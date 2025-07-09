@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import Dashboard from './pages/DashBoard';
+import './index.css'; // ✅ THIS IS REQUIRED!
+
 
 export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(true);

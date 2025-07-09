@@ -24,15 +24,10 @@ const data = [
 export default function TwitterGrowthChart() {
   return (
     <div className="flex flex-col items-center space-y-4">
-      <div className="mb-4 flex items-center justify-between">
-        <div className="flex items-center space-x-3 mb-4">
-            <FaTwitter className="w-6 h-6 text-blue-500" />
-            <h2 className="text-2xl font-semibold text-gray-800"> X Follower Growth</h2>
-        </div>
-
-        <button className="bg-blue-500 hover:bg-blue-600 text-white text-sm px-4 py-2 rounded-lg transition">
-          Download CSV
-        </button>
+       <div className="flex flex-col items-center mb-4">
+                <h2 className="text-lg font-semibold text-center">
+                 X Following Chart
+                </h2>
       </div>
       <ResponsiveContainer width="100%" height={300}>
         <LineChart data={data}>
