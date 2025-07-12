@@ -6,33 +6,35 @@ const holders = [
 
 export default function TokenHoldings() {
   return (
-   <div className="w-full overflow-x-auto">
-  <div className="min-w-full max-w-screen-xl mx-auto divide-y divide-gray-200 px-2">
-    {/* Header */}
-    <div className="flex py-2 font-semibold text-gray-700">
-      <p className="w-1/3">Member</p>
-      <p className="w-1/3">Wallet</p>
-      <p className="w-1/3 text-right">Tokens</p>
-    </div>
+   <div className="token-holdings-container">
 
-    {/* Rows */}
-    {holders.map((holder) => (
-      <div
-        key={holder.wallet}
-        className="flex py-2 items-center hover:bg-gray-50 border-b border-gray-100"
-      >
-        <p className="w-1/3 truncate overflow-hidden whitespace-nowrap">
-          {holder.name}
-        </p>
-        <p className="w-1/3 truncate overflow-hidden whitespace-nowrap">
-          {holder.wallet}
-        </p>
-        <p className="w-1/3 text-right font-medium">
-          {holder.tokensHeld}
-        </p>
+      <h1>Token Holdings</h1>
+      <div className="min-w-full max-w-screen-xl mx-auto divide-y divide-gray-200">
+        {/* Header */}
+        <div className="flex py-2 font-semibold text-gray-700">
+          <p className="w-1/3">Member</p>
+          <p className="w-1/3">Wallet</p>
+          <p className="w-1/3 text-right">Tokens</p>
+        </div>
+
+        {/* Rows */}
+        {holders.map((holder) => (
+          <div
+            key={holder.wallet}
+            className="flex py-2 items-center hover:bg-gray-50 border-b border-gray-100"
+          >
+            <p className="w-1/3 truncate overflow-hidden whitespace-nowrap">
+              {holder.name}
+            </p>
+            <p className="w-1/3 truncate overflow-hidden whitespace-nowrap">
+              {holder.wallet}
+            </p>
+            <p className="w-1/3 text-right font-medium">
+              {holder.tokensHeld}
+            </p>
+          </div>
+        ))}
       </div>
-    ))}
-  </div>
 </div>
   );
 }

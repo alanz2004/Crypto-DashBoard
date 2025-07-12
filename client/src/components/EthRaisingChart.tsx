@@ -20,7 +20,7 @@ const data = [
 
 export default function EthRaisingChart() {
   return (
-    <div className="bg-white p-4 rounded-lg shadow w-full">
+    <div className="ethereum-chart-container">
              <div className="flex flex-col items-center mb-4">
                 <h2 className="text-lg font-semibold text-center text-brand-bg">
                  Ethereum Growing Chart

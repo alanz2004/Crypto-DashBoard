@@ -23,7 +23,7 @@ const data = [
 
 export default function TwitterGrowthChart() {
   return (
-    <div className="flex flex-col items-center space-y-4">
+    <div className="twitter-chart-container">
        <div className="flex flex-col items-center mb-4">
                 <h2 className="text-lg font-semibold text-center">
                  X Following Chart

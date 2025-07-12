@@ -35,8 +35,9 @@ const options = {
 
 export default function ChartComponent() {
   return (
-    <div className="w-full overflow-x-auto">
-      <div className="min-w-[700px] max-w-[1000px] w-full h-[300px] mx-auto">
+    <div className="chart-container">
+      <h1>Token Distrubition</h1>
+      <div className="inner-chart-container">
         <Bar data={data} options={options} />
       </div>
     </div>

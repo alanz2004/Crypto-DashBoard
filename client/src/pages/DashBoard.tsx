@@ -12,22 +12,19 @@ const sampleData = [
 
 export default function Dashboard() {
   return (
-   <div className='w-[95%] box-border'>
-    <h1 className="text-4xl font-bold mb-4">Dashboard</h1>
-        <div className='w-[100%] flex flex-col'>
-      
-          <div className="flex justify-start w-full mt-[3.5%] gap-x-4">
-                        <div className="flex-grow max-w-[48%] min-w-0">
-                          <TwitterGrowthChart />
-                        </div>
-                        <div className="flex-grow max-w-[48%] min-w-0">
-                          <EthRaisingChart />
-                        </div>
-          </div>
-          <ChartComponent />
+   <div className='dashboard-content'>
+     <h1 className="tite">Dashboard</h1>
+     
+        <div className="chart-container-row">
+          
+            <TwitterGrowthChart />
+            <EthRaisingChart />
 
+            
+        </div>
+
+          <ChartComponent />
           <TokenHoldings />
-      </div>
     </div>
   );
 }

@@ -11,14 +11,13 @@ export default function App() {
 
   return (
 
-      <div className="min-h-screen w-screen overflow-x-hidden bg-gray-50">
+      <div className="app-container">
         <Navbar username="Alan Starobinski" />
-        <main className="max-w-screen-xl mx-auto p-4 flex flex-col items-center">
+        <main className="content">
           
           <Dashboard />
          
         </main>
-
       </div>
   );
 }
