@@ -1,23 +1,33 @@
 import { useState } from 'react';
+
+
 import Dashboard from './pages/DashBoard';
-import TokenHoldings from './components/TokenHoldings';
+import Team from "./pages/Team";
+
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+
 
 import Navbar from './components/NavBar';
 import './index.css'; // ✅ THIS IS REQUIRED!
 
 
 export default function App() {
-  const [sidebarOpen, setSidebarOpen] = useState<boolean>(true);
-
   return (
 
+      <Router>
       <div className="app-container">
         <Navbar username="Alan Starobinski" />
+
         <main className="content">
-          
-          <Dashboard />
-         
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/team" element={<Team />} />
+
+          </Routes>
         </main>
       </div>
+    </Router>
   );
 }

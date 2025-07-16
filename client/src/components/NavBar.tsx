@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 interface NavbarProps {
   username: string;
@@ -12,8 +13,8 @@ const Navbar: React.FC<NavbarProps> = ({ username }) => {
       </div>
 
       <div className='navbar-row'>
-        <a>DashBoard</a>
-        <a>Team</a>
+       <Link to="/" className="text-gray-700 hover:text-indigo-600 transition">DashBoard</Link>
+        <Link to="/team" className="text-gray-700 hover:text-indigo-600 transition">Team</Link>
         <a>AI Helper</a>
       </div>
     </div>
