@@ -13,7 +13,7 @@ const sampleData = [
 export default function Dashboard() {
   return (
    <div className='dashboard-content'>
-     <h1 className="tite">Dashboard</h1>
+     <h1 className="dashboard-tite">DashBoard</h1>
      
         <div className="chart-container-row">
           

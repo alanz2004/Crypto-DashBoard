@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import Dashboard from './pages/DashBoard';
 import Team from "./pages/Team";
+import WalletPage from './pages/Wallet';
 
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -24,7 +25,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/team" element={<Team />} />
-
+            <Route path='/wallet' element={<WalletPage />} />
           </Routes>
         </main>
       </div>

@@ -36,7 +36,7 @@ const options = {
 export default function ChartComponent() {
   return (
     <div className="chart-container">
-      <h1>Token Distrubition</h1>
+      <h1 className='chart-container-title'>Token Distrubition</h1>
       <div className="inner-chart-container">
         <Bar data={data} options={options} />
       </div>

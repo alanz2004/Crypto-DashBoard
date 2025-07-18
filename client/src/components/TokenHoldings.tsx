@@ -8,7 +8,7 @@ export default function TokenHoldings() {
   return (
    <div className="token-holdings-container">
 
-      <h1>Token Holdings</h1>
+      <h1 className="token-holdings-title">Token Holdings</h1>
       <div className="min-w-full max-w-screen-xl mx-auto divide-y divide-gray-200">
         {/* Header */}
         <div className="flex py-2 font-semibold text-gray-700">

@@ -1,4 +1,5 @@
 import TeamCard, { TeamMember } from "../components/TeamCard";
+import TeamTasks from "../components/TeamTasks";
 
 const teamMembers: TeamMember[] = [
   {
@@ -30,6 +31,8 @@ export default function Team() {
           <TeamCard key={index} member={member} />
         ))}
       </div>
+
+      <TeamTasks />
     </div>
   );
 }
