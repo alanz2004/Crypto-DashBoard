@@ -506,20 +506,11 @@
 .ai-helper-container {
   width: 95%;
   margin: 40px auto;
-  margin-left: auto;
-  margin-right: auto;
+  padding: 0 20px;
   font-family: sans-serif;
 }
 
-.tool-box {
-  margin-top: 30px;
-  background: #f9f9f9;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
-}
-
-.tool-box textarea {
+.ai-helper-container textarea {
   width: 100%;
   height: 120px;
   padding: 12px;
@@ -530,7 +521,7 @@
   resize: vertical;
 }
 
-.tool-box button {
+.ai-helper-container button {
   margin-top: 12px;
   background-color: #4f46e5;
   color: white;
@@ -542,16 +533,55 @@
   transition: background 0.3s ease;
 }
 
-.tool-box button:hover {
+.ai-helper-container button:hover {
   background-color: #4338ca;
 }
 
-.generated-output {
-  margin-top: 20px;
-  background: #fff;
-  padding: 16px;
-  border-radius: 10px;
-  font-size: 13px;
-  white-space: pre-wrap;
-  border: 1px solid #e0e0e0;
+.team-section {
+  padding: 40px 20px;
+  max-width: 1100px;
+  margin: auto;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.team-title {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 40px;
+  color: #222;
+}
+
+.team-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+}
+
+.team-card {
+  background-color: #f9f9f9;
+  padding: 20px;
+  flex: 1 1 280px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.04);
+  text-align: center;
+}
+
+.avatar-placeholder {
+  width: 80px;
+  height: 80px;
+  background-color: #ddd;
+  border-radius: 50%;
+  margin: 0 auto 12px;
+}
+
+.team-role {
+  font-weight: 600;
+  color: #4f46e5;
+  margin: 6px 0;
+}
+
+.team-description {
+  font-size: 14px;
+  color: #555;
 }
