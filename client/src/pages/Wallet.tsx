@@ -1,6 +1,8 @@
 // components/WalletPage.tsx
 import React from 'react';
 
+import WalletLinks from '../components/WalletLinks';
+
 type Transaction = {
   id: string;
   type: 'Send' | 'Receive';
@@ -45,7 +47,7 @@ const WalletPage: React.FC = () => {
 
   return (
     <div className="wallet-container">
-      <h1 className="wallet-title">🚀 Startup Wallet</h1>
+      <h1 className="wallet-title">🚀Wallet</h1>
 
       <div className="wallet-info">
         <div className="wallet-section">
@@ -84,6 +86,8 @@ const WalletPage: React.FC = () => {
           ))}
         </div>
       </div>
+
+      <WalletLinks />
     </div>
   );
 };

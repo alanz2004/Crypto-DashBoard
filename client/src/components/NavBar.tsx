@@ -16,7 +16,7 @@ const Navbar: React.FC<NavbarProps> = ({ username }) => {
         <Link to="/" className="navbar-link">DashBoard</Link>
         <Link to="/team" className="navbar-link">Team</Link>
         <Link to="/wallet" className="navbar-link">Wallet</Link>
-        <Link to="/team" className="navbar-link">AI Helper</Link>
+        <Link to="/helper" className="navbar-link">AI Helper</Link>
       </div>
     </div>
   );
