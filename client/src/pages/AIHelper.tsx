@@ -42,31 +42,67 @@ const TeamGenerator: React.FC = () => {
   };
 
   return (
-    <div className="ai-helper-container">
-      <h1>👥 AI Team Section Generator</h1>
-      <p>Enter team members in format: <code>Name: Role</code></p>
-      <textarea
-        value={inputText}
-        onChange={(e) => setInputText(e.target.value)}
-        placeholder="Alan Starobinski: CEO\nSarah Dahan: Smart Contract Engineer"
-      />
-      <button onClick={handleGenerate}>Generate Section</button>
+    <div className="ai-helper-page">
+      <header className="page-header">
+        <h1>AI Helper</h1>
+        <p>Use powerful AI tools to build your crypto startup faster.</p>
+      </header>
 
-      {team.length > 0 && (
-        <section className="team-section">
-          <h2 className="team-title">Meet the Team</h2>
-          <div className="team-list">
-            {team.map((member) => (
-              <div className="team-card" key={member.name}>
-                <div className="avatar-placeholder" />
-                <h3>{member.name}</h3>
-                <p className="team-role">{member.role}</p>
-                <p className="team-description">{member.description}</p>
+      <div className="tools-container">
+        {/* Website Helper with Live Team Generator */}
+        <div className="tool-card tool-website">
+          <h2>Website Helper</h2>
+          <p>Generate a team section and other website components using AI.</p>
+          <p>Enter team members in format: <code>Name: Role</code></p>
+          <textarea
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
+            placeholder={`Alan Starobinski: CEO\nSarah Dahan: Smart Contract Engineer`}
+          />
+          <button className="tool-button" onClick={handleGenerate}>Generate Section</button>
+
+          {team.length > 0 && (
+            <section className="team-section">
+              <h3 className="team-title">Meet the Team</h3>
+              <div className="team-list">
+                {team.map((member) => (
+                  <div className="team-card" key={member.name}>
+                    <div className="avatar-placeholder" />
+                    <h4>{member.name}</h4>
+                    <p className="team-role">{member.role}</p>
+                    <p className="team-description">{member.description}</p>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </section>
-      )}
+            </section>
+          )}
+        </div>
+
+        {/* Other cards - Coming soon */}
+        <div className="tool-card tool-funding">
+          <h2>Funding Helper</h2>
+          <p>Plan fundraising rounds and get AI-generated pitch suggestions.</p>
+          <span className="coming-soon">Coming Soon</span>
+        </div>
+
+        <div className="tool-card tool-tokenomics">
+          <h2>Tokenomics Helper</h2>
+          <p>Design smart token allocations and utility models with AI.</p>
+          <span className="coming-soon">Coming Soon</span>
+        </div>
+
+        <div className="tool-card tool-roadmap">
+          <h2>Roadmap Builder</h2>
+          <p>Create a startup roadmap tailored to your stage and vision.</p>
+          <span className="coming-soon">Coming Soon</span>
+        </div>
+
+        <div className="tool-card tool-whitepaper">
+          <h2>Whitepaper Assistant</h2>
+          <p>Generate a structured, high-quality whitepaper using AI.</p>
+          <span className="coming-soon">Coming Soon</span>
+        </div>
+      </div>
     </div>
   );
 };

@@ -123,8 +123,6 @@
 }
 
 .team-page {
-  min-height: 100vh;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   width: 95%;
   display: flex;
   flex-direction: column;
@@ -505,7 +503,6 @@
 
 .ai-helper-container {
   width: 95%;
-  margin: 40px auto;
   padding: 0 20px;
   font-family: sans-serif;
 }
@@ -536,6 +533,154 @@
 .ai-helper-container button:hover {
   background-color: #4338ca;
 }
+
+.page-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.page-header h1 {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.page-header p {
+  font-size: 18px;
+  color: #555;
+}
+
+.tools-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px 40px; /* gap: rowGap columnGap */
+  justify-content: center;
+}
+
+/* Each card will take roughly 48% to allow two per row with spacing */
+.tool-card {
+  flex: 0 1 calc(50% - 40px);
+  border-radius: 16px;
+  padding: 24px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  min-height: 300px;
+}
+
+.tool-card:hover {
+  transform: translateY(-4px);
+}
+
+.tool-card h2 {
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+.tool-card p {
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+/* Unique card colors */
+.tool-website {
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+}
+
+.tool-funding {
+  background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+}
+
+.tool-tokenomics {
+  background: linear-gradient(135deg, #059669, #34d399);
+}
+
+.tool-roadmap {
+  background: linear-gradient(135deg, #eab308, #facc15);
+  color: #222;
+}
+
+.tool-whitepaper {
+  background: linear-gradient(135deg, #f43f5e, #fb7185);
+}
+
+/* Team Section Styles */
+textarea {
+  width: 100%;
+  height: 80px;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 14px;
+  border: none;
+  resize: vertical;
+  margin: 10px 0;
+}
+
+.tool-button {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.tool-button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.coming-soon {
+  font-style: italic;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: auto;
+}
+
+/* Team Output */
+.team-section {
+  margin-top: 20px;
+}
+
+.team-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.team-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.team-card {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 14px;
+  color: #222;
+  width: 100%;
+}
+
+.avatar-placeholder {
+  width: 50px;
+  height: 50px;
+  background-color: #ccc;
+  border-radius: 50%;
+  margin-bottom: 8px;
+}
+
+.team-role {
+  font-weight: bold;
+}
+
+.team-description {
+  font-size: 13px;
+  color: #555;
+}
+
+
 
 .team-section {
   padding: 40px 20px;
