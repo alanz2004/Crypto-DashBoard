@@ -48,6 +48,7 @@
 .content {
   padding-bottom: 100px;
   margin-top: 50px;
+  width: 100%;
 }
 
 .navbar-row a,p {
@@ -729,4 +730,122 @@ textarea {
 .team-description {
   font-size: 14px;
   color: #555;
+}
+
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Full layout */
+.login-page {
+  display: flex;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  width: 100%;
+}
+
+/* Left image area */
+.login-image {
+  flex: 1;
+  background-color: #2c3e50;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-text {
+  font-size: 24px;
+  font-weight: bold;
+  opacity: 0.8;
+}
+
+/* Right form area */
+.login-form-container {
+  flex: 1;
+  background-color: #f5f7fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-box {
+  background-color: white;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-box h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.login-form .input-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  margin-bottom: 6px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.input-group input {
+  padding: 10px 14px;
+  font-size: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.login-button {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+  transition: background-color 0.2s ease;
+}
+
+.login-button:hover {
+  background-color: #1e40af;
+}
+
+.extra-links {
+  margin-top: 20px;
+  font-size: 14px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.extra-links a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.extra-links a:hover {
+  text-decoration: underline;
 }
