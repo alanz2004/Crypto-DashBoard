@@ -1,21 +1,29 @@
 import React from "react";
 
-const LoginPage: React.FC = () => {
+
+interface LoginPageProps {
+  setLoggedIn: (status: boolean) => void;
+}
+
+const LoginPage: React.FC<LoginPageProps> = ({ setLoggedIn }) => {
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    // You can add real auth here
+    setLoggedIn(true); // <- Logs user in
+  };
+
   return (
     <div className="login-page">
-      {/* Left Side - Image Placeholder */}
       <div className="login-image">
-        {/* You can set background-image via CSS later */}
         <span className="image-text">Your image here</span>
       </div>
 
-      {/* Right Side - Form */}
       <div className="login-form-container">
         <div className="login-box">
           <h2>Welcome Back 👋</h2>
           <p className="subtitle">Login to your account</p>
 
-          <form className="login-form">
+          <form className="login-form" onSubmit={handleLogin}>
             <div className="input-group">
               <label htmlFor="email">📧 Email</label>
               <input type="email" id="email" placeholder="you@example.com" />
