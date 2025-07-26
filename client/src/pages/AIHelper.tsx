@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import TokenomicsHelper from '../components/TokenomicsHelper';
+import FundraisingRounds from '../components/FundraisingRounds';
+import FundraisingRecommendation from '../components/FundraisingRecommendation';
 
 interface Member {
   name: string;
@@ -80,13 +82,23 @@ const TeamGenerator: React.FC = () => {
         </div>
 
         {/* Other cards - Coming soon */}
-        <div className="tool-card tool-funding">
+        <div className="tool-card tool-funding"  onClick={() => {
+  const section = document.getElementById('funding-rounds');
+  if (section) {
+    section.scrollIntoView({ behavior: 'smooth' });
+  }
+}}>
           <h2>Funding Helper</h2>
           <p>Plan fundraising rounds and get AI-generated pitch suggestions.</p>
-          <span className="coming-soon">Coming Soon</span>
+          <span className="coming-soon">Plan Fundraising Rounds</span>
         </div>
 
-        <div className="tool-card tool-tokenomics">
+        <div className="tool-card tool-tokenomics" onClick={() => {
+  const section = document.getElementById('tokenomics-helper');
+  if (section) {
+    section.scrollIntoView({ behavior: 'smooth' });
+  }
+}}>
           <h2>Tokenomics Helper</h2>
           <p>Design smart token allocations and utility models with AI.</p>
           <span className="coming-soon">Create Me Tokenomics</span>
@@ -106,6 +118,10 @@ const TeamGenerator: React.FC = () => {
       </div>
 
       <TokenomicsHelper />
+
+      <FundraisingRounds />
+
+      <FundraisingRecommendation />
     </div>
   );
 };

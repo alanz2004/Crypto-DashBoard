@@ -65,7 +65,7 @@ Respond with a JSON array of token allocation breakdown like:
   };
 
   return (
-    <div className="tokenomics-container">
+    <div className="tokenomics-container" id="tokenomics-helper">
       <div className="tokenomics-header">
         <FaRobot className="icon" />
         <h2>Tokenomics AI Helper</h2>

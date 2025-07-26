@@ -573,6 +573,7 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease;
   min-height: 300px;
+  cursor: pointer;
 }
 
 .tool-card:hover {
@@ -941,6 +942,10 @@ textarea {
   margin-top: 2.5%;
 }
 
+.tool-card.tool-tokenomics {
+  cursor: pointer;
+}
+
 .tokenomics-header {
   text-align: center;
   margin-bottom: 2rem;
@@ -1045,4 +1050,169 @@ textarea {
 .recharts-tooltip-label {
   font-weight: bold;
   color: #1e293b;
+}
+
+
+.rounds-container {
+  padding: 2rem;
+  background-color: #f8fafc;
+  color: #1e293b;
+  font-family: 'Segoe UI', sans-serif;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  max-width: 800px;
+  margin: auto;
+}
+
+.rounds-title {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #4f46e5;
+}
+
+.round-card {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.round-row {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 200px;
+}
+
+.round-row label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.round-row input {
+  padding: 0.7rem 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #f9fafb;
+}
+
+.add-btn {
+  background-color: #4f46e5;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.3s;
+}
+
+.add-btn:hover {
+  background-color: #4338ca;
+}
+
+.delete-btn {
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.totals p {
+  margin: 0.2rem 0;
+  font-size: 1rem;
+}
+
+.recommendation-container {
+  background: #f8fafc;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.05);
+  font-family: 'Segoe UI', sans-serif;
+  color: #1e293b;
+  max-width: 800px;
+  margin: 2rem auto;
+}
+
+.recommendation-container h2 {
+  font-size: 1.6rem;
+  color: #4f46e5;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.input-grid {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  margin-bottom: 1.5rem;
+}
+
+.input-grid div {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-grid input {
+  padding: 0.6rem 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #f9fafb;
+  font-size: 1rem;
+}
+
+.input-grid button {
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s;
+}
+
+.input-grid button:hover {
+  background-color: #4338ca;
+}
+
+.recommendations-list {
+  margin-top: 2rem;
+}
+
+.rec-card {
+  background: white;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.05);
 }
