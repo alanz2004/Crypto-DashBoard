@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import TokenomicsHelper from '../components/TokenomicsHelper';
 
 interface Member {
   name: string;
@@ -88,7 +89,7 @@ const TeamGenerator: React.FC = () => {
         <div className="tool-card tool-tokenomics">
           <h2>Tokenomics Helper</h2>
           <p>Design smart token allocations and utility models with AI.</p>
-          <span className="coming-soon">Coming Soon</span>
+          <span className="coming-soon">Create Me Tokenomics</span>
         </div>
 
         <div className="tool-card tool-roadmap">
@@ -103,6 +104,8 @@ const TeamGenerator: React.FC = () => {
           <span className="coming-soon">Coming Soon</span>
         </div>
       </div>
+
+      <TokenomicsHelper />
     </div>
   );
 };
