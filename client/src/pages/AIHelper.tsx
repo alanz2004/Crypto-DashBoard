@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import TokenomicsHelper from '../components/TokenomicsHelper';
 import FundraisingRounds from '../components/FundraisingRounds';
 import FundraisingRecommendation from '../components/FundraisingRecommendation';
+import RoadmapBuilder from '../components/RoadmapBuilder';
 
 interface Member {
   name: string;
@@ -104,10 +105,15 @@ const TeamGenerator: React.FC = () => {
           <span className="coming-soon">Create Me Tokenomics</span>
         </div>
 
-        <div className="tool-card tool-roadmap">
+        <div className="tool-card tool-roadmap"  onClick={() => {
+  const section = document.getElementById('roadmap-container');
+  if (section) {
+    section.scrollIntoView({ behavior: 'smooth' });
+  }
+}}>
           <h2>Roadmap Builder</h2>
           <p>Create a startup roadmap tailored to your stage and vision.</p>
-          <span className="coming-soon">Coming Soon</span>
+          <span className="coming-soon">Create Road Map</span>
         </div>
 
         <div className="tool-card tool-whitepaper">
@@ -117,11 +123,17 @@ const TeamGenerator: React.FC = () => {
         </div>
       </div>
 
-      <TokenomicsHelper />
 
-      <FundraisingRounds />
+      <div className='tools-ai-container'>
+             <TokenomicsHelper />
 
-      <FundraisingRecommendation />
+            <FundraisingRounds />
+
+            <FundraisingRecommendation />
+
+            <RoadmapBuilder />
+      </div>
+     
     </div>
   );
 };
