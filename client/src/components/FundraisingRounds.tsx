@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './FundrasingRounds.css'
 import { FaDollarSign, FaPercentage, FaPlus, FaTrash, FaCoins, FaClock } from 'react-icons/fa';
 
 type Round = {

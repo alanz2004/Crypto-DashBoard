@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './RoadmapBuilder.css'
 import { FaCalendarAlt, FaUsers, FaRocket, FaClipboardList } from 'react-icons/fa';
 
 type RoadmapItem = {

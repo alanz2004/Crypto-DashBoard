@@ -1,0 +1,24 @@
+.dashboard-content {
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+}
+
+.dashboard-tite{
+  color: #467599;
+}
+
+.chart-title {
+  color: #467599;
+  padding-bottom: 15px;
+  text-align: left;
+}
+
+.ethereum-chart-container {
+  width: 45%;
+}
+
+.twitter-chart-container {
+  width: 45%;
+}

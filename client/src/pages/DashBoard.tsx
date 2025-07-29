@@ -1,3 +1,4 @@
+import './DashBoard.css'
 import TwitterGrowthChart from '../components/TwitterGrowthChart';
 import EthRaisingChart from '../components/EthRaisingChart';
 import TokenHoldings from '../components/TokenHoldings';

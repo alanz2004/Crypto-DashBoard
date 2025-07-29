@@ -1,3 +1,5 @@
+import './TokenHoldings.css'
+
 const holders = [
   { name: "Alice", wallet: "0xabc...123", tokensHeld: 1200 },
   { name: "Bob", wallet: "0xdef...456", tokensHeld: 3000 },

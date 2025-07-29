@@ -1,5 +1,6 @@
 // components/TeamTasks.tsx
 import React from 'react';
+import './TeamTasks.css';
 
 type Task = {
   id: number;

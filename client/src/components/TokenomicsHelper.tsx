@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './TokenomicsHelper.css'
 import { FaCoins, FaUsers, FaChartPie, FaRobot } from 'react-icons/fa';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './FundraisingRecommendation.css'
 import { FaWandMagicSparkles } from 'react-icons/fa6';
 
 type Recommendation = {

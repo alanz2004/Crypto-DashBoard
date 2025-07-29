@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './SignUp.css'
 import { FaUser, FaEnvelope, FaLock } from 'react-icons/fa';
 
 const SignUp: React.FC = () => {

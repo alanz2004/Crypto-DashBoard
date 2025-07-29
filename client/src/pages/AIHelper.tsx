@@ -1,3 +1,5 @@
+import './AIHelper.css'
+
 import React, { useState } from 'react';
 import TokenomicsHelper from '../components/TokenomicsHelper';
 import FundraisingRounds from '../components/FundraisingRounds';

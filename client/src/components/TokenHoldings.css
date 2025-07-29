@@ -1,0 +1,11 @@
+.token-holdings-title {
+  color: #9ED8DB;
+}
+
+
+.token-holdings-container {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+  

@@ -1,5 +1,5 @@
 import React from "react";
-
+import './LoginPage.css'
 
 interface LoginPageProps {
   setLoggedIn: (status: boolean) => void;

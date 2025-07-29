@@ -1,3 +1,5 @@
+import './Team.css'
+
 import TeamCard, { TeamMember } from "../components/TeamCard";
 import TeamTasks from "../components/TeamTasks";
 

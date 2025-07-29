@@ -1,4 +1,5 @@
 import React from "react";
+import './TeamCard.css'
 
 export interface TeamMember {
   name: string;

@@ -1,5 +1,6 @@
 // components/WalletPage.tsx
 import React from 'react';
+import './Wallet.css'
 
 import WalletLinks from '../components/WalletLinks';
 

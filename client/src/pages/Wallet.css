@@ -1,0 +1,101 @@
+.wallet-container {
+  width: 95%;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: Arial, sans-serif;
+}
+
+.wallet-title {
+  font-size: 28px;
+  margin-bottom: 24px;
+  color: #222;
+}
+
+.wallet-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.wallet-section {
+  flex: 1 1 300px;
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.wallet-section h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #333;
+}
+
+.wallet-address {
+  font-family: monospace;
+  font-size: 14px;
+  word-break: break-all;
+  color: #555;
+}
+
+.wallet-transactions {
+  margin-top: 20px;
+}
+
+.wallet-transactions h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.transaction-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.transaction-card {
+  background: #fff;
+  border-left: 6px solid #ddd;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+}
+
+.transaction-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #666;
+}
+
+.tx-type {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.tx-type.send {
+  background-color: #ffe6e6;
+  color: #cc0000;
+}
+
+.tx-type.receive {
+  background-color: #e6f4ea;
+  color: #207a43;
+}
+
+.tx-amount {
+  font-size: 18px;
+  font-weight: 500;
+  color: #222;
+}
+
+.tx-hash {
+  font-size: 13px;
+  font-family: monospace;
+  color: #888;
+  margin-top: 4px;
+}

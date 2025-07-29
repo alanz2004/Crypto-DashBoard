@@ -1,0 +1,29 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: #E9FFF9;
+  padding: 10px 0 10px 0
+}
+
+.navbar-username {
+  color: #D64045;
+}
+
+.navbar-link {
+  color: #D64045;
+  text-decoration: none;
+}
+
+.navbar-link:hover {
+  text-decoration: underline;
+}
+
+.navbar-row {
+  display: flex;
+  padding: 20px;
+  gap: 15px;
+}
+
+.navbar-row a,p {
+  font-size: 26px;
+}
