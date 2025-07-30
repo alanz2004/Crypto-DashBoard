@@ -5,6 +5,7 @@ import Dashboard from './pages/DashBoard';
 import Team from "./pages/Team";
 import WalletPage from './pages/Wallet';
 import AIHelperPage from './pages/AIHelper';
+import SmartContractsDashboard from './pages/SmartContractsDashboard';
 
 import LoginPage from './pages/LoginPage';
 import SignUp from './pages/SignUp';
@@ -41,6 +42,7 @@ export default function App() {
                     <Route path="/team" element={<Team />} />
                     <Route path="/wallet" element={<WalletPage />} />
                     <Route path="/helper" element={<AIHelperPage />} />
+                    <Route path='/smartcontracts' element={<SmartContractsDashboard />} />
                   </Routes>
                 </main>
               </div>

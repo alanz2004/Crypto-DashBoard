@@ -18,6 +18,7 @@ const Navbar: React.FC<NavbarProps> = ({ username }) => {
         <Link to="/team" className="navbar-link">Team</Link>
         <Link to="/wallet" className="navbar-link">Wallet</Link>
         <Link to="/helper" className="navbar-link">AI Helper</Link>
+        <Link to="/smartcontracts" className='navbar-link'>Smart Contracts</Link>
       </div>
     </div>
   );
