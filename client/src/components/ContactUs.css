@@ -1,0 +1,100 @@
+:root {
+  --background: #0b0f19;
+  --card: #111827;
+  --primary: #6c5ce7;
+  --accent-blue: #00bcd4;
+  --text: #f1f5f9;
+  --border: #2d3748;
+  --glow: rgba(108, 92, 231, 0.3);
+}
+
+.contact-section {
+  background: var(--background);
+  padding: 4rem 6rem; /* Match hero section padding */
+  width: 100%;
+  animation: fadeInLeft 1s ease-out forwards;
+  color: var(--text);
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.contact-title {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.contact-subtext {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  color: #94a3b8;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* left alignment */
+  gap: 1.5rem;
+  width: 40%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.form-group label {
+font-size: 1.05rem;
+  font-weight: 500;
+  margin-bottom: 0.6rem;
+  color: #e2e8f0;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: var(--text);
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--primary);
+}
+
+.contact-form button {
+  align-self: flex-start;
+  background: var(--primary);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.contact-form button:hover {
+  background: #5b50d6;
+  transform: translateY(-2px);
+}
+
+/* Fade-in animation from left */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

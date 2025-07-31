@@ -1,0 +1,66 @@
+/* Base colors from Cosmos Tech Theme */
+:root {
+  --background: #0b0f19;
+  --card: #111827;
+  --primary: #6c5ce7;
+  --accent-blue: #00bcd4;
+  --text: #f1f5f9;
+  --border: #2d3748;
+  --glow: rgba(108, 92, 231, 0.3);
+}
+
+body {
+  background: var(--background);
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  color: var(--text);
+}
+
+.homepage-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--background);
+}
+
+/* Placeholder for your Navbar */
+.navbar-placeholder {
+  height: 60px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Main hero content */
+.hero-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 4rem 6rem;
+  background: radial-gradient(circle at top left, #111827 20%, #0b0f19 100%);
+}
+
+.hero-content {
+  max-width: 600px;
+}
+
+.hero-content h1 {
+  font-size: 2.8rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.hero-content p {
+  font-size: 1.1rem;
+  color: #cbd5e1;
+  line-height: 1.6;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 1rem;
+  background: #111827;
+  color: #64748b;
+  font-size: 0.9rem;
+  border-top: 1px solid var(--border);
+}

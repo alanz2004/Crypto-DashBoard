@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import HomePage from './pages/HomePage';
 
 import Dashboard from './pages/DashBoard';
 import Team from "./pages/Team";
@@ -27,7 +27,7 @@ export default function App() {
         {/* Login route — always available — no Navbar or layout */}
         <Route path="/login" element={<LoginPage setLoggedIn={setLoggedIn} />} />
         <Route path="/signup" element={<SignUp />} />
-
+        <Route path='/home' element={<HomePage />} />
 
         {/* Main app routes with layout */}
         <Route
