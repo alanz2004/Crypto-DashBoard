@@ -1,4 +1,4 @@
-.features-section {
+.features-section-home {
   padding: 4rem 2rem;
   background: #0b0f19;
   color: #f1f5f9;
@@ -6,7 +6,7 @@
   margin: auto;
 }
 
-.features-title {
+.features-titl-home {
   text-align: center;
   font-size: 2rem;
   color: #6c5ce7;
@@ -14,14 +14,14 @@
   animation: fadeIn 1s ease-in-out forwards;
 }
 
-.features-grid {
+.features-grid-home {
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
   justify-content: center;
 }
 
-.feature-card {
+.feature-card-home {
   background: #111827;
   border: 1px solid #2d3748;
   flex: 1 1 calc(33% - 2rem);
@@ -35,24 +35,24 @@
   animation: slideUp 1s ease forwards;
 }
 
-.feature-card:hover {
+.feature-card-home:hover {
   transform: translateY(-6px);
   box-shadow: 0 0 20px rgba(108,92,231, 0.3);
 }
 
-.feature-card .icon {
+.feature-card-home .icon {
   font-size: 2rem;
   margin-bottom: 1rem;
   color: #00bcd4;
 }
 
-.feature-card h3 {
+.feature-card-home h3 {
   margin-bottom: 0.5rem;
   font-size: 1.1rem;
   color: #e2e8f0;
 }
 
-.feature-card p {
+.feature-card-home p {
   font-size: 0.95rem;
   color: #cbd5e1;
   line-height: 1.4;

@@ -21,6 +21,7 @@ body {
   flex-direction: column;
   min-height: 100vh;
   background: var(--background);
+  gap: 5rem;
 }
 
 /* Placeholder for your Navbar */

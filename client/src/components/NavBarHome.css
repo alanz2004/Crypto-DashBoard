@@ -1,0 +1,74 @@
+:root {
+  --background: #0b0f19;
+  --primary: #6c5ce7;
+  --accent-blue: #00bcd4;
+  --text: #f1f5f9;
+  --border: #2d3748;
+  --glow: rgba(108, 92, 231, 0.3);
+}
+
+.navbar-home {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 2.5rem;
+  background-color: var(--background);
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* Left side */
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.project-icon {
+  font-size: 1.5rem;
+  color: var(--accent-blue);
+}
+
+.project-name {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* Right side */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--primary);
+}
+
+/* CTA Button */
+.cta-button {
+  background: linear-gradient(to right, var(--primary), var(--accent-blue));
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 10px var(--glow);
+}

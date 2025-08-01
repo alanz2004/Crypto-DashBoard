@@ -1,16 +1,17 @@
 import React from 'react';
 import './HomePage.css';
 
+import NavBarHome from '../components/NavBarHome';
 import FeaturesSection from '../components/FeaturesSection';
+import PricingSection from '../components/PricingSection';
+import SocialMediaBar from '../components/SocialMediaBar';
 import ContactUs from '../components/ContactUs';
+
 
 const HomePage: React.FC = () => {
   return (
     <div className="homepage-container">
-      {/* Placeholder for Navbar */}
-      <header className="navbar-placeholder">
-        {/* You can replace this with <Navbar /> later */}
-      </header>
+     <NavBarHome />
 
       {/* Main Content */}
       <main className="hero-section">
@@ -25,11 +26,15 @@ const HomePage: React.FC = () => {
 
       <FeaturesSection />
 
+      <PricingSection />
+
+      <SocialMediaBar />
+
       <ContactUs />
 
       {/* Footer */}
       <footer className="footer">
-        <p>&copy; {new Date().getFullYear()} CosmosAI. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} CRAIS. All rights reserved.</p>
       </footer>
     </div>
   );
