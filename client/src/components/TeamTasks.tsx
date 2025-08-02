@@ -23,6 +23,7 @@ const tasks: Task[] = [
     title: 'Design staking dashboard',
     assignedTo: 'Alan',
     status: 'To Do',
+    eta: 'July 22',
   },
   {
     id: 3,

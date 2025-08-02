@@ -7,6 +7,10 @@ import PricingSection from '../components/PricingSection';
 import SocialMediaBar from '../components/SocialMediaBar';
 import ContactUs from '../components/ContactUs';
 
+import Rocket from '../components/RocketModel';
+
+import RocketImage from '../assets/rocket.svg'; // Put your rocket image in public or src/assets
+
 
 const HomePage: React.FC = () => {
   return (
@@ -15,14 +19,18 @@ const HomePage: React.FC = () => {
 
       {/* Main Content */}
       <main className="hero-section">
-        <div className="hero-content">
-          <h1>AI Tools for Crypto Startups</h1>
-          <p>
-            Launch smarter with our AI-powered platform for tokenomics, smart contracts,
-            fundraising planning, and more. Designed for builders in the Web3 universe.
-          </p>
-        </div>
-      </main>
+      <div className="hero-content">
+        <h1>AI Tools for Crypto Startups</h1>
+        <p>
+          Launch smarter with our AI-powered platform for tokenomics, smart contracts,
+          fundraising planning, and more. Designed for builders in the Web3 universe.
+        </p>
+      </div>
+
+      <div className="hero-rocket">
+          <img src={RocketImage} alt="Rocket Launch" className="rocket-image" />
+      </div>
+    </main>
 
       <FeaturesSection />
 

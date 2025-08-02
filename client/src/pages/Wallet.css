@@ -3,12 +3,14 @@
   margin: 40px auto;
   padding: 0 20px;
   font-family: Arial, sans-serif;
+  color: #f1f5f9;
+  background-color: #0b0f19;
 }
 
 .wallet-title {
   font-size: 28px;
   margin-bottom: 24px;
-  color: #222;
+  color: #6c5ce7;
 }
 
 .wallet-info {
@@ -20,23 +22,24 @@
 
 .wallet-section {
   flex: 1 1 300px;
-  background: #f9f9f9;
+  background: #121829;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  box-shadow: 0 4px 20px rgba(108, 92, 231, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .wallet-section h3 {
   margin-bottom: 10px;
   font-size: 18px;
-  color: #333;
+  color: #00bcd4;
 }
 
 .wallet-address {
   font-family: monospace;
   font-size: 14px;
   word-break: break-all;
-  color: #555;
+  color: #cbd5e1;
 }
 
 .wallet-transactions {
@@ -46,6 +49,7 @@
 .wallet-transactions h2 {
   font-size: 22px;
   margin-bottom: 20px;
+  color: #f1f5f9;
 }
 
 .transaction-list {
@@ -55,11 +59,11 @@
 }
 
 .transaction-card {
-  background: #fff;
-  border-left: 6px solid #ddd;
+  background: #1e293b;
+  border-left: 6px solid #6c5ce7;
   padding: 16px;
   border-radius: 8px;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+  box-shadow: 0 2px 12px rgba(108, 92, 231, 0.05);
 }
 
 .transaction-header {
@@ -67,7 +71,7 @@
   justify-content: space-between;
   margin-bottom: 8px;
   font-size: 14px;
-  color: #666;
+  color: #94a3b8;
 }
 
 .tx-type {
@@ -77,25 +81,28 @@
   font-size: 13px;
 }
 
+/* Send & Receive Status */
 .tx-type.send {
-  background-color: #ffe6e6;
-  color: #cc0000;
+  background-color: rgba(255, 99, 132, 0.1);
+  color: #ff4d6d;
+  border: 1px solid #ff4d6d;
 }
 
 .tx-type.receive {
-  background-color: #e6f4ea;
-  color: #207a43;
+  background-color: rgba(0, 255, 160, 0.1);
+  color: #00ffaa;
+  border: 1px solid #00ffaa;
 }
 
 .tx-amount {
   font-size: 18px;
   font-weight: 500;
-  color: #222;
+  color: #f1f5f9;
 }
 
 .tx-hash {
   font-size: 13px;
   font-family: monospace;
-  color: #888;
+  color: #94a3b8;
   margin-top: 4px;
 }

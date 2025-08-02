@@ -30,30 +30,107 @@ body {
   border-bottom: 1px solid var(--border);
 }
 
-/* Main hero content */
 .hero-section {
-  flex: 1;
+  background: var(--background);
+  color: var(--text);
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  padding: 4rem 6rem;
-  background: radial-gradient(circle at top left, #111827 20%, #0b0f19 100%);
+  justify-content: space-between;
+  padding: 6rem 6rem;
+  min-height: 60vh;
+  gap: 4rem;
 }
 
 .hero-content {
+  flex: 1;
   max-width: 600px;
 }
 
 .hero-content h1 {
-  font-size: 2.8rem;
+  font-size: 3rem;
+  font-weight: 700;
   color: var(--primary);
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  animation: fadeInUp 0.8s ease-out;
 }
 
 .hero-content p {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: #cbd5e1;
   line-height: 1.6;
+  animation: fadeInUp 1.2s ease-out;
+}
+
+.hero-rocket {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeInUp 1s ease-out;
+}
+
+.rocket-image {
+  width: 100%;
+  max-width: 500px;
+  animation: floatRocket 4s ease-in-out infinite;
+}
+
+/* Floating animation */
+@keyframes floatRocket {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+
+.rocket-wrapper {
+  width: 100%;
+  max-width: 500px;
+  height: 500px;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-section {
+    flex-direction: column;
+    text-align: center;
+    padding: 4rem 2rem;
+  }
+
+  .hero-rocket {
+    margin-top: 3rem;
+    height: 400px;
+  }
+
+  .rocket-wrapper {
+    height: 400px;
+  }
+
+  .hero-content h1 {
+    font-size: 2.4rem;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+  }
 }
 
 /* Footer */

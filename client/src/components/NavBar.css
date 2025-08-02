@@ -1,29 +1,47 @@
 .navbar {
   display: flex;
   justify-content: space-between;
-  background-color: #E9FFF9;
-  padding: 10px 0 10px 0
+  align-items: center;
+  background-color: #121829;
+  padding: 20px 40px; /* Increased padding for height */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 2px 12px rgba(108, 92, 231, 0.08);
+  min-height: 80px; /* Added height for consistency */
 }
 
 .navbar-username {
-  color: #D64045;
+  color: #00bcd4;
+  font-weight: 600;
+  font-size: 22px;
 }
 
 .navbar-link {
-  color: #D64045;
+  color: #6c5ce7;
   text-decoration: none;
+  font-weight: 500;
+  font-size: 18px;
+  transition: color 0.2s ease;
 }
 
 .navbar-link:hover {
+  color: #00bcd4;
   text-decoration: underline;
 }
 
 .navbar-row {
   display: flex;
-  padding: 20px;
-  gap: 15px;
+  gap: 28px;
+  align-items: center;
 }
 
-.navbar-row a,p {
-  font-size: 26px;
+.navbar-row a,
+.navbar-row p {
+  font-size: 20px;
+  color: #f1f5f9;
+  margin: 0;
+  transition: color 0.2s ease;
+}
+
+.navbar-row a:hover {
+  color: #00bcd4;
 }
