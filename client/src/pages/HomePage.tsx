@@ -7,7 +7,6 @@ import PricingSection from '../components/PricingSection';
 import SocialMediaBar from '../components/SocialMediaBar';
 import ContactUs from '../components/ContactUs';
 
-import Rocket from '../components/RocketModel';
 
 import RocketImage from '../assets/rocket.svg'; // Put your rocket image in public or src/assets
 

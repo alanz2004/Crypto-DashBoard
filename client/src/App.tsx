@@ -6,6 +6,7 @@ import Team from "./pages/Team";
 import WalletPage from './pages/Wallet';
 import AIHelperPage from './pages/AIHelper';
 import SmartContractsDashboard from './pages/SmartContractsDashboard';
+import CreateProject from './components/CreateProject/CreateProject';
 
 import AppFooter from './components/AppFooter';
 
@@ -30,6 +31,7 @@ export default function App() {
         <Route path="/login" element={<LoginPage setLoggedIn={setLoggedIn} />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path='/home' element={<HomePage />} />
+        <Route path='/createproject' element={<CreateProject />} />
 
         {/* Main app routes with layout */}
         <Route
@@ -56,8 +58,6 @@ export default function App() {
               <LoginPage setLoggedIn={setLoggedIn} />
             )
           }
-
-
         />
       </Routes>
     </Router>
