@@ -7,6 +7,8 @@ import WalletPage from './pages/Wallet';
 import AIHelperPage from './pages/AIHelper';
 import SmartContractsDashboard from './pages/SmartContractsDashboard';
 
+import AppFooter from './components/AppFooter';
+
 import LoginPage from './pages/LoginPage';
 import SignUp from './pages/SignUp';
 
@@ -45,12 +47,17 @@ export default function App() {
                     <Route path='/smartcontracts' element={<SmartContractsDashboard />} />
                   </Routes>
                 </main>
+
+                <AppFooter />
+
               </div>
             ) : (
               // Redirect to login if not logged in
               <LoginPage setLoggedIn={setLoggedIn} />
             )
           }
+
+
         />
       </Routes>
     </Router>

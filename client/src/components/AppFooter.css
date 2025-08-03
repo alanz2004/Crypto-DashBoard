@@ -1,0 +1,35 @@
+:root {
+  --background: #0b0f19;
+  --text: #f1f5f9;
+  --border: #2d3748;
+  --accent: #6c5ce7;
+}
+
+.app-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 3rem;              /* More vertical and horizontal space */
+  background: var(--background);
+  border-top: 1px solid var(--border);
+  color: var(--text);
+  font-size: 1.15rem;              /* Larger font size */
+  height: 100px;                   /* Taller footer */
+  box-sizing: border-box;
+}
+
+.footer-left {
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.footer-right {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.footer-right:hover {
+  color: #a78bfa;
+}
