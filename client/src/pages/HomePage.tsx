@@ -2,6 +2,7 @@ import React from 'react';
 import './HomePage.css';
 
 import NavBarHome from '../components/NavBarHome';
+import CryptoStatsSection from '../components/CryptoStatsSection';
 import FeaturesSection from '../components/FeaturesSection';
 import PricingSection from '../components/PricingSection';
 import SocialMediaBar from '../components/SocialMediaBar';
@@ -32,6 +33,8 @@ const HomePage: React.FC = () => {
     </main>
 
       <FeaturesSection />
+
+      <CryptoStatsSection />
 
       <PricingSection />
 

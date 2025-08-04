@@ -1,0 +1,66 @@
+.crypto-stats-section {
+  background: linear-gradient(135deg, #0a0f24, #151c32);
+  color: #f1f5ff;
+  padding: 4rem 2rem;
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid #273043;
+  border-bottom: 1px solid #273043;
+}
+
+.stats-content {
+  max-width: 1000px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.stats-content h2 {
+  font-size: 2.5rem;
+  color: #8ab4f8;
+  margin-bottom: 1rem;
+}
+
+.stats-content p {
+  font-size: 1.1rem;
+  color: #c4d0ff;
+  max-width: 700px;
+  margin-bottom: 3rem;
+  line-height: 1.6;
+}
+
+.stats-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.stat-card {
+  background-color: #1f2b44;
+  border: 1px solid #303d66;
+  border-radius: 12px;
+  padding: 2rem;
+  width: 220px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: scale(1.05);
+}
+
+.stat-value {
+  font-size: 2rem;
+  color: #43e6d3;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.stat-label {
+  font-size: 1rem;
+  color: #a3b7ff;
+}
