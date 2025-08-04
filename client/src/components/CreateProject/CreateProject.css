@@ -115,33 +115,17 @@ width: 100vw;
   background: rgba(108, 92, 231, 0.1);
 }
 
-/* Fade in and slide from right */
-@keyframes fadeSlideIn {
+@keyframes fadeScaleIn {
   0% {
     opacity: 0;
-    transform: translateX(40px);
+    transform: scale(0.95);
   }
   100% {
     opacity: 1;
-    transform: translateX(0);
+    transform: scale(1);
   }
 }
 
 .step-container {
-  animation: fadeSlideIn 0.5s ease forwards;
-}
-
-/* Button hover glow */
-.step-actions button:hover {
-  box-shadow: 0 0 8px 2px rgba(108, 92, 231, 0.7);
-  transition: box-shadow 0.3s ease;
-}
-
-/* Input and textarea focus glow */
-.step-form input:focus,
-.step-form textarea:focus {
-  border-color: #6c5ce7;
-  box-shadow: 0 0 8px 2px rgba(108, 92, 231, 0.6);
-  outline: none;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeScaleIn 1s ease forwards;
 }

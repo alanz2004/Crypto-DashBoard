@@ -1,246 +1,163 @@
 .ai-helper-page {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  color: #f1f5ff;
+  font-family: 'Segoe UI', sans-serif;
+  min-height: 100vh;
   width: 100%;
-  align-self: center;
-}
-
-
-.ai-helper-container {
-  width: 95%;
-  padding: 0 20px;
-  font-family: sans-serif;
-}
-
-.ai-helper-container textarea {
-  width: 100%;
-  height: 120px;
-  padding: 12px;
-  font-size: 14px;
-  margin-top: 10px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  resize: vertical;
-}
-
-.ai-helper-container button {
-  margin-top: 12px;
-  background-color: #4f46e5;
-  color: white;
-  padding: 10px 18px;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.ai-helper-container button:hover {
-  background-color: #4338ca;
 }
 
 .page-header {
-  text-align: center;
-  margin-bottom: 40px;
+  text-align: left;
+  margin-bottom: 3rem;
+  align-self: flex-start;
+  padding-left: 5%;
 }
 
 .page-header h1 {
-  font-size: 40px;
-  margin-bottom: 10px;
+  font-size: 2.5rem;
+  color: #8ab4f8;
+  margin-bottom: 0.5rem;
 }
 
 .page-header p {
-  font-size: 18px;
-  color: #555;
+  font-size: 1.2rem;
+  color: #aabbee;
 }
 
 .tools-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 40px 40px; /* gap: rowGap columnGap */
-  justify-content: center;
-}
-
-.tools-ai-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px 40px; /* gap: rowGap columnGap */
-  justify-content: center;
-}
-
-/* Each card will take roughly 48% to allow two per row with spacing */
-.tool-card {
-  flex: 0 1 calc(50% - 40px);
-  border-radius: 16px;
-  padding: 24px;
-  color: #fff;
-  display: flex;
   flex-direction: column;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
-  min-height: 300px;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+}
+
+/* Tool Section Styling */
+.tool-section {
+  width: 90%;
+  background: linear-gradient(135deg, #1f2b44, #101828);
+  border: 1px solid #2c3a5c;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.tool-section:hover {
+  transform: scale(1.01);
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.6);
+}
+
+.tool-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.tool-info h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #ffffff;
+}
+
+.tool-info p {
+  margin-top: 0.4rem;
+  color: #c9d1ff;
+  font-size: 1rem;
+}
+
+.tool-toggle-btn {
+  background-color: #7f5af0;
+  color: #ffffff;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
   cursor: pointer;
+  transition: background 0.2s ease-in-out;
 }
 
-.tool-card:hover {
-  transform: translateY(-4px);
+.tool-toggle-btn:hover {
+  background-color: #6842d6;
 }
 
-.tool-card h2 {
-  font-size: 22px;
-  margin-bottom: 8px;
+.tool-body {
+  margin-top: 1.5rem;
 }
 
-.tool-card p {
-  font-size: 15px;
-  margin-bottom: 10px;
-}
-
-/* Unique card colors */
-.tool-website {
-  background: linear-gradient(135deg, #4f46e5, #6366f1);
-}
-
-.tool-funding {
-  background: linear-gradient(135deg, #0ea5e9, #38bdf8);
-}
-
-.tool-tokenomics {
-  background: linear-gradient(135deg, #059669, #34d399);
-}
-
-.tool-roadmap {
-  background: linear-gradient(135deg, #eab308, #facc15);
-  color: #222;
-}
-
-.tool-whitepaper {
-  background: linear-gradient(135deg, #f43f5e, #fb7185);
-}
-
-/* Team Section Styles */
+/* Textarea and team section styles */
 textarea {
   width: 100%;
-  height: 80px;
+  height: 120px;
+  margin-top: 1rem;
+  border: 1px solid #3b4360;
   border-radius: 8px;
-  padding: 10px;
-  font-size: 14px;
-  border: none;
+  background-color: #1a2138;
+  color: #ffffff;
+  padding: 1rem;
   resize: vertical;
-  margin: 10px 0;
+  font-size: 1rem;
+  outline: none;
 }
 
 .tool-button {
-  background-color: rgba(255, 255, 255, 0.2);
-  color: #fff;
-  padding: 8px 14px;
+  margin-top: 1rem;
+  background-color: #43e6d3;
+  color: #0a0f24;
+  padding: 0.6rem 1.2rem;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
+  font-weight: 600;
   cursor: pointer;
-  font-weight: bold;
-  font-size: 14px;
+  transition: background-color 0.2s;
 }
 
 .tool-button:hover {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: #31cbbd;
 }
 
-.coming-soon {
-  font-style: italic;
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.85);
-  margin-top: auto;
-}
-
-/* Team Output */
 .team-section {
-  margin-top: 20px;
+  margin-top: 2rem;
 }
 
 .team-title {
-  font-size: 18px;
-  margin-bottom: 10px;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: #a3b7ff;
 }
 
 .team-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 1rem;
 }
 
 .team-card {
-  background-color: #fff;
-  border-radius: 12px;
-  padding: 14px;
-  color: #222;
-  width: 100%;
+  background-color: #1f2b44;
+  border: 1px solid #303d66;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 220px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .avatar-placeholder {
-  width: 50px;
-  height: 50px;
-  background-color: #ccc;
+  background-color: #353e5a;
+  height: 60px;
+  width: 60px;
   border-radius: 50%;
-  margin-bottom: 8px;
+  margin-bottom: 0.8rem;
 }
 
 .team-role {
-  font-weight: bold;
+  color: #8ab4f8;
+  font-weight: 500;
 }
 
 .team-description {
-  font-size: 13px;
-  color: #555;
+  color: #c2d0ff;
+  font-size: 0.95rem;
 }
-
-
-
-.team-section {
-  padding: 40px 20px;
-  max-width: 1100px;
-  margin: auto;
-  font-family: 'Segoe UI', sans-serif;
-}
-
-.team-title {
-  text-align: center;
-  font-size: 28px;
-  margin-bottom: 40px;
-  color: #222;
-}
-
-.team-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24px;
-  justify-content: center;
-}
-
-.team-card {
-  background-color: #f9f9f9;
-  padding: 20px;
-  flex: 1 1 280px;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.04);
-  text-align: center;
-}
-
-.avatar-placeholder {
-  width: 80px;
-  height: 80px;
-  background-color: #ddd;
-  border-radius: 50%;
-  margin: 0 auto 12px;
-}
-
-.team-role {
-  font-weight: 600;
-  color: #4f46e5;
-  margin: 6px 0;
-}
-
-.team-description {
-  font-size: 14px;
-  color: #555;
-}
-

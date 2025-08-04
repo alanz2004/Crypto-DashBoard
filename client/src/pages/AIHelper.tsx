@@ -5,6 +5,7 @@ import TokenomicsHelper from '../components/TokenomicsHelper';
 import FundraisingRounds from '../components/FundraisingRounds';
 import FundraisingRecommendation from '../components/FundraisingRecommendation';
 import RoadmapBuilder from '../components/RoadmapBuilder';
+import ToolSection from '../components/ToolSection';
 
 interface Member {
   name: string;
@@ -54,87 +55,69 @@ const TeamGenerator: React.FC = () => {
         <p>Use powerful AI tools to build your crypto startup faster.</p>
       </header>
 
-      <div className="tools-container">
-        {/* Website Helper with Live Team Generator */}
-        <div className="tool-card tool-website">
-          <h2>Website Helper</h2>
-          <p>Generate a team section and other website components using AI.</p>
-          <p>Enter team members in format: <code>Name: Role</code></p>
-          <textarea
-            value={inputText}
-            onChange={(e) => setInputText(e.target.value)}
-            placeholder={`Alan Starobinski: CEO\nSarah Dahan: Smart Contract Engineer`}
-          />
-          <button className="tool-button" onClick={handleGenerate}>Generate Section</button>
+            <div className="tools-container">
+                  <ToolSection
+                    title="Website Helper"
+                    description="Generate a team section and other website components using AI."
+                    renderContent={() => (
+                      <>
+                        <p>Enter team members in format: <code>Name: Role</code></p>
+                        <textarea
+                          value={inputText}
+                          onChange={(e) => setInputText(e.target.value)}
+                          placeholder={`Alan Starobinski: CEO\nSarah Dahan: Smart Contract Engineer`}
+                        />
+                        <button className="tool-button" onClick={handleGenerate}>Generate Section</button>
+                        {team.length > 0 && (
+                          <section className="team-section">
+                            <h3 className="team-title">Meet the Team</h3>
+                            <div className="team-list">
+                              {team.map((member) => (
+                                <div className="team-card" key={member.name}>
+                                  <div className="avatar-placeholder" />
+                                  <h4>{member.name}</h4>
+                                  <p className="team-role">{member.role}</p>
+                                  <p className="team-description">{member.description}</p>
+                                </div>
+                              ))}
+                            </div>
+                          </section>
+                        )}
+                      </>
+                    )}
+                  />
 
-          {team.length > 0 && (
-            <section className="team-section">
-              <h3 className="team-title">Meet the Team</h3>
-              <div className="team-list">
-                {team.map((member) => (
-                  <div className="team-card" key={member.name}>
-                    <div className="avatar-placeholder" />
-                    <h4>{member.name}</h4>
-                    <p className="team-role">{member.role}</p>
-                    <p className="team-description">{member.description}</p>
-                  </div>
-                ))}
+                  <ToolSection
+                    title="Tokenomics Helper"
+                    description="Design smart token allocations and utility models with AI."
+                    renderContent={() => <TokenomicsHelper />}
+                  />
+
+                  <ToolSection
+                    title="Fundraising Rounds"
+                    description="Plan your raise and token distribution strategy with AI-assisted guidance."
+                    renderContent={() => <FundraisingRounds />}
+                  />
+
+                  <ToolSection
+                    title="Fundraising Recommendations"
+                    description="Use AI to generate ideal raise amounts, prices, and token allocation."
+                    renderContent={() => <FundraisingRecommendation />}
+                  />
+
+                  <ToolSection
+                    title="Roadmap Builder"
+                    description="Create a startup roadmap tailored to your project stage and vision."
+                    renderContent={() => <RoadmapBuilder />}
+                  />
+
+                  <ToolSection
+                    title="Whitepaper Assistant"
+                    description="Generate a high-quality whitepaper draft with the help of AI."
+                    renderContent={() => <p style={{ color: '#64748b' }}>Coming soon...</p>}
+                    />
               </div>
-            </section>
-          )}
-        </div>
 
-        {/* Other cards - Coming soon */}
-        <div className="tool-card tool-funding"  onClick={() => {
-  const section = document.getElementById('funding-rounds');
-  if (section) {
-    section.scrollIntoView({ behavior: 'smooth' });
-  }
-}}>
-          <h2>Funding Helper</h2>
-          <p>Plan fundraising rounds and get AI-generated pitch suggestions.</p>
-          <span className="coming-soon">Plan Fundraising Rounds</span>
-        </div>
-
-        <div className="tool-card tool-tokenomics" onClick={() => {
-  const section = document.getElementById('tokenomics-helper');
-  if (section) {
-    section.scrollIntoView({ behavior: 'smooth' });
-  }
-}}>
-          <h2>Tokenomics Helper</h2>
-          <p>Design smart token allocations and utility models with AI.</p>
-          <span className="coming-soon">Create Me Tokenomics</span>
-        </div>
-
-        <div className="tool-card tool-roadmap"  onClick={() => {
-  const section = document.getElementById('roadmap-container');
-  if (section) {
-    section.scrollIntoView({ behavior: 'smooth' });
-  }
-}}>
-          <h2>Roadmap Builder</h2>
-          <p>Create a startup roadmap tailored to your stage and vision.</p>
-          <span className="coming-soon">Create Road Map</span>
-        </div>
-
-        <div className="tool-card tool-whitepaper">
-          <h2>Whitepaper Assistant</h2>
-          <p>Generate a structured, high-quality whitepaper using AI.</p>
-          <span className="coming-soon">Coming Soon</span>
-        </div>
-      </div>
-
-
-      <div className='tools-ai-container'>
-             <TokenomicsHelper />
-
-            <FundraisingRounds />
-
-            <FundraisingRecommendation />
-
-            <RoadmapBuilder />
-      </div>
      
     </div>
   );
