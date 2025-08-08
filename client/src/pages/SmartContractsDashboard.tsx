@@ -45,7 +45,7 @@ const SmartContractsDashboard: React.FC = () => {
 
     try {
       const completion = await openai.chat.completions.create({
-        model: 'gpt-4',
+        model: 'gpt-3.5-turbo',
         messages: [
           { role: 'system', content: 'You are an expert Solidity and Web3 smart contract assistant.' },
           { role: 'user', content: buildPrompt() },

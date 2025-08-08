@@ -1,0 +1,57 @@
+.dashboard-stats {
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch; /* ensures equal height for all cards */
+  padding: 40px;
+  border-radius: 16px;
+  height: 300px;
+  color: white;
+  gap: 30px;
+}
+
+.dashboard-stats-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffb400; /* cosmic gold */
+  text-align: left;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 40px 60px;
+  border-radius: 12px;
+  width: 400px; /* wider cards */
+  justify-content: center;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.stat-icon {
+  font-size: 90px; /* bigger icon */
+}
+
+.users-icon {
+  color: #ffce56;
+}
+
+.eth-icon {
+    color: #2c5364;
+}
+
+.stat-card h2 {
+  font-size: 52px;
+  margin: 0;
+}
+
+.stat-card p {
+  font-size: 20px;
+  margin: 0;
+  opacity: 0.8;
+}

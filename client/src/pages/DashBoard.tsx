@@ -1,6 +1,7 @@
 import './DashBoard.css'
 import TwitterGrowthChart from '../components/TwitterGrowthChart';
 import EthRaisingChart from '../components/EthRaisingChart';
+import DashboardStats from '../components/DashboardStats';
 import TokenHoldings from '../components/TokenHoldings';
 import ChartComponent from '../components/FundBarChart';
 
@@ -13,17 +14,8 @@ const sampleData = [
 
 export default function Dashboard() {
   return (
-   <div className='dashboard-content'>
-     <h1 className="dashboard-tite">DashBoard</h1>
-     
-        <div className="chart-container-row">
-          
-            <TwitterGrowthChart />
-            <EthRaisingChart />
-
-            
-        </div>
-
+   <div className='dashboard-content'> 
+          <DashboardStats totalUsers={12500} totalEth={342.57} />
           <ChartComponent />
           <TokenHoldings />
     </div>
