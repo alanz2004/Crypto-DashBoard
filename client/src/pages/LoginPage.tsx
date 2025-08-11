@@ -1,15 +1,31 @@
-import React from "react";
-import './LoginPage.css'
+import React, { useState } from "react";
+import { useAuth } from "../context/AuthContext";
+import "./LoginPage.css";
 
 interface LoginPageProps {
   setLoggedIn: (status: boolean) => void;
 }
 
 const LoginPage: React.FC<LoginPageProps> = ({ setLoggedIn }) => {
-  const handleLogin = (e: React.FormEvent) => {
+  const { login } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    // You can add real auth here
-    setLoggedIn(true); // <- Logs user in
+    setLoading(true);
+    setError("");
+
+    try {
+      await login(email, password); // Calls backend via context
+      setLoggedIn(true); // Only runs if login succeeds
+    } catch (err: any) {
+      setError(err.message || "Login failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -23,23 +39,47 @@ const LoginPage: React.FC<LoginPageProps> = ({ setLoggedIn }) => {
           <h2>Welcome Back 👋</h2>
           <p className="subtitle">Login to your account</p>
 
+          {error && <p className="error-message">{error}</p>}
+
           <form className="login-form" onSubmit={handleLogin}>
             <div className="input-group">
               <label htmlFor="email">📧 Email</label>
-              <input type="email" id="email" placeholder="you@example.com" />
+              <input
+                type="email"
+                id="email"
+                placeholder="you@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
             </div>
 
             <div className="input-group">
               <label htmlFor="password">🔒 Password</label>
-              <input type="password" id="password" placeholder="••••••••" />
+              <input
+                type="password"
+                id="password"
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
             </div>
 
-            <button type="submit" className="login-button">Login</button>
+            <button
+              type="submit"
+              className="login-button"
+              disabled={loading}
+            >
+              {loading ? "Logging in..." : "Login"}
+            </button>
           </form>
 
           <div className="extra-links">
             <a href="#">Forgot password?</a>
-            <a href="#">Don't have an account? <strong>Sign up</strong></a>
+            <a href="#">
+              Don't have an account? <strong>Sign up</strong>
+            </a>
           </div>
         </div>
       </div>
