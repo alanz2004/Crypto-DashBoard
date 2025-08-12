@@ -14,9 +14,23 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<any>(null);
   const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
 
+  // Restore user session if token exists
   useEffect(() => {
     if (token) {
-      // TODO: Optionally fetch user profile
+      fetch(`${process.env.REACT_APP_API_URL}/users/me`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data && !data.error) {
+            setUser(data);
+          } else {
+            logout();
+          }
+        })
+        .catch(() => logout());
     }
   }, [token]);
 
@@ -28,10 +42,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     });
 
     const data = await res.json();
-    if (data.token) {
+
+    if (res.ok && data.token) {
       setToken(data.token);
       localStorage.setItem('token', data.token);
-      // Optionally set user
+      setUser(data.username || { email }); // If backend doesn't send user, fallback
     } else {
       throw new Error(data.error || 'Login failed');
     }

@@ -10,6 +10,9 @@ import CreateProject from './components/CreateProject/CreateProject';
 
 import AppFooter from './components/AppFooter';
 
+import { AuthProvider } from './context/AuthContext';
+
+
 import LoginPage from './pages/LoginPage';
 import SignUp from './pages/SignUp';
 
@@ -26,40 +29,45 @@ export default function App() {
 
   return (
     <Router>
-      <Routes>
-        {/* Login route — always available — no Navbar or layout */}
-        <Route path="/login" element={<LoginPage setLoggedIn={setLoggedIn} />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path='/home' element={<HomePage />} />
-        <Route path='/createproject' element={<CreateProject />} />
+      <AuthProvider>
 
-        {/* Main app routes with layout */}
-        <Route
-          path="*"
-          element={
-            loggedIn ? (
-              <div className="app-container">
-                <Navbar username="Alan Starobinski" />
-                <main className="content">
-                  <Routes>
-                    <Route path="/" element={<Dashboard />} />
-                    <Route path="/team" element={<Team />} />
-                    <Route path="/wallet" element={<WalletPage />} />
-                    <Route path="/helper" element={<AIHelperPage />} />
-                    <Route path='/smartcontracts' element={<SmartContractsDashboard />} />
-                  </Routes>
-                </main>
+                <Routes>
+              {/* Login route — always available — no Navbar or layout */}
+              <Route path="/login" element={<LoginPage setLoggedIn={setLoggedIn} />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path='/home' element={<HomePage />} />
+              <Route path='/createproject' element={<CreateProject />} />
 
-                <AppFooter />
+              {/* Main app routes with layout */}
+              <Route
+                path="*"
+                element={
+                  loggedIn ? (
+                    <div className="app-container">
+                      <Navbar username="Alan Starobinski" />
+                      <main className="content">
+                        <Routes>
+                          <Route path="/" element={<Dashboard />} />
+                          <Route path="/team" element={<Team />} />
+                          <Route path="/wallet" element={<WalletPage />} />
+                          <Route path="/helper" element={<AIHelperPage />} />
+                          <Route path='/smartcontracts' element={<SmartContractsDashboard />} />
+                        </Routes>
+                      </main>
 
-              </div>
-            ) : (
-              // Redirect to login if not logged in
-              <LoginPage setLoggedIn={setLoggedIn} />
-            )
-          }
-        />
-      </Routes>
+                      <AppFooter />
+
+                    </div>
+                  ) : (
+                    // Redirect to login if not logged in
+                    <LoginPage setLoggedIn={setLoggedIn} />
+                  )
+                }
+              />
+            </Routes>
+
+      </AuthProvider>
+    
     </Router>
   );
 }
