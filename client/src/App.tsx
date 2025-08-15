@@ -18,7 +18,7 @@ import SignUp from './pages/SignUp';
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-
+import ProtectedRoute from './components/routes/ProtectedRoute';
 
 import Navbar from './components/NavBar';
 import './index.css'; // ✅ THIS IS REQUIRED!
@@ -36,7 +36,9 @@ export default function App() {
               <Route path="/login" element={<LoginPage setLoggedIn={setLoggedIn} />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path='/home' element={<HomePage />} />
-              <Route path='/createproject' element={<CreateProject />} />
+              <Route path='/createproject' element={<ProtectedRoute>
+                  <CreateProject />
+                </ProtectedRoute>} />
 
               {/* Main app routes with layout */}
               <Route
