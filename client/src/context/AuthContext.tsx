@@ -47,7 +47,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     if (res.ok && data.token) {
       setToken(data.token);
       localStorage.setItem('token', data.token);
-      setUser(data.username || { email }); // If backend doesn't send user, fallback
+      setUser({
+        username: data.username || null,
+        email: email // fallback to the email entered during login
+      });
     } else {
       throw new Error(data.error || 'Login failed');
     }

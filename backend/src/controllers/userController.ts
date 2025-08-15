@@ -4,7 +4,32 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User, { IUser } from '../models/User';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'fallback-secret';
+import { AuthRequest } from '../middlewares/authMiddleware';
+
+
+
+// GET /users/me
+export const getMe = async (req: AuthRequest, res: Response) => {
+  try {
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({ error: 'Unauthorized' });
+    }
+
+    const user: IUser | null = await User.findById(req.user.id).select('-password'); // exclude password
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.json({
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+    });
+  } catch (error) {
+    console.error('getMe Error:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
 
 // Create User
 export const createUser = async (req: Request, res: Response) => {
@@ -80,7 +105,7 @@ export const loginUser = async (req: Request, res: Response) => {
     }
 
     // Create token
-    const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '7d' });
+    const token = jwt.sign({ id: user._id },  process.env.JWT_SECRET!, { expiresIn: '7d' });
 
     res.json({
       message: 'Login successful',
