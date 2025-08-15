@@ -17,13 +17,10 @@ export const createUser = async (req: Request, res: Response) => {
       return res.status(400).json({ error: 'Email already in use' });
     }
 
-    // Hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Create user
+    // Create user — password will be hashed automatically by schema
     const user: IUser = await User.create({
       username,
-      password: hashedPassword,
+      password, // raw password, DO NOT hash manually
       email
     });
 
@@ -65,17 +62,20 @@ export const deleteUser = async (req: Request, res: Response) => {
 // Login
 export const loginUser = async (req: Request, res: Response) => {
   try {
+
     const { email, password } = req.body;
 
     // Find user
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: { $regex: new RegExp(`^${email.trim()}$`, 'i') } });
     if (!user) {
+      
       return res.status(400).json({ error: 'Invalid credentials' });
     }
 
     // Compare password
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await user.matchPassword(password);
     if (!isMatch) {
+      console.log(password)
       return res.status(400).json({ error: 'Invalid credentials' });
     }
 

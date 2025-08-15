@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   // Restore user session if token exists
   useEffect(() => {
     if (token) {
-      fetch(`${process.env.REACT_APP_API_URL}/users/me`, {
+      fetch(`${import.meta.env.VITE_API_URL}/users/me`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -35,7 +35,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, [token]);
 
   const login = async (email: string, password: string) => {
-    const res = await fetch(`${process.env.REACT_APP_API_URL}/users/login`, {
+    console.log("API URL:", import.meta.env.VITE_API_URL);
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/users/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
@@ -53,7 +54,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const register = async (username: string, email: string, password: string) => {
-    const res = await fetch(`${process.env.REACT_APP_API_URL}/users`, {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/users`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, email, password }),
