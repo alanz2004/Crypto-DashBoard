@@ -45,21 +45,23 @@ export default function App() {
                 path="*"
                 element={
                   loggedIn ? (
-                    <div className="app-container">
-                      <Navbar username="Alan Starobinski" />
-                      <main className="content">
-                        <Routes>
-                          <Route path="/" element={<Dashboard />} />
-                          <Route path="/team" element={<Team />} />
-                          <Route path="/wallet" element={<WalletPage />} />
-                          <Route path="/helper" element={<AIHelperPage />} />
-                          <Route path='/smartcontracts' element={<SmartContractsDashboard />} />
-                        </Routes>
-                      </main>
+                    <ProtectedRoute>
+                         <div className="app-container">
+                            <Navbar username="Alan Starobinski" />
+                            <main className="content">
+                              <Routes>
+                                <Route path="/" element={<Dashboard />} />
+                                <Route path="/team" element={<Team />} />
+                                <Route path="/wallet" element={<WalletPage />} />
+                                <Route path="/helper" element={<AIHelperPage />} />
+                                <Route path='/smartcontracts' element={<SmartContractsDashboard />} />
+                              </Routes>
+                            </main>
 
-                      <AppFooter />
-
-                    </div>
+                            <AppFooter />
+                          </div>
+                    </ProtectedRoute>
+                   
                   ) : (
                     // Redirect to login if not logged in
                     <LoginPage setLoggedIn={setLoggedIn} />
