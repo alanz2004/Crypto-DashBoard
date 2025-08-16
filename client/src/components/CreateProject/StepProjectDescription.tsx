@@ -22,7 +22,7 @@ const StepProjectDescription: React.FC<Props> = ({ value, onNext, onBack, onChan
         <textarea
           placeholder="Describe your project..."
           value={value}
-          onChange={(e) => onChange('description', e.target.value)}
+          onChange={(e) => onChange('projectDescription', e.target.value)}
           rows={6}
         />
         <div className="step-actions">
