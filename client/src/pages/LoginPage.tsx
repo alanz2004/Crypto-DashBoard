@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import "./LoginPage.css";
 
+import AuthImage from '../assets/auth.svg'; // Put your rocket image in public or src/assets
+
+
 interface LoginPageProps {
   setLoggedIn: (status: boolean) => void;
 }
@@ -31,7 +34,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ setLoggedIn }) => {
   return (
     <div className="login-page">
       <div className="login-image">
-        <span className="image-text">Your image here</span>
+         <img src={AuthImage} alt="Auth Image" />
       </div>
 
       <div className="login-form-container">

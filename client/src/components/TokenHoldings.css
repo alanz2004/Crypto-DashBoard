@@ -1,11 +1,64 @@
-.token-holdings-title {
-  color: #9ED8DB;
-}
-
-
 .token-holdings-container {
-  display: flex;
-  flex-direction: column;
-  gap: 50px;
+  background: #0b0f19; /* cosmic background */
+  border: 1px solid #2d3748;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(108, 92, 231, 0.2);
+  color: #f1f5f9;
+  margin: 0 auto;
+  width: 100%;
 }
-  
+
+.token-holdings-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #6c5ce7; /* neon violet */
+  margin-bottom: 15px;
+  text-align: center;
+  text-shadow: 0 0 8px rgba(108, 92, 231, 0.7);
+}
+
+.token-holdings-table {
+  width: 100%;
+}
+
+.token-holdings-row {
+  display: flex;
+  align-items: center;
+  padding: 12px 10px;
+  border-bottom: 1px solid #2d3748;
+  transition: background 0.3s ease;
+}
+
+.token-holdings-row:hover {
+  background: rgba(108, 92, 231, 0.1);
+}
+
+.token-holdings-header {
+  font-weight: 600;
+  color: #00bcd4; /* electric blue */
+  border-bottom: 2px solid #6c5ce7;
+}
+
+.col {
+  width: 33.3333%;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.truncate {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.token-holdings-row p {
+  font-size: 1rem;
+}
+
+.token-holdings-row:last-child {
+  border-bottom: none;
+}
+

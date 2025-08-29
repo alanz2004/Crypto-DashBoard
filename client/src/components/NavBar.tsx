@@ -22,6 +22,8 @@ const Navbar: React.FC<NavbarProps> = ({ username }) => {
         <Link to="/wallet" className="navbar-link">Wallet</Link>
         <Link to="/helper" className="navbar-link">AI Helper</Link>
         <Link to="/smartcontracts" className='navbar-link'>Smart Contracts</Link>
+        <Link to="/code" className='navbar-link'>Project Code</Link>
+
       </div>
     </div>
   );

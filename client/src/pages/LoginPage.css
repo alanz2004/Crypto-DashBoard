@@ -20,6 +20,11 @@
   justify-content: center;
 }
 
+.login-image img {
+  width: 70%;
+  height: 70%;
+}
+
 .image-text {
   font-size: 26px;
   font-weight: bold;
