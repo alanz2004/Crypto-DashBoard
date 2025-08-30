@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './TokenHoldings.css';
 import { useAuth } from '../context/AuthContext';
+import EmbedContainer from './EmbedContainer';
 
 interface TokenHolder {
   _id: string;
@@ -19,10 +20,41 @@ export default function TokenHoldings({ projectId }: TokenHoldingsProps) {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  const [showEmbed, setShowEmbed] = useState(false);
+
   // Add holder states
   const [showAddRow, setShowAddRow] = useState(false);
   const [newHolder, setNewHolder] = useState({ name: '', wallet: '', tokensHeld: 0 });
   const [adding, setAdding] = useState(false);
+
+   const embedCode = `
+  <script>
+    async function addTokenHolder(name, wallet, tokensHeld) {
+      try {
+        const response = await fetch("https://yourdomain.com/api/tokenholders/${projectId}", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer YOUR_API_TOKEN"
+          },
+          body: JSON.stringify({ name, wallet, tokensHeld })
+        });
+        const data = await response.json();
+        console.log("Token Holder Added:", data);
+      } catch (error) {
+        console.error("Error adding token holder:", error);
+      }
+    }
+    // Example usage:
+    // addTokenHolder("Alice", "0x123...", 1000);
+  </script>
+  `;
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(embedCode).then(() => {
+      alert("Code copied to clipboard!");
+    });
+  };
 
   // Fetch token holders
   useEffect(() => {
@@ -82,16 +114,22 @@ export default function TokenHoldings({ projectId }: TokenHoldingsProps) {
     <div className="token-holdings-container">
       <h1 className="token-holdings-title">Token Holdings</h1>
 
-       {!showAddRow && (
-  <div className="add-row">
-    <button className="add-btn" onClick={() => setShowAddRow(true)}>
-      + Add Holder
-    </button>
-  </div>
-)}
-    
+              {!showAddRow && (
+          <div className="add-row">
+            {!showEmbed && (
+                 <button className="add-btn" onClick={() => setShowAddRow(true)}>
+                    Add Holder
+                </button>
+            )}
+         
+            <button onClick={() => setShowEmbed(!showEmbed)}>
+                  {showEmbed ? "Back to Table" : "Show Embed Code"}
+              </button>
+          </div>
+        )}
 
-      <div className="token-holdings-table">
+        {!showEmbed ? (
+                <div className="token-holdings-table">
         {/* Header */}
         <div className="token-holdings-row token-holdings-header">
           <p className="col">Member</p>
@@ -158,6 +196,9 @@ export default function TokenHoldings({ projectId }: TokenHoldingsProps) {
         )}
        
       </div>
+        ): (
+           <EmbedContainer />
+        )}
     </div>
   );
 }

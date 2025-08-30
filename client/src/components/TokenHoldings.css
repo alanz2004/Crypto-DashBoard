@@ -94,11 +94,77 @@
   gap: 8px;
 }
 
-.action-row {
+/* container: full width, spaced from borders */
+.add-row {
   display: flex;
-  justify-content: flex-end;
-  margin-top: 10px;
-  gap: 10px; /* space between buttons */
+  justify-content: space-between; /* left button left, right button right */
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  gap: 12px;
+  /* optional background to visually separate the controls */
+  /* background: rgba(255,255,255,0.02); */
+}
+
+/* Primary "Add Holder" button (left) */
+.add-row .add-btn {
+  background: #6c5ce7;    /* cosmic purple */
+  color: #f1f5f9;         /* cool white */
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(108,92,231,0.14);
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+  min-width: 130px;
+}
+
+/* hover / focus for accessibility */
+.add-row .add-btn:hover,
+.add-row .add-btn:focus {
+  transform: translateY(-1px);
+  background: #5746d6;
+  outline: none;
+  box-shadow: 0 10px 26px rgba(108,92,231,0.18);
+}
+
+/* Secondary "Show Embed Code" button (right).
+   Uses a selector for the second button if you didn't add a class.
+   If you add a class like .embed-btn, prefer that instead. */
+.add-row button:last-child {
+  background: transparent;
+  color: #00bcd4;         /* electric blue */
+  border: 2px solid rgba(0,188,212,0.12);
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 140px;
+  transition: background .12s ease, transform .12s ease;
+}
+
+/* hover / focus for embed button */
+.add-row button:last-child:hover,
+.add-row button:last-child:focus {
+  background: rgba(0,188,212,0.06);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+/* Responsive: on small screens stack buttons vertically */
+@media (max-width: 600px) {
+  .add-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .add-row .add-btn,
+  .add-row button:last-child {
+    width: 100%;
+    min-width: 0;
+  }
+  .add-row button:last-child {
+    margin-top: 8px;
+  }
 }
 
 .save-btn {

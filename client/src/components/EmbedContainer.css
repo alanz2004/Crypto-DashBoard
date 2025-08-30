@@ -1,0 +1,70 @@
+.embed-container {
+  width: 100%;
+  max-width: 100%;
+  flex: 1;
+  margin: 0;
+  padding: 1rem;
+  background: #0a0f1e; /* cosmos dark bg */
+  border: 1px solid #2d3a5a;
+  border-radius: 12px;
+  box-sizing: border-box;
+  color: #e0e6f0;
+  margin-top: 2rem;
+}
+
+.embed-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.mode-switch button {
+  background: transparent;
+  border: 1px solid rgba(0, 188, 212, 0.2);
+  color: #00bcd4;
+  padding: 6px 14px;
+  border-radius: 8px;
+  margin-right: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.mode-switch button.active {
+  background: #6c5ce7; /* purple cosmic */
+  color: #f1f5f9;
+  border-color: transparent;
+}
+
+.mode-switch button:hover {
+  background: rgba(0, 188, 212, 0.1);
+}
+
+.copy-btn {
+  background: #6c5ce7;
+  border: none;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.copy-btn:hover {
+  background: #5746d6;
+  transform: translateY(-1px);
+}
+
+.code-block {
+  background: #0f172a; /* darker cosmic panel */
+  border-radius: 8px;
+  padding: 14px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  line-height: 1.5;
+  font-size: 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
