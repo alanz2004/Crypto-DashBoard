@@ -59,6 +59,7 @@ export default function Dashboard() {
 
         const data: Project[] = await response.json();
         setProjects(data);
+        console.log(projects)
       } catch (err) {
         setError((err as Error).message);
       } finally {
@@ -92,7 +93,7 @@ return (
       <Fragment>
         <DashboardStats totalUsers={12500} totalEth={342.57} />
         <ChartComponent />
-        <TokenHoldings />
+        {<TokenHoldings projectId={projects[0]._id}/>}
       </Fragment>
     )}
   </div>

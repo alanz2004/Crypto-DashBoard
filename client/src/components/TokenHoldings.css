@@ -62,3 +62,69 @@
   border-bottom: none;
 }
 
+.token-holdings-header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+/* New Holder Row Inputs */
+.new-holder-row {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.new-holder-row .input-cell {
+  width: 33%;              /* slightly smaller than full column */
+  height: 40px;            /* bigger height */
+  padding: 6px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+/* Tokens input + Save button aligned to the right */
+.new-holder-row .col.text-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+}
+
+.action-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+  gap: 10px; /* space between buttons */
+}
+
+.save-btn {
+  padding: 8px 16px;
+  background-color: #5cb85c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.save-btn:hover {
+  background-color: #4cae4c;
+}
+
+.cancel-btn {
+  padding: 8px 16px;
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.cancel-btn:hover {
+  background-color: #c9302c;
+}
