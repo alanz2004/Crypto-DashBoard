@@ -4,6 +4,7 @@
   flex-direction: column;
   gap: 100px;
   min-height: 90vh;
+  margin-top: 50px;
 }
 
 .dashboard-tite{

@@ -1,0 +1,78 @@
+.code-page {
+  display: flex;
+  height: 90vh;
+  width: 100%;
+  background: #0b0f2a; /* deep cosmic blue */
+  color: #e0e0e0;
+  border: 1px solid #302b40;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(255, 78, 205, 0.3); /* pink cosmic glow */
+}
+
+/* Sidebar */
+.file-list {
+  width: 15%;
+  background: #1a103d; /* deep purple */
+  border-right: 1px solid #2b224d;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.file-item {
+  padding: 10px;
+  margin-bottom: 6px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #cfcbe7; /* light lavender text */
+}
+
+.file-item:hover {
+  background: rgba(122, 92, 255, 0.2); /* violet hover */
+  color: #7a5cff;
+}
+
+.file-item.active {
+  background: rgba(255, 78, 205, 0.2); /* pink glow */
+  color: #ff4ecd;
+  font-weight: bold;
+  border-left: 3px solid #ff4ecd;
+}
+
+/* Code Viewer */
+.code-viewer {
+  width: 85%;
+  padding: 20px;
+  background: #0b0f2a; /* dark space blue */
+  font-family: "Fira Code", monospace;
+  font-size: 14px;
+  overflow: auto;
+}
+
+/* Pre/code styling */
+.code-viewer pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  line-height: 1.6;
+  color: #a2fafa; /* soft cyan */
+}
+
+.code-viewer code {
+  color: #a2fafa;
+}
+
+/* Extra "syntax feel" */
+.code-viewer code .keyword {
+  color: #ff4ecd; /* pink keywords */
+  font-weight: bold;
+}
+
+.code-viewer code .string {
+  color: #7a5cff; /* violet for strings */
+}
+
+.code-viewer code .number {
+  color: #ffae42; /* orange numbers */
+}

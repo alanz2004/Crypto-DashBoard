@@ -1,26 +1,32 @@
 import { useState } from 'react';
+
+
 import HomePage from './pages/HomePage';
 
 import Dashboard from './pages/DashBoard';
 import Team from "./pages/Team";
 import WalletPage from './pages/Wallet';
 import AIHelperPage from './pages/AIHelper';
+import CodePage from './pages/Code';
 import SmartContractsDashboard from './pages/SmartContractsDashboard';
-import CreateProject from './components/CreateProject/CreateProject';
-
-import AppFooter from './components/AppFooter';
-
-import { AuthProvider } from './context/AuthContext';
 
 
 import LoginPage from './pages/LoginPage';
 import SignUp from './pages/SignUp';
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+import CreateProject from './components/CreateProject/CreateProject';
+import AppFooter from './components/AppFooter';
 import ProtectedRoute from './components/routes/ProtectedRoute';
-
 import Navbar from './components/NavBars/NavBar';
+
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AuthProvider } from './context/AuthContext';
+
+
+
+
 import './index.css'; // ✅ THIS IS REQUIRED!
 
 
@@ -55,6 +61,7 @@ export default function App() {
                                 <Route path="/wallet" element={<WalletPage />} />
                                 <Route path="/helper" element={<AIHelperPage />} />
                                 <Route path='/smartcontracts' element={<SmartContractsDashboard />} />
+                                <Route path='/code' element={<CodePage />} />
                               </Routes>
                             </main>
 

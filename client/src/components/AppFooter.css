@@ -16,6 +16,7 @@
   font-size: 1.15rem;              /* Larger font size */
   height: 100px;                   /* Taller footer */
   box-sizing: border-box;
+  margin-top: 100px;
 }
 
 .footer-left {

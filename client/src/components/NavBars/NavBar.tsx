@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 
 import './NavBar.css'
 
@@ -22,7 +22,7 @@ const Navbar: React.FC<NavbarProps> = ({ username }) => {
         <Link to="/wallet" className="navbar-link">Wallet</Link>
         <Link to="/helper" className="navbar-link">AI Helper</Link>
         <Link to="/smartcontracts" className='navbar-link'>Smart Contracts</Link>
-        <Link to="/code" className='navbar-link'>Project Code</Link>
+        <Link to="/code" className='navbar-link'>Code</Link>
 
       </div>
     </div>
