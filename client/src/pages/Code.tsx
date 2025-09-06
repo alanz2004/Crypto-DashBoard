@@ -3,6 +3,23 @@ import "./Code.css";
 
 const CodePage = () => {
   const [activeFile, setActiveFile] = useState("index.js");
+  const [fileContent, setFileContent] = useState(`console.log("Hello Cosmic World!");`);
+  const [fileName, setFileName] = useState("example.js");
+
+  const handleDownload = () => {
+    const blob = new Blob([fileContent], { type: "text/plain;charset=utf-8" });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+
+    a.href = url;
+    a.download = fileName; // file name from state
+    document.body.appendChild(a);
+    a.click();
+
+    // cleanup
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  };
 
   const files = ["index.js", "App.js", "Wallet.js", "TokenHolders.js"];
 
@@ -32,7 +49,13 @@ const CodePage = () => {
       <div className="code-viewer">
         <pre>
           <code>{codeSamples[activeFile]}</code>
+         
         </pre>
+         <div className="download-row">
+          <button className="download-btn" onClick={handleDownload}>
+            ⬇ Download
+          </button>
+        </div>
       </div>
     </div>
   );

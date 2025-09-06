@@ -4,9 +4,9 @@
   width: 100%;
   background: #0b0f2a; /* deep cosmic blue */
   color: #e0e0e0;
-  border: 1px solid #302b40;
+  margin-top: 30px;
   overflow: hidden;
-  box-shadow: 0 0 20px rgba(255, 78, 205, 0.3); /* pink cosmic glow */
+ 
 }
 
 /* Sidebar */
@@ -42,21 +42,27 @@
 
 /* Code Viewer */
 .code-viewer {
-  width: 85%;
-  padding: 20px;
-  background: #0b0f2a; /* dark space blue */
-  font-family: "Fira Code", monospace;
-  font-size: 14px;
-  overflow: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #0d0d21;
+  border-radius: 12px;
+  padding: 16px;
+  color: #fff;
+  box-shadow: 0 0 15px rgba(122, 92, 255, 0.3);
 }
 
-/* Pre/code styling */
 .code-viewer pre {
+  flex: 1;
+  background: #1a1a35;
+  border-radius: 8px;
+  padding: 12px;
   margin: 0;
-  white-space: pre-wrap;
-  word-wrap: break-word;
+  overflow-x: auto;
+  font-family: "Fira Code", monospace;
+  font-size: 14px;
   line-height: 1.6;
-  color: #a2fafa; /* soft cyan */
+  color: #d1d5db;
 }
 
 .code-viewer code {
@@ -75,4 +81,28 @@
 
 .code-viewer code .number {
   color: #ffae42; /* orange numbers */
+}
+
+.download-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+
+.download-btn {
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #7a5cff, #ff4ecd);
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: all 0.2s ease;
+}
+
+.download-btn:hover {
+  background: linear-gradient(135deg, #ff4ecd, #7a5cff);
+  transform: translateY(-2px);
+  box-shadow: 0 0 16px rgba(255, 78, 205, 0.7);
 }
