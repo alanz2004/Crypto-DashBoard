@@ -1,7 +1,7 @@
 import './Team.css'
 
-import { TeamCard } from '../components/TeamCard';
-import TeamTasks from "../components/TeamTasks";
+import { TeamCard } from '../components/Team/TeamCard';
+import TeamTasks from "../components/Team/TeamTasks";
 
 
 export default function Team() {

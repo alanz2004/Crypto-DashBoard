@@ -1,12 +1,12 @@
 import React from 'react';
 import './HomePage.css';
 
-import NavBarHome from '../components/NavBarHome';
+import NavBarHome from '../components/NavBars/NavBarHome';
 import CryptoStatsSection from '../components/CryptoStatsSection';
-import FeaturesSection from '../components/FeaturesSection';
-import PricingSection from '../components/PricingSection';
-import SocialMediaBar from '../components/SocialMediaBar';
-import ContactUs from '../components/ContactUs';
+import FeaturesSection from '../components/Home/FeaturesSection';
+import PricingSection from '../components/Home/PricingSection';
+import SocialMediaBar from '../components/Home/SocialMediaBar';
+import ContactUs from '../components/Home/ContactUs';
 
 
 import RocketImage from '../assets/rocket.svg'; // Put your rocket image in public or src/assets

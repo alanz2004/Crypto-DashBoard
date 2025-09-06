@@ -1,11 +1,11 @@
 import './AIHelper.css'
 
 import React, { useState } from 'react';
-import TokenomicsHelper from '../components/TokenomicsHelper';
-import FundraisingRounds from '../components/FundraisingRounds';
-import FundraisingRecommendation from '../components/FundraisingRecommendation';
-import RoadmapBuilder from '../components/RoadmapBuilder';
-import ToolSection from '../components/ToolSection';
+import TokenomicsHelper from '../components/AITools/TokenomicsHelper';
+import FundraisingRounds from '../components/AITools/FundraisingRounds';
+import FundraisingRecommendation from '../components/AITools/FundraisingRecommendation';
+import RoadmapBuilder from '../components/AITools/RoadmapBuilder';
+import ToolSection from '../components/AITools/ToolSection';
 
 interface Member {
   name: string;

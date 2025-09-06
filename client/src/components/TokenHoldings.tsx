@@ -27,35 +27,6 @@ export default function TokenHoldings({ projectId }: TokenHoldingsProps) {
   const [newHolder, setNewHolder] = useState({ name: '', wallet: '', tokensHeld: 0 });
   const [adding, setAdding] = useState(false);
 
-   const embedCode = `
-  <script>
-    async function addTokenHolder(name, wallet, tokensHeld) {
-      try {
-        const response = await fetch("https://yourdomain.com/api/tokenholders/${projectId}", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer YOUR_API_TOKEN"
-          },
-          body: JSON.stringify({ name, wallet, tokensHeld })
-        });
-        const data = await response.json();
-        console.log("Token Holder Added:", data);
-      } catch (error) {
-        console.error("Error adding token holder:", error);
-      }
-    }
-    // Example usage:
-    // addTokenHolder("Alice", "0x123...", 1000);
-  </script>
-  `;
-
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(embedCode).then(() => {
-      alert("Code copied to clipboard!");
-    });
-  };
-
   // Fetch token holders
   useEffect(() => {
     if (!token) return;

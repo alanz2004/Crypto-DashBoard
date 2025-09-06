@@ -20,7 +20,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import ProtectedRoute from './components/routes/ProtectedRoute';
 
-import Navbar from './components/NavBar';
+import Navbar from './components/NavBars/NavBar';
 import './index.css'; // ✅ THIS IS REQUIRED!
 
 
