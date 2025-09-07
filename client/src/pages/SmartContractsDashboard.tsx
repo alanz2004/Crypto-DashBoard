@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import './SmartContractsDashboard.css'
-
-
+import './SmartContractsDashboard.css';
 import OpenAI from 'openai';
-
+import axios from 'axios';
 
 const openai = new OpenAI({
   apiKey: import.meta.env.VITE_OPENAI_API_KEY,
@@ -17,12 +15,12 @@ const features = [
   'Template Selector',
 ];
 
-const SmartContractsDashboard: React.FC = () => {
-
- const [selectedFeature, setSelectedFeature] = useState(features[0]);
+const SmartContractsDashboard: React.FC<{ projectId: string }> = ({ projectId }) => {
+  const [selectedFeature, setSelectedFeature] = useState(features[0]);
   const [inputText, setInputText] = useState('');
   const [result, setResult] = useState('');
   const [loading, setLoading] = useState(false);
+  const [saving, setSaving] = useState(false);
 
   const buildPrompt = () => {
     switch (selectedFeature) {
@@ -62,6 +60,29 @@ const SmartContractsDashboard: React.FC = () => {
     }
   };
 
+  const handleSave = async () => {
+    if (!result.trim()) return;
+
+    setSaving(true);
+    try {
+      await axios.post(
+        `${import.meta.env.VITE_API_URL}/files/${projectId}/files`,
+        {
+          fileName: 'SmartContract.sol',
+          content: result,
+          language: 'solidity',
+        },
+        { withCredentials: true }
+      );
+      alert('✅ Contract saved successfully');
+    } catch (error) {
+      console.error(error);
+      alert('❌ Failed to save contract');
+    } finally {
+      setSaving(false);
+    }
+  };
+
   return (
     <div className="sc-dashboard-container">
       <div className="sc-main-area">
@@ -76,9 +97,16 @@ const SmartContractsDashboard: React.FC = () => {
           <button className="sc-run-button" onClick={handleRun} disabled={loading}>
             {loading ? 'Running...' : `Run ${selectedFeature}`}
           </button>
+
           {result && (
             <div className="sc-output-box">
               <pre>{result}</pre>
+
+              {selectedFeature === 'Smart Contract Generator' && (
+                <button className="sc-save-button" onClick={handleSave} disabled={saving}>
+                  {saving ? 'Saving...' : 'Save Contract'}
+                </button>
+              )}
             </div>
           )}
         </div>
