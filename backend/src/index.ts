@@ -7,6 +7,8 @@ import { connectDB } from './config/db';
 import userRoutes from './routes/userRoutes';
 import projectRoutes from './routes/projectRoutes'
 import tokenHolderRoutes from './routes/tokenHolderRoutes';
+import fileRoutes from "./routes/fileRoutes";
+
 
 
 dotenv.config();
@@ -25,6 +27,8 @@ app.use(express.json());
 app.use('/api/users', userRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/tokenholders', tokenHolderRoutes);
+app.use("/api/files", fileRoutes);
+
 
 // Root
 app.get('/', (_, res) => res.send('API is running...'));
