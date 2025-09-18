@@ -1,34 +1,65 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { useAuth } from "../context/AuthContext";
 import "./Code.css";
 
-const CodePage = () => {
-  const [activeFile, setActiveFile] = useState("index.js");
-  const [fileContent, setFileContent] = useState(`console.log("Hello Cosmic World!");`);
-  const [fileName, setFileName] = useState("example.js");
+interface CodePageProps {
+  projectId: string;
+}
+
+interface File {
+  _id: string;
+  fileName: string;
+  content: string;
+  language: string;
+}
+
+const CodePage: React.FC<CodePageProps> = ({ projectId }) => {
+  const { token } = useAuth();
+
+  const [files, setFiles] = useState<File[]>([]);
+  const [activeFile, setActiveFile] = useState<File | null>(null);
 
   const handleDownload = () => {
-    const blob = new Blob([fileContent], { type: "text/plain;charset=utf-8" });
+    if (!activeFile) return;
+
+    const blob = new Blob([activeFile.content], { type: "text/plain;charset=utf-8" });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement("a");
 
     a.href = url;
-    a.download = fileName; // file name from state
+    a.download = activeFile.fileName;
     document.body.appendChild(a);
     a.click();
 
-    // cleanup
     document.body.removeChild(a);
     window.URL.revokeObjectURL(url);
   };
 
-  const files = ["index.js", "App.js", "Wallet.js", "TokenHolders.js"];
+  useEffect(() => {
+    const fetchFiles = async () => {
+      try {
+        const res = await axios.get(
+          `${import.meta.env.VITE_API_URL}/files/${projectId}/files`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            withCredentials: true,
+          }
+        );
 
-  const codeSamples: Record<string, string> = {
-    "index.js": `console.log("Hello from index.js");`,
-    "App.js": `function App() { return <h1>Cosmic Dashboard</h1>; }`,
-    "Wallet.js": `const balance = 1000; console.log("Wallet:", balance);`,
-    "TokenHolders.js": `const holders = ["Alice", "Bob"]; console.log(holders);`,
-  };
+        setFiles(res.data);
+        if (res.data.length > 0) {
+          setActiveFile(res.data[0]);
+        }
+      } catch (err) {
+        console.error("Failed to fetch files:", err);
+      }
+    };
+
+    if (token && projectId) fetchFiles();
+  }, [token, projectId]);
 
   return (
     <div className="code-page">
@@ -36,11 +67,11 @@ const CodePage = () => {
       <div className="file-list">
         {files.map((file) => (
           <div
-            key={file}
-            className={`file-item ${activeFile === file ? "active" : ""}`}
+            key={file._id}
+            className={`file-item ${activeFile?._id === file._id ? "active" : ""}`}
             onClick={() => setActiveFile(file)}
           >
-            {file}
+            {file.fileName}
           </div>
         ))}
       </div>
@@ -48,11 +79,11 @@ const CodePage = () => {
       {/* Code display */}
       <div className="code-viewer">
         <pre>
-          <code>{codeSamples[activeFile]}</code>
-         
+          <code>{activeFile?.content || "Select a file to view its content"}</code>
         </pre>
-         <div className="download-row">
-          <button className="download-btn" onClick={handleDownload}>
+
+        <div className="download-row">
+          <button className="download-btn" onClick={handleDownload} disabled={!activeFile}>
             ⬇ Download
           </button>
         </div>

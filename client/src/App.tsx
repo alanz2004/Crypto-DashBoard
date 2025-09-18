@@ -60,8 +60,8 @@ export default function App() {
                                 <Route path="/team" element={<Team />} />
                                 <Route path="/wallet" element={<WalletPage />} />
                                 <Route path="/helper" element={<AIHelperPage />} />
-                                <Route path='/smartcontracts' element={<SmartContractsDashboard />} />
-                                <Route path='/code' element={<CodePage />} />
+                                <Route path='/smartcontracts' element={<SmartContractsDashboard projectId='68a07b2e8ac4689151efe55a'/>} />
+                                <Route path='/code' element={<CodePage projectId='68a07b2e8ac4689151efe55a'/>} />
                               </Routes>
                             </main>
 

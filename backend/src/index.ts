@@ -1,7 +1,7 @@
 import express from 'express';
-import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
+
 import { connectDB } from './config/db';
 
 import userRoutes from './routes/userRoutes';
@@ -20,7 +20,10 @@ const PORT = process.env.PORT || 5000;
 connectDB();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:5173", // your frontend origin
+  credentials: true,               // allow cookies/authorization headers
+}));
 app.use(express.json());
 
 // Routes

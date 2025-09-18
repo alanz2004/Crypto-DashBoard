@@ -1,8 +1,9 @@
 import { Response } from "express";
 import { Project,ITokenHolder  } from "../models/Project";
 import { AuthRequest } from "../middlewares/authMiddleware";
+import mongoose from "mongoose";
 
-// Create Project
+
 export const createProject = async (req: AuthRequest, res: Response) => {
   try {
     const { projectName, projectDescription, wallet } = req.body;
@@ -11,15 +12,122 @@ export const createProject = async (req: AuthRequest, res: Response) => {
       return res.status(400).json({ error: "All fields are required" });
     }
 
+    const starterFiles = [
+      {
+        _id: new mongoose.Types.ObjectId(),
+        fileName: "index.html",
+        language: "html",
+        content: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Landing Page Blueprint</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <h1 class="header-title">Project Title Goes Here</h1>
+    <p class="header-subtitle">A short subtitle or slogan goes here</p>
+  </header>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="feature">
+      <h2>Feature One</h2>
+      <p>Brief description of this feature goes here.</p>
+    </div>
+    <div class="feature">
+      <h2>Feature Two</h2>
+      <p>Brief description of this feature goes here.</p>
+    </div>
+    <div class="feature">
+      <h2>Feature Three</h2>
+      <p>Brief description of this feature goes here.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 Your Company. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>`
+      },
+      {
+        _id: new mongoose.Types.ObjectId(),
+        fileName: "styles.css",
+        language: "css",
+        content: `* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, sans-serif;
+  color: #333;
+  background-color: #f8f9fc;
+  line-height: 1.6;
+}
+.header {
+  text-align: center;
+  padding: 80px 20px 60px;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: #fff;
+}
+.header-title {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+.header-subtitle {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  padding: 60px 20px;
+  background: #ffffff;
+}
+.feature {
+  background: #f1f3f9;
+  border-radius: 12px;
+  padding: 30px;
+  flex: 1 1 250px;
+  max-width: 300px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+.feature h2 {
+  margin-bottom: 10px;
+  color: #4f46e5;
+}
+.footer {
+  text-align: center;
+  padding: 30px 20px;
+  background: #111827;
+  color: #9ca3af;
+  font-size: 0.9rem;
+}`
+      }
+    ];
+
     const project = await Project.create({
       projectName,
       projectDescription,
       wallet,
       projectAdmin: req.user?.id,
+      files: starterFiles
     });
 
     res.status(201).json(project);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Server error" });
   }
 };
