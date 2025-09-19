@@ -5,6 +5,7 @@ import {
   getAllFiles,
   updateFile,
   deleteFile,
+  addSectionToLandingPage
 } from "../controllers/fileController";
 import { authMiddleware } from "../middlewares/authMiddleware";
 
@@ -24,5 +25,8 @@ router.put("/:projectId/files/:fileId", authMiddleware, updateFile);
 
 // 📌 Delete a file by ID
 router.delete("/:projectId/files/:fileId", authMiddleware, deleteFile);
+
+router.post("/:projectId/files/landing/add-section", authMiddleware, addSectionToLandingPage);
+
 
 export default router;
