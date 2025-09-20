@@ -7,8 +7,6 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from '../context/AuthContext';
 
 
-import TwitterGrowthChart from '../components/TwitterGrowthChart';
-import EthRaisingChart from '../components/EthRaisingChart';
 import DashboardStats from '../components/DashboardStats';
 import TokenHoldings from '../components/TokenHoldings';
 import ChartComponent from '../components/FundBarChart';

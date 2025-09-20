@@ -18,13 +18,28 @@ const TokenomicsHelper: React.FC<{ projectId: string }> = ({ projectId }) => {
   const [allocations, setAllocations] = useState<Allocation[]>([]);
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
+  const testingMode = true;
 
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
+  e.preventDefault();
+  setLoading(true);
 
-    const prompt = `
+  if (testingMode) {
+    // Use pre-made values instead of API
+    const mockAllocations: Allocation[] = [
+      { name: 'Team', value: 20 },
+      { name: 'Investors', value: 25 },
+      { name: 'Staking Rewards', value: 30 },
+      { name: 'Ecosystem', value: 15 },
+      { name: 'Treasury', value: 10 },
+    ];
+    setAllocations(mockAllocations);
+    setLoading(false);
+    return;
+  }
+
+  const prompt = `
 Design a tokenomics model for a crypto startup.
 Startup name: ${startupName}
 Total token supply: ${tokenSupply}
@@ -40,32 +55,32 @@ Respond with a JSON array of token allocation breakdown like:
   { "name": "Treasury", "value": 10 }
 ]`;
 
-    try {
-      const response = await fetch('https://api.openai.com/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          model: 'gpt-4',
-          messages: [{ role: 'user', content: prompt }],
-          temperature: 0.7,
-        }),
-      });
+  try {
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'gpt-4',
+        messages: [{ role: 'user', content: prompt }],
+        temperature: 0.7,
+      }),
+    });
 
-      const data = await response.json();
-      const content = data.choices[0].message.content;
+    const data = await response.json();
+    const content = data.choices[0].message.content;
 
-      const parsed = JSON.parse(content);
-      setAllocations(parsed);
-    } catch (err) {
-      alert('Failed to fetch tokenomics model from OpenAI.');
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
+    const parsed = JSON.parse(content);
+    setAllocations(parsed);
+  } catch (err) {
+    alert('Failed to fetch tokenomics model from OpenAI.');
+    console.error(err);
+  } finally {
+    setLoading(false);
+  }
+};
 
  const handleSave = async () => {
     if (allocations.length === 0) return;
