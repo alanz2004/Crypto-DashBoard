@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './TokenomicsHelper.css'
-import { FaCoins, FaUsers, FaChartPie, FaRobot } from 'react-icons/fa';
+import { FaCoins, FaUsers, FaChartPie, FaRobot,FaSave  } from 'react-icons/fa';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 
 type Allocation = {
@@ -10,13 +10,15 @@ type Allocation = {
 
 const COLORS = ['#4f46e5', '#6366f1', '#818cf8', '#a5b4fc', '#c7d2fe'];
 
-const TokenomicsHelper: React.FC = () => {
+const TokenomicsHelper: React.FC<{ projectId: string }> = ({ projectId }) => {
   const [startupName, setStartupName] = useState('');
   const [tokenSupply, setTokenSupply] = useState('');
   const [teamSize, setTeamSize] = useState('');
   const [tokenUtility, setTokenUtility] = useState('');
   const [allocations, setAllocations] = useState<Allocation[]>([]);
   const [loading, setLoading] = useState(false);
+  const [saving, setSaving] = useState(false);
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -65,6 +67,42 @@ Respond with a JSON array of token allocation breakdown like:
     }
   };
 
+ const handleSave = async () => {
+    if (allocations.length === 0) return;
+    setSaving(true);
+
+    const sectionHtml = `
+      <div class="tokenomics-section">
+        <h2>📊 Tokenomics</h2>
+        <p><strong>${startupName}</strong> Token Model</p>
+        <ul class="allocation-list">
+          ${allocations
+            .map(item => `<li><strong>${item.name}:</strong> ${item.value}%</li>`)
+            .join("")}
+        </ul>
+      </div>
+    `;
+
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/projects/${projectId}/landing/add-section`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ htmlContent: sectionHtml }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to save tokenomics");
+      }
+
+      alert("✅ Tokenomics saved to landing page!");
+    } catch (err) {
+      console.error("Error saving tokenomics", err);
+      alert("❌ Failed to save tokenomics");
+    } finally {
+      setSaving(false);
+    }
+  };
+
   return (
     <div className="tokenomics-container" id="tokenomics-helper">
       <div className="tokenomics-header">
@@ -95,7 +133,7 @@ Respond with a JSON array of token allocation breakdown like:
         </div>
 
         <button type="submit" className="submit-button" disabled={loading}>
-          {loading ? 'Generating...' : 'Generate Tokenomics'}
+          {loading ? "Generating..." : "Generate Tokenomics"}
         </button>
       </form>
 
@@ -120,6 +158,10 @@ Respond with a JSON array of token allocation breakdown like:
               </li>
             ))}
           </ul>
+
+          <button className="save-button" onClick={handleSave} disabled={saving}>
+            {saving ? "Saving..." : <><FaSave /> Save to Landing Page</>}
+          </button>
         </div>
       )}
     </div>

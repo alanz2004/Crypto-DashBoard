@@ -31,7 +31,7 @@ const generateDescription = (name: string, role: string): string => {
   return `${name} plays a critical role in the startup, contributing their expertise as ${role}.`;
 };
 
-const TeamGenerator: React.FC = () => {
+const TeamGenerator: React.FC <{ projectId: string }> = ({ projectId }) => {
   const [inputText, setInputText] = useState('');
   const [team, setTeam] = useState<Member[]>([]);
 
@@ -90,7 +90,7 @@ const TeamGenerator: React.FC = () => {
                   <ToolSection
                     title="Tokenomics Helper"
                     description="Design smart token allocations and utility models with AI."
-                    renderContent={() => <TokenomicsHelper />}
+                    renderContent={() => <TokenomicsHelper projectId={projectId}/>}
                   />
 
                   <ToolSection

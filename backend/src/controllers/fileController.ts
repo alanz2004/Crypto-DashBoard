@@ -114,19 +114,15 @@ export const deleteFile = async (req: AuthRequest, res: Response) => {
 
 // Insert section to landing page
 export const addSectionToLandingPage = async (req: AuthRequest, res: Response) => {
-  try {
+   try {
     const { projectId } = req.params;
-    const { sectionHtml } = req.body;
+    const { htmlContent } = req.body;
 
-    if (!sectionHtml || typeof sectionHtml !== "string") {
-      return res.status(400).json({ error: "sectionHtml is required and must be a string" });
+    if (!htmlContent) {
+      return res.status(400).json({ error: "htmlContent is required" });
     }
 
-    const project = await Project.findOne({
-      _id: projectId,
-      projectAdmin: req.user?.id,
-    });
-
+    const project = await Project.findOne({ _id: projectId, projectAdmin: req.user?.id });
     if (!project) {
       return res.status(404).json({ error: "Project not found" });
     }
@@ -136,27 +132,24 @@ export const addSectionToLandingPage = async (req: AuthRequest, res: Response) =
       return res.status(404).json({ error: "Landing page file not found" });
     }
 
-    // Insert before </footer>
     const insertIndex = landingFile.content.lastIndexOf("</footer>");
     if (insertIndex === -1) {
       return res.status(400).json({ error: "Landing page file is missing a <footer> element" });
     }
 
+    const sectionHtml = `<section class="landing-section">\n${htmlContent}\n</section>\n`;
+
     const updatedHtml =
       landingFile.content.slice(0, insertIndex) +
-      `\n  ${sectionHtml}\n` +
+      `\n  ${sectionHtml}` +
       landingFile.content.slice(insertIndex);
 
     landingFile.content = updatedHtml;
 
     await project.save();
 
-    res.status(200).json({
-      message: "Section added successfully",
-      updatedHtml: landingFile.content,
-    });
-  } catch (error) {
-    console.error(error);
+    res.status(200).json({ message: "Section added successfully", updatedHtml });
+  } catch (err) {
     res.status(500).json({ error: "Server error" });
   }
 };
