@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './TokenomicsHelper.css'
 import { FaCoins, FaUsers, FaChartPie, FaRobot,FaSave  } from 'react-icons/fa';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
+import { useAuth } from "../../context/AuthContext";
+
 
 type Allocation = {
   name: string;
@@ -19,6 +21,9 @@ const TokenomicsHelper: React.FC<{ projectId: string }> = ({ projectId }) => {
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
   const testingMode = true;
+
+  const { token } = useAuth();
+
 
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -99,9 +104,9 @@ Respond with a JSON array of token allocation breakdown like:
     `;
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/projects/${projectId}/landing/add-section`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/files/${projectId}/files/landing/add-section`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json"},
         body: JSON.stringify({ htmlContent: sectionHtml }),
       });
 
