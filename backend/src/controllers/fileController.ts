@@ -118,19 +118,28 @@ export const addSectionToLandingPage = async (req: AuthRequest, res: Response) =
     const { projectId } = req.params;
     const { htmlContent } = req.body;
 
+    
+
+    
+
     if (!htmlContent) {
       return res.status(400).json({ error: "htmlContent is required" });
     }
 
     const project = await Project.findOne({ _id: projectId, projectAdmin: req.user?.id });
     if (!project) {
+      
       return res.status(404).json({ error: "Project not found" });
     }
+
+   
+ 
 
     const landingFile = project.files.find(f => f.fileName === "index.html");
     if (!landingFile) {
       return res.status(404).json({ error: "Landing page file not found" });
     }
+
 
     const insertIndex = landingFile.content.lastIndexOf("</footer>");
     if (insertIndex === -1) {
@@ -150,6 +159,185 @@ export const addSectionToLandingPage = async (req: AuthRequest, res: Response) =
 
     res.status(200).json({ message: "Section added successfully", updatedHtml });
   } catch (err) {
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+// Create Landing Page
+export const createLandingPage = async (req: AuthRequest, res: Response) => {
+  try {
+    const { projectId } = req.params;
+    const { projectName, projectDescription, teamMembers } = req.body;
+
+    if (!projectName || !projectDescription || !teamMembers) {
+      return res.status(400).json({ error: "All fields are required" });
+    }
+
+    const project = await Project.findOne({
+      _id: projectId,
+      projectAdmin: req.user?.id,
+    });
+    if (!project) {
+      return res.status(404).json({ error: "Project not found" });
+    }
+
+    // Build HTML content
+    const htmlContent = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>${projectName} - Landing Page</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <h1 class="header-title">${projectName}</h1>
+    <p class="header-subtitle">${projectDescription}</p>
+  </header>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="feature">
+      <h2>🚀 Innovation</h2>
+      <p>Cutting-edge solutions powered by blockchain technology.</p>
+    </div>
+    <div class="feature">
+      <h2>🌐 Community</h2>
+      <p>Building a strong and engaged ecosystem around ${projectName}.</p>
+    </div>
+    <div class="feature">
+      <h2>🔒 Security</h2>
+      <p>Smart, secure, and transparent tokenomics for startups.</p>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team">
+    <h2>Meet the Team</h2>
+    <div class="team-members">
+      ${teamMembers
+        .map(
+          (member: string) => `
+        <div class="team-member">
+          <div class="avatar"></div>
+          <p>${member}</p>
+        </div>`
+        )
+        .join("")}
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© ${new Date().getFullYear()} ${projectName}. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>`;
+
+    // Build CSS content
+    const cssContent = `
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #0b0f19; /* space black */
+  color: #f1f5f9; /* cool white */
+}
+
+.header {
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.header-title {
+  font-size: 2.5rem;
+  color: #6c5ce7; /* cosmic purple */
+}
+
+.header-subtitle {
+  font-size: 1.2rem;
+  color: #00bcd4; /* electric blue */
+}
+
+.features {
+  display: flex;
+  justify-content: space-around;
+  padding: 40px 20px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.feature {
+  background: #2d3748; /* steel grey */
+  padding: 20px;
+  border-radius: 12px;
+  flex: 1;
+  min-width: 250px;
+  text-align: center;
+  box-shadow: 0 0 12px rgba(108,92,231, 0.4); /* purple glow */
+}
+
+.team {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.team-members {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.team-member {
+  background: #2d3748;
+  padding: 15px;
+  border-radius: 12px;
+  width: 150px;
+  box-shadow: 0 0 12px rgba(0,188,212, 0.4); /* electric blue glow */
+}
+
+.team-member .avatar {
+  width: 80px;
+  height: 80px;
+  background: #6c5ce7;
+  border-radius: 50%;
+  margin: 0 auto 10px;
+}
+
+.footer {
+  text-align: center;
+  padding: 20px;
+  background: #0b0f19;
+  border-top: 1px solid #2d3748;
+}
+`;
+
+    // Push landing page files into project.files
+    project.files.push(
+      {
+        _id: new mongoose.Types.ObjectId(),
+        fileName: "index.html",
+        language: "html",
+        content: htmlContent,
+      },
+      {
+        _id: new mongoose.Types.ObjectId(),
+        fileName: "styles.css",
+        language: "css",
+        content: cssContent,
+      }
+    );
+
+    await project.save();
+
+    res.status(201).json({ message: "Landing page created successfully", project });
+  } catch (err) {
+    console.error(err);
     res.status(500).json({ error: "Server error" });
   }
 };
