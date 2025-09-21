@@ -36,7 +36,7 @@ const CreateLandingPage: React.FC<Props> = ({ projectId }) => {
 
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`/api/projects/create-landing-page`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/files/${projectId}/createLandingPage`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

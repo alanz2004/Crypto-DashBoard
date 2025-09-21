@@ -70,30 +70,40 @@ export default function Dashboard() {
 
 return (
   <div className="dashboard-content">
-    {loading ? (
-      <div className="loading-spinner">
-        <div className="spinner"></div>
-      </div>
-    ) : error ? (
-      <div className="error-message">{error}</div>
-    ) : projects.length === 0 ? (
-      <div className="no-projects">
-        <h3>You don’t have any projects yet 🚀</h3>
-        <p>Start building your startup journey by creating your first project.</p>
+  {loading ? (
+    <div className="loading-spinner">
+      <div className="spinner"></div>
+    </div>
+  ) : error ? (
+    <div className="error-message">{error}</div>
+  ) : projects.length === 0 ? (
+    <div className="no-projects">
+      <h3>You don’t have any projects yet 🚀</h3>
+      <p>Start building your startup journey by creating your first project.</p>
+      <button
+        className="create-project-btn"
+        onClick={() => navigate("/createProject")}
+      >
+        + Create Project
+      </button>
+    </div>
+  ) : (
+    <Fragment>
+      <DashboardStats totalUsers={12500} totalEth={342.57} />
+      <ChartComponent />
+      <TokenHoldings projectId={projects[0]._id} />
+
+      {/* 🚀 New Section for Create Landing Page */}
+      <div className="landing-page-actions">
         <button
-          className="create-project-btn"
-          onClick={() => navigate("/createProject")}
+          className="create-landing-btn"
+          onClick={() => navigate("/createLandingPage")}
         >
-          + Create Project
+          🌌 Create Landing Page
         </button>
       </div>
-    ) : (
-      <Fragment>
-        <DashboardStats totalUsers={12500} totalEth={342.57} />
-        <ChartComponent />
-        {<TokenHoldings projectId={projects[0]._id}/>}
-      </Fragment>
-    )}
-  </div>
+    </Fragment>
+  )}
+</div>
 );
 }

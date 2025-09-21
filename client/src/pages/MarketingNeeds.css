@@ -1,0 +1,106 @@
+body {
+  background-color: #0b0f19; /* space black */
+  color: #f1f5f9; /* cool white */
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.marketing-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.marketing-title {
+  width: 95%;
+  font-size: 2.5rem;
+  color: #6c5ce7; /* cosmic purple */
+  margin-top: 25px;
+  margin-bottom: 10px;
+  align-self: center;
+
+}
+
+.marketing-subtitle {
+  width: 95%;
+  font-size: 1.2rem;
+  color: #00bcd4; /* electric blue */
+  margin-bottom: 40px;
+  align-self: center;
+}
+
+/* Flexbox column layout */
+.needs-grid {
+  display: flex;
+  flex-direction: column; /* stack vertically */
+  align-self: center;
+  gap: 50px;
+  width: 95%;
+  margin-bottom: 10vh;
+}
+
+/* Each card takes full row */
+.need-card {
+  background: #2d3748; /* steel grey */
+  border-radius: 16px;
+  padding: 20px;
+  width: 100%; /* full width row */
+  box-shadow: 0 0 15px rgba(108, 92, 231, 0.4); /* purple neon glow */
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.need-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px #00bcd4; /* electric blue glow */
+}
+
+.need-title {
+  font-size: 1.5rem;
+  color: #00f5a0; /* mint green */
+  margin-bottom: 10px;
+}
+
+.need-description {
+  font-size: 1rem;
+  margin-bottom: 15px;
+  color: #f1f5f9;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  margin-top: 15px;
+  margin-bottom: 8px;
+  color: #6c5ce7; /* cosmic purple */
+}
+
+.section-subtitle.pain {
+  color: #ff6b6b; /* red for warnings */
+}
+
+.needs-list {
+  list-style: "✨ ";
+  padding-left: 20px;
+  margin-bottom: 15px;
+}
+
+.needs-list li {
+  margin: 6px 0;
+  line-height: 1.4;
+  color: #f1f5f9;
+}
+
+.pain-text {
+  font-size: 0.95rem;
+  color: #ffbaba;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 1rem;
+  background: #111827;
+  color: #64748b;
+  font-size: 0.9rem;
+  border-top: 1px solid var(--border);
+}

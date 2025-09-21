@@ -104,7 +104,7 @@ Respond with a JSON array of token allocation breakdown like:
     `;
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/files/${projectId}/files/landing/add-section`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/files/${projectId}/landing/add-section`, {
         method: "POST",
         headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json"},
         body: JSON.stringify({ htmlContent: sectionHtml }),

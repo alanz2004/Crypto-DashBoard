@@ -40,7 +40,7 @@ const CodePage: React.FC<CodePageProps> = ({ projectId }) => {
     const fetchFiles = async () => {
       try {
         const res = await axios.get(
-          `${import.meta.env.VITE_API_URL}/files/${projectId}/files`,
+          `${import.meta.env.VITE_API_URL}/files/${projectId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

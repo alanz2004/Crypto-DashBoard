@@ -112,3 +112,38 @@
   max-width: 500px;
   box-shadow: 0 0 10px rgba(255, 0, 76, 0.4);
 }
+
+/* Buttons general */
+.create-project-btn,
+.create-landing-btn {
+  background-color: #6c5ce7; /* cosmic purple */
+  color: #f1f5f9; /* cool white */
+  padding: 12px 28px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 12px rgba(108, 92, 231, 0.4); /* purple neon glow */
+}
+
+.create-project-btn:hover,
+.create-landing-btn:hover {
+  background-color: #00bcd4; /* electric blue on hover */
+  box-shadow: 0 0 18px rgba(0, 188, 212, 0.6);
+  transform: translateY(-2px);
+}
+
+/* Landing Page actions container */
+.landing-page-actions {
+  display: flex;
+  justify-content: flex-start; /* align left */
+  margin-top: 20px;
+  width: 95%; /* page width */
+}
+
+.create-landing-btn {
+  width: auto; /* not full width */
+  min-width: 220px; /* nice size */
+}

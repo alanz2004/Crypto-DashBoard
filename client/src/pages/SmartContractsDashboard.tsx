@@ -91,7 +91,7 @@ const SmartContractsDashboard: React.FC<{ projectId: string }> = ({ projectId })
     setSaving(true);
     try {
       await axios.post(
-        `${import.meta.env.VITE_API_URL}/files/${projectId}/files`,
+        `${import.meta.env.VITE_API_URL}/files/${projectId}`,
         {
           fileName: 'SmartContract.sol',
           content: result,

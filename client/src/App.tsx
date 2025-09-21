@@ -10,6 +10,7 @@ import AIHelperPage from './pages/AIHelper';
 import CodePage from './pages/Code';
 import SmartContractsDashboard from './pages/SmartContractsDashboard';
 import CreateLandingPage from './pages/CreateLandingPage';
+import MarketingNeeds from './pages/MarketingNeeds';
 
 
 import LoginPage from './pages/LoginPage';
@@ -43,6 +44,7 @@ export default function App() {
               <Route path="/login" element={<LoginPage setLoggedIn={setLoggedIn} />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path='/home' element={<HomePage />} />
+              <Route path='/marketingneeds' element={<MarketingNeeds />}/>
               <Route path='/createproject' element={<ProtectedRoute>
                   <CreateProject />
                 </ProtectedRoute>} />
