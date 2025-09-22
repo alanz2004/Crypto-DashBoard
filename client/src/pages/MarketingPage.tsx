@@ -2,6 +2,7 @@ import React from "react";
 import "./MarketingPage.css";
 
 import SocialMediaPostGenerator from "../components/Marketing/SocialMediaPostGenerator";
+import MarketingRoadMap from "../components/Marketing/MarketingRoadMap";
 
 const MarketingPage: React.FC = () => {
   return (
@@ -10,9 +11,8 @@ const MarketingPage: React.FC = () => {
       <div className="marketing-features">
         {/* Placeholder cards for future features */}
         <div className="feature-card"><SocialMediaPostGenerator /></div>
-        <div className="feature-card">Feature Placeholder 2</div>
-        <div className="feature-card">Feature Placeholder 3</div>
       </div>
+      <MarketingRoadMap />
     </div>
   );
 };
