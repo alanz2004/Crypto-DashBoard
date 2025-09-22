@@ -1,0 +1,41 @@
+/* Container */
+.marketing-container {
+  width: 95%;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #0b0f19; /* Deep navy / space black */
+  color: #f1f5f9; /* Cool white */
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Title */
+.marketing-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #6c5ce7; /* Neon violet / cosmic purple */
+  text-align: left;
+}
+
+/* Features section */
+.marketing-features {
+  display: flex;
+  flex-direction: column; /* Column layout */
+  gap: 1.5rem;
+}
+
+/* Feature card */
+.feature-card {
+  background-color: #111827; /* Slightly lighter than background */
+  border: 1px solid #2d3748; /* Steel grey */
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(108, 92, 231, 0.4); /* Purple neon glow */
+  transition: transform 0.2s ease-in-out;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 18px rgba(108, 92, 231, 0.6);
+}
