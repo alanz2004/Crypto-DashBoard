@@ -1,0 +1,91 @@
+.social-connections-container {
+  width: 95%;
+  margin: 2rem auto;
+  background-color: #0b0f19; /* Deep navy / space black */
+  color: #f1f5f9; /* Cool white */
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(108, 92, 231, 0.4); /* Purple neon glow */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.social-connections-title {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #6c5ce7; /* Neon violet */
+  text-align: left;
+  width: 100%;
+}
+
+.social-connections-row {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.social-connection-card {
+  background-color: #111827; /* Slightly lighter than space black */
+  border: 1px solid #2d3748; /* Steel grey */
+  flex: 1;
+  min-width: 280px;
+  padding: 1.5rem;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.social-connection-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px rgba(0, 188, 212, 0.6); /* Electric blue glow */
+}
+
+.social-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.social-icon.twitter {
+  color: #00bcd4; /* Electric blue */
+}
+
+.social-icon.telegram {
+  color: #00f5a0; /* Mint green */
+}
+
+.social-icon.discord {
+  color: #6c5ce7; /* Neon violet */
+}
+
+.social-connection-card h3 {
+  margin: 0.5rem 0;
+  font-size: 1.4rem;
+}
+
+.social-connection-card p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  color: #cbd5e1; /* Soft white-grey */
+}
+
+.connect-btn {
+  background-color: #6c5ce7; /* Neon violet */
+  color: #f1f5f9;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.connect-btn:hover {
+  background-color: #00bcd4; /* Electric blue */
+  transform: scale(1.05);
+}

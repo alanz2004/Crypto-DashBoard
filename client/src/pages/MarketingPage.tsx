@@ -3,6 +3,7 @@ import "./MarketingPage.css";
 
 import SocialMediaPostGenerator from "../components/Marketing/SocialMediaPostGenerator";
 import MarketingRoadMap from "../components/Marketing/MarketingRoadMap";
+import SocialConnections from "../components/Marketing/SocialConnections";
 
 const MarketingPage: React.FC = () => {
   return (
@@ -12,6 +13,7 @@ const MarketingPage: React.FC = () => {
         {/* Placeholder cards for future features */}
         <div className="feature-card"><SocialMediaPostGenerator /></div>
       </div>
+      <SocialConnections />
       <MarketingRoadMap />
     </div>
   );
