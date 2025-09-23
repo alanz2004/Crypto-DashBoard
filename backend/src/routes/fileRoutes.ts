@@ -16,20 +16,20 @@ const router = Router();
 router.post("/:projectId/files", authMiddleware, addFile);
 
 // 📌 Get all files of a project
-router.get("/:projectId/files", authMiddleware, getAllFiles);
+router.get("/:projectId", authMiddleware, getAllFiles);
 
 // 📌 Get a single file by ID
-router.get("/:projectId/files/:fileId", authMiddleware, getFile);
+router.get("/:projectId/:fileId", authMiddleware, getFile);
 
 // 📌 Update a file by ID
-router.put("/:projectId/files/:fileId", authMiddleware, updateFile);
+router.put("/:projectId/:fileId", authMiddleware, updateFile);
 
 // 📌 Delete a file by ID
-router.delete("/:projectId/files/:fileId", authMiddleware, deleteFile);
+router.delete("/:projectId/:fileId", authMiddleware, deleteFile);
 
-router.post("/:projectId/files/landing/add-section", authMiddleware, addSectionToLandingPage);
+router.post("/:projectId/landing/add-section", authMiddleware, addSectionToLandingPage);
 
-router.post("/:projectId/files/createLandingPage", authMiddleware, createLandingPage);
+router.post("/:projectId/createLandingPage", authMiddleware, createLandingPage);
 
 
 
