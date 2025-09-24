@@ -20,6 +20,7 @@ export const discordCallback = async (req: AuthRequest, res: Response) => {
     params.append("code", code);
     params.append("redirect_uri", process.env.DISCORD_REDIRECT_URI!);
 
+
     const tokenRes = await axios.post("https://discord.com/api/oauth2/token", params.toString(), {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
     });
@@ -33,7 +34,7 @@ export const discordCallback = async (req: AuthRequest, res: Response) => {
 
     // Return guilds to frontend so user selects which to connect (or auto-select if only one)
     // Each guild object contains id, name, owner (bool), permissions
-    return res.json({ projectId, guilds: guildsRes.data });
+    res.redirect(`${process.env.CLIENT_URL}/marketing`);
   } catch (err) {
     console.error("Discord callback error", err);
     return res.status(500).json({ error: "Discord callback failed" });

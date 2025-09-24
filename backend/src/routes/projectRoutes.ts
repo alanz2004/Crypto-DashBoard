@@ -3,13 +3,10 @@ import {
   createProject,
   getMyProjects,
   getProjectById,
+  addTokenomics, 
+  getTokenomics 
 } from "../controllers/projectController";
-import {
-  getTokenHolders,
-  addTokenHolder,
-  updateTokenHolder,
-  removeTokenHolder,
-} from "../controllers/projectController";
+
 import { authMiddleware } from "../middlewares/authMiddleware";
 
 const router = express.Router();
@@ -18,5 +15,12 @@ const router = express.Router();
 router.post("/", authMiddleware, createProject);
 router.get("/", authMiddleware, getMyProjects);
 router.get("/:id", authMiddleware, getProjectById);
+
+// Add or update tokenomics
+router.post("/:projectId/tokenomics", authMiddleware, addTokenomics);
+
+// Get tokenomics
+router.get("/:projectId/tokenomics", authMiddleware, getTokenomics);
+
 
 export default router;

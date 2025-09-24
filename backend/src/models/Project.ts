@@ -14,6 +14,10 @@ export interface IFile {
   language: string; // e.g., "javascript", "typescript", "solidity"
 }
 
+export interface ITokenomic {
+  name: string;
+  value: number;
+}
 
 
 
@@ -24,6 +28,8 @@ export interface IProject extends Document {
   projectAdmin: mongoose.Types.ObjectId;
   tokenHolders: mongoose.Types.DocumentArray<ITokenHolder & Document>;
   files: IFile[];
+  tokenomics: ITokenomic[];
+
 }
 
 const tokenHolderSchema = new Schema<ITokenHolder>(
@@ -45,6 +51,11 @@ const fileSchema = new Schema<IFile>(
 
 );
 
+const TokenomicSchema = new Schema<ITokenomic>({
+  name: { type: String, required: true },
+  value: { type: Number, required: true },
+});
+
 
 const projectSchema = new Schema<IProject>(
   {
@@ -54,6 +65,8 @@ const projectSchema = new Schema<IProject>(
     projectAdmin: { type: Schema.Types.ObjectId, ref: "User", required: true },
     tokenHolders: { type: [tokenHolderSchema], default: [] },
     files: [fileSchema],
+    tokenomics: [TokenomicSchema],
+
   },
   { timestamps: true }
 );

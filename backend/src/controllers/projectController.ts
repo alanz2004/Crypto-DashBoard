@@ -151,3 +151,63 @@ export const removeTokenHolder = async (req: AuthRequest, res: Response) => {
     res.status(500).json({ error: "Server error" });
   }
 };
+
+// ✅ Add or update tokenomics
+export const addTokenomics = async (req: AuthRequest, res: Response) => {
+  try {
+    const { projectId } = req.params;
+    const tokenomics = req.body.tokenomics; // expect array of { name, value }
+
+    if (!Array.isArray(tokenomics)) {
+      return res.status(400).json({ message: "Tokenomics must be an array" });
+    }
+
+    // Optional validation: values must add up to 100
+    const total = tokenomics.reduce((sum, t) => sum + t.value, 0);
+    if (total !== 100) {
+      return res.status(400).json({ message: "Tokenomics values must add up to 100" });
+    }
+
+    // ✅ Find project and check ownership
+    const project = await Project.findById(projectId);
+    if (!project) {
+      return res.status(404).json({ message: "Project not found" });
+    }
+
+    if (project.projectAdmin.toString() !== req.user?._id.toString()) {
+      return res.status(403).json({ message: "Not authorized to update this project" });
+    }
+
+    project.tokenomics = tokenomics;
+    await project.save();
+
+    return res.status(200).json({
+      message: "Tokenomics updated successfully",
+      tokenomics: project.tokenomics,
+    });
+  } catch (error) {
+    console.error("Add Tokenomics Error:", error);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+// ✅ Get tokenomics
+export const getTokenomics = async (req: AuthRequest, res: Response) => {
+  try {
+    const { projectId } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(projectId)) {
+      return res.status(400).json({ message: "Invalid project ID" });
+    }
+
+    const project = await Project.findById(projectId).select("tokenomics");
+    if (!project) {
+      return res.status(404).json({ message: "Project not found" });
+    }
+
+    return res.status(200).json({ tokenomics: project.tokenomics });
+  } catch (error) {
+    console.error("Get Tokenomics Error:", error);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
