@@ -66,7 +66,7 @@ export default function App() {
                                 <Route path="/helper" element={<AIHelperPage projectId='68a07b2e8ac4689151efe55a'/>} />
                                 <Route path='/smartcontracts' element={<SmartContractsDashboard projectId='68a07b2e8ac4689151efe55a'/>} />
                                 <Route path='/code' element={<CodePage projectId='68a07b2e8ac4689151efe55a'/>} />
-                                <Route path='/marketing' element={<MarketingPage />}/>
+                                <Route path='/marketing' element={<MarketingPage projectId='68a07b2e8ac4689151efe55a'/>}/>
                                 <Route path='/createLandingPage' element={<CreateLandingPage projectId='68a07b2e8ac4689151efe55a'/>} />
                               </Routes>
                             </main>

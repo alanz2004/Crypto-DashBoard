@@ -18,7 +18,7 @@ router.get("/discord/invite/:projectId",authMiddleware, (req, res) => {
 });
 
 // Discord OAuth callback
-router.get("/discord/callback", authMiddleware,discordCallback);
+router.get("/discord/callback",discordCallback);
 
 // Register a guild after the bot is invited
 router.post("/discord/register", authMiddleware, registerGuild);

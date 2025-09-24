@@ -5,7 +5,12 @@ import SocialMediaPostGenerator from "../components/Marketing/SocialMediaPostGen
 import MarketingRoadMap from "../components/Marketing/MarketingRoadMap";
 import SocialConnections from "../components/Marketing/SocialConnections";
 
-const MarketingPage: React.FC = () => {
+// Assume you pass projectId down as a prop
+interface MarketingPageProps {
+  projectId: string;
+}
+
+const MarketingPage: React.FC<MarketingPageProps> = ({projectId}) => {
   return (
     <div className="marketing-container">
       <h1 className="marketing-title">Marketing</h1>
@@ -13,7 +18,7 @@ const MarketingPage: React.FC = () => {
         {/* Placeholder cards for future features */}
         <div className="feature-card"><SocialMediaPostGenerator /></div>
       </div>
-      <SocialConnections />
+      <SocialConnections projectId={projectId}/>
       <MarketingRoadMap />
     </div>
   );

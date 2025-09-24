@@ -8,6 +8,7 @@ import userRoutes from './routes/userRoutes';
 import projectRoutes from './routes/projectRoutes'
 import tokenHolderRoutes from './routes/tokenHolderRoutes';
 import fileRoutes from "./routes/fileRoutes";
+import integraionRoutes from './routes/integrationsRoutes';
 
 
 
@@ -31,7 +32,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/tokenholders', tokenHolderRoutes);
 app.use("/api/files", fileRoutes);
-
+app.use('/api/integrations', integraionRoutes)
 
 // Root
 app.get('/', (_, res) => res.send('API is running...'));
