@@ -87,41 +87,65 @@ Respond with a JSON array of token allocation breakdown like:
   }
 };
 
- const handleSave = async () => {
-    if (allocations.length === 0) return;
-    setSaving(true);
+const handleSave = async () => {
+  if (allocations.length === 0) return;
+  setSaving(true);
 
-    const sectionHtml = `
-      <div class="tokenomics-section">
-        <h2>📊 Tokenomics</h2>
-        <p><strong>${startupName}</strong> Token Model</p>
-        <ul class="allocation-list">
-          ${allocations
-            .map(item => `<li><strong>${item.name}:</strong> ${item.value}%</li>`)
-            .join("")}
-        </ul>
-      </div>
-    `;
+  const sectionHtml = `
+    <div class="tokenomics-section">
+      <h2>📊 Tokenomics</h2>
+      <p><strong>${startupName}</strong> Token Model</p>
+      <ul class="allocation-list">
+        ${allocations
+          .map(item => `<li><strong>${item.name}:</strong> ${item.value}%</li>`)
+          .join("")}
+      </ul>
+    </div>
+  `;
 
-    try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/files/${projectId}/landing/add-section`, {
+  try {
+    // 1️⃣ Save the tokenomics section to landing page
+    const landingRes = await fetch(
+      `${import.meta.env.VITE_API_URL}/files/${projectId}/landing/add-section`,
+      {
         method: "POST",
-        headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json"},
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({ htmlContent: sectionHtml }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to save tokenomics");
       }
+    );
 
-      alert("✅ Tokenomics saved to landing page!");
-    } catch (err) {
-      console.error("Error saving tokenomics", err);
-      alert("❌ Failed to save tokenomics");
-    } finally {
-      setSaving(false);
+    if (!landingRes.ok) {
+      throw new Error("Failed to save tokenomics section");
     }
-  };
+
+    // 2️⃣ Save the tokenomics data to project
+    const tokenomicsRes = await fetch(
+      `${import.meta.env.VITE_API_URL}/projects/${projectId}/tokenomics`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ tokenomics: allocations }),
+      }
+    );
+
+    if (!tokenomicsRes.ok) {
+      throw new Error("Failed to save project tokenomics");
+    }
+
+    alert("✅ Tokenomics saved successfully!");
+  } catch (err) {
+    console.error("Error saving tokenomics", err);
+    alert("❌ Failed to save tokenomics");
+  } finally {
+    setSaving(false);
+  }
+};
 
   return (
     <div className="tokenomics-container" id="tokenomics-helper">
