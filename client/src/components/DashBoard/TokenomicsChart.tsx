@@ -55,54 +55,41 @@ const TokenomicsChart: React.FC<TokenomicsChartProps> = ({ projectId }) => {
   }
 
   return (
-   <div className="tokenomics-container">
-      <h2 className="tokenomics-title">Project Tokenomics</h2>
-  {tokenomics.length > 0 ? (
-    <>
-      {/* Title aligned left */}
-      <div className="tokenomics-chart-wrapper">
-        <ResponsiveContainer width="100%" height={300}>
-          <PieChart>
-            <Pie
-              data={tokenomics}
-              cx="50%"
-              cy="50%"
-              labelLine={false}
-              label={({ name, percent }) =>
-                percent !== undefined
-                  ? `${name} ${(percent * 100).toFixed(0)}%`
-                  : name
-              }
-              outerRadius={120}
-              dataKey="value"
-            >
-              {tokenomics.map((_, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={COLORS[index % COLORS.length]}
-                />
-              ))}
-            </Pie>
-            <Tooltip />
-          </PieChart>
-        </ResponsiveContainer>
-      </div>
-    </>
-  ) : (
-    <div className="tokenomics-empty">
-      <p className="tokenomics-empty-text">
-        No tokenomics found for this project.
-      </p>
-      <button
-        className="tokenomics-btn"
-        onClick={() => navigate("/helper")}
-      >
-      Build Tokenomics with AI
-      </button>
-    </div>
-  )}
-</div>
+   <div className="tokenomic-chart-container">
+      <h2 className="tokenomic-chart-title">Project Tokenomics</h2>
 
+      {tokenomics.length > 0 ? (
+        <div className="tokenomic-chart-wrapper">
+          <ResponsiveContainer width="100%" height={300}>
+            <PieChart>
+              <Pie
+                data={tokenomics}
+                cx="50%"
+                cy="50%"
+                labelLine={false}
+                label={({ name, percent }) =>
+                  typeof percent === "number" ? `${name} ${(percent * 100).toFixed(0)}%` : name
+                }
+                outerRadius={120}
+                dataKey="value"
+              >
+                {tokenomics.map((_, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
+              <Tooltip />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+      ) : (
+        <div className="tokenomic-no-data">
+          <p>No tokenomics found for this project.</p>
+          <button className="tokenomic-btn" onClick={() => navigate("/helper")}>
+            Build Tokenomics with AI
+          </button>
+        </div>
+      )}
+    </div>
   );
 };
 

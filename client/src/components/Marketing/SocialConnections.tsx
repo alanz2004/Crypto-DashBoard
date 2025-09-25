@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import './SocialConnections.css'
 import { FaTwitter, FaTelegramPlane, FaDiscord } from "react-icons/fa";
 
@@ -14,7 +15,9 @@ interface SocialConnectionsProps {
 
 const SocialConnections: React.FC<SocialConnectionsProps> = ({ projectId }) => {
 
-    const { token} = useAuth();
+  const { token} = useAuth();
+  const [chatId, setChatId] = useState("");
+  const [telegramStep, setTelegramStep] = useState<"start" | "chatId">("start");
   
 
   const handleDiscordConnect = async () => {
@@ -46,6 +49,40 @@ const SocialConnections: React.FC<SocialConnectionsProps> = ({ projectId }) => {
     }
   };
 
+   const handleTelegramConnect = async () => {
+    if (telegramStep === "start") {
+      // Step 1: Open Telegram bot link for the user
+      window.open(`https://t.me/${import.meta.env.VITE_TELEGRAM_BOT_USERNAME}`, "_blank");
+      setTelegramStep("chatId");
+    } else {
+      // Step 2: Register chatId with backend
+      try {
+        const res = await fetch(
+          `${API_URL}/integrations/telegram/register/${projectId}`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ chatId }),
+          }
+        );
+
+        if (!res.ok) {
+          throw new Error("Failed to register Telegram chat");
+        }
+
+        alert("✅ Telegram connected successfully!");
+        setChatId("");
+        setTelegramStep("start");
+      } catch (err) {
+        console.error("Error connecting Telegram:", err);
+        alert("❌ Something went wrong while connecting Telegram.");
+      }
+    }
+  };
+
   return (
     <div className="social-connections-container">
       <h2 className="social-connections-title">Connect Your Channels</h2>
@@ -65,24 +102,24 @@ const SocialConnections: React.FC<SocialConnectionsProps> = ({ projectId }) => {
         {/* Telegram */}
         <div className="social-connection-card">
           <FaTelegramPlane className="social-icon telegram" />
-          <h3>Telegram</h3>
+           <h3>Telegram</h3>
           <p>
             Add our bot to your Telegram group or channel as an admin. The bot
             will track activity, members, and engagement automatically.
           </p>
-          <button className="connect-btn">Connect Telegram</button>
-        </div>
 
-        {/* Discord */}
-        <div className="social-connection-card">
-          <FaDiscord className="social-icon discord" />
-          <h3>Discord</h3>
-          <p>
-            Invite our bot to your Discord server with the required permissions.
-            Once connected, we’ll track member growth, activity, and events.
-          </p>
-          <button className="connect-btn" onClick={handleDiscordConnect}>
-            Connect Discord
+          {telegramStep === "chatId" && (
+            <input
+              type="text"
+              placeholder="Enter Telegram Chat ID"
+              value={chatId}
+              onChange={(e) => setChatId(e.target.value)}
+              className="telegram-input"
+            />
+          )}
+
+          <button className="connect-btn" onClick={handleTelegramConnect}>
+            {telegramStep === "start" ? "Open Bot in Telegram" : "Register Chat ID"}
           </button>
         </div>
       </div>

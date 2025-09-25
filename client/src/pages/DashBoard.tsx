@@ -91,17 +91,16 @@ return (
   ) : (
     <Fragment>
       <DashboardStats totalUsers={12500} totalEth={342.57} />
-      <ChartComponent />
-      <TokenHoldings projectId={projects[0]._id} />
       <TokenomicsChart projectId={projects[0]._id}/>
-
+      <TokenHoldings projectId={projects[0]._id} />
+      
       {/* 🚀 New Section for Create Landing Page */}
       <div className="landing-page-actions">
         <button
           className="create-landing-btn"
           onClick={() => navigate("/createLandingPage")}
         >
-          🌌 Create Landing Page
+        Create Landing Page
         </button>
       </div>
     </Fragment>
