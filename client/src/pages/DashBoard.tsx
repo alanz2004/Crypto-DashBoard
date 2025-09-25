@@ -10,6 +10,7 @@ import { useAuth } from '../context/AuthContext';
 import DashboardStats from '../components/DashboardStats';
 import TokenHoldings from '../components/TokenHoldings';
 import ChartComponent from '../components/FundBarChart';
+import TokenomicsChart from '../components/DashBoard/TokenomicsChart';
 
 const sampleData = [
   { category: 'Category A', value: 75, description: 'Description A...' },
@@ -92,6 +93,7 @@ return (
       <DashboardStats totalUsers={12500} totalEth={342.57} />
       <ChartComponent />
       <TokenHoldings projectId={projects[0]._id} />
+      <TokenomicsChart projectId={projects[0]._id}/>
 
       {/* 🚀 New Section for Create Landing Page */}
       <div className="landing-page-actions">
