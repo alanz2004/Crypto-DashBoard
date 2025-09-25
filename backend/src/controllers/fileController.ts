@@ -431,6 +431,23 @@ export const createRaisingSection = async (req: AuthRequest, res: Response) => {
   </script>
 `;
 
+ // === Step 2: Add CSS for the section ===
+    const cssContent = `
+      <style>
+      .raising-container { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 20px; }
+      .raising-card { background: linear-gradient(135deg, #0f172a, #071129); border-radius: 16px; padding: 20px; flex: 1 1 300px; max-width: 400px; box-shadow: 0 8px 20px rgba(0,0,0,0.5); color: #fff; display: flex; flex-direction: column; gap: 12px; transition: transform 0.2s ease; }
+      .raising-card:hover { transform: translateY(-5px); }
+      .raising-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 5px; }
+      .raising-card p { font-size: 14px; line-height: 1.4; }
+      .raising-card .eth-input { padding: 8px 10px; border-radius: 8px; border: 1px solid #4a4a4a; background-color: #0b0f1e; color: #fff; width: 100%; box-sizing: border-box; }
+      .raising-card .token-amount { font-weight: 600; color: #ff8c42; }
+      .raising-card .wallet-btn { margin-top: 10px; padding: 10px 15px; font-size: 16px; font-weight: 600; border-radius: 10px; border: none; cursor: pointer; background: linear-gradient(90deg, #4a00e0, #8e2de2); color: #fff; transition: all 0.2s ease; }
+      .raising-card .wallet-btn:hover { transform: scale(1.05); opacity: 0.9; }
+      @media (max-width: 768px) { .raising-container { flex-direction: column; gap: 15px; align-items: center; } .raising-card { max-width: 90%; } }
+      .raising-title { font-size: 28px; font-weight: 800; text-align: center; background: linear-gradient(90deg, #8e2de2, #4a00e0, #ff4e50, #ff758c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; }
+      </style>
+    `;
+
     // === Step 2: Insert into landing page ===
     const landingFile = project.files.find((f: any) => f.fileName === "index.html");
     if (!landingFile) {
@@ -442,7 +459,7 @@ export const createRaisingSection = async (req: AuthRequest, res: Response) => {
       return res.status(400).json({ error: "Landing page file is missing a <footer> element" });
     }
 
-    const sectionHtml = `<section class="landing-section">\n${htmlContent}\n</section>\n`;
+    const sectionHtml = `${cssContent}\n<section class="landing-section">\n${htmlContent}\n</section>\n`;
 
     const updatedHtml =
       landingFile.content.slice(0, insertIndex) +
