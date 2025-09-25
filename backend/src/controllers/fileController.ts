@@ -341,3 +341,121 @@ body {
     res.status(500).json({ error: "Server error" });
   }
 };
+
+export const createRaisingSection = async (req: AuthRequest, res: Response) => {
+  try {
+    const { projectId } = req.params;
+    const { fundraisingRounds } = req.body; // already generated on frontend
+
+    if (!Array.isArray(fundraisingRounds) || fundraisingRounds.length === 0) {
+      return res.status(400).json({ error: "fundraisingRounds array is required" });
+    }
+
+    const project = await Project.findById(projectId);
+    if (!project) {
+      return res.status(404).json({ error: "Project not found" });
+    }
+
+    // === Step 1: Build Raising Section HTML ===
+    const htmlContent = `
+  <h2 class="raising-title">🚀 Fundraising Rounds</h2>
+  <div class="raising-container">
+    ${fundraisingRounds
+      .map(
+        (round, index) => `
+      <div class="raising-card">
+        <h3>${round.name}</h3>
+        <p><strong>Raise:</strong> $${round.raise.toLocaleString()}</p>
+        <p><strong>Token %:</strong> ${round.tokenPercent}%</p>
+        <p><strong>Price (USD/token):</strong> $${round.price}</p>
+        <p><strong>Cliff:</strong> ${round.cliff}</p>
+        <p><strong>Vesting:</strong> ${round.vesting}</p>
+
+        <label>ETH to invest:</label>
+        <input type="number" min="0" step="0.01" class="eth-input" data-price="${round.price}" placeholder="0.0" />
+
+        <p>Tokens you will receive: <span class="token-amount">0</span></p>
+
+        <button class="wallet-btn" data-round-index="${index}">💰 Invest with MetaMask</button>
+      </div>`
+      )
+      .join("\n")}
+  </div>
+
+  <script>
+    // Update token amount as user types
+    document.querySelectorAll('.eth-input').forEach(input => {
+      input.addEventListener('input', e => {
+        const ethAmount = parseFloat(e.target.value) || 0;
+        const tokenPrice = parseFloat(e.target.dataset.price);
+        const tokenAmount = (ethAmount * 3000 / tokenPrice).toFixed(2); 
+        // Assume ETH price = $3000 for example, you can fetch dynamically later
+        e.target.closest('.raising-card').querySelector('.token-amount').textContent = tokenAmount;
+      });
+    });
+
+    // MetaMask Invest button
+    document.querySelectorAll('.wallet-btn').forEach(btn => {
+      btn.addEventListener('click', async e => {
+        if (!window.ethereum) {
+          alert('MetaMask is not installed!');
+          return;
+        }
+        const card = e.target.closest('.raising-card');
+        const ethInput = card.querySelector('.eth-input');
+        const ethValue = parseFloat(ethInput.value);
+        if (!ethValue || ethValue <= 0) {
+          alert('Enter a valid ETH amount');
+          return;
+        }
+
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const from = accounts[0];
+
+        try {
+          const tx = await window.ethereum.request({
+            method: 'eth_sendTransaction',
+            params: [{
+              from,
+              to: 'YOUR_WALLET_ADDRESS_HERE', // replace with project wallet
+              value: (ethValue * 1e18).toString(16), // convert ETH to wei in hex
+            }],
+          });
+          alert('Transaction sent! Tx hash: ' + tx);
+        } catch (err) {
+          console.error(err);
+          alert('Transaction failed: ' + err.message);
+        }
+      });
+    });
+  </script>
+`;
+
+    // === Step 2: Insert into landing page ===
+    const landingFile = project.files.find((f: any) => f.fileName === "index.html");
+    if (!landingFile) {
+      return res.status(404).json({ error: "Landing page file not found" });
+    }
+
+    const insertIndex = landingFile.content.lastIndexOf("</footer>");
+    if (insertIndex === -1) {
+      return res.status(400).json({ error: "Landing page file is missing a <footer> element" });
+    }
+
+    const sectionHtml = `<section class="landing-section">\n${htmlContent}\n</section>\n`;
+
+    const updatedHtml =
+      landingFile.content.slice(0, insertIndex) +
+      `\n  ${sectionHtml}` +
+      landingFile.content.slice(insertIndex);
+
+    landingFile.content = updatedHtml;
+
+    await project.save();
+
+    res.status(200).json({ message: "Raising section created successfully" });
+  } catch (error) {
+    console.error("Error creating raising section:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};

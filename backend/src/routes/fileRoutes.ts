@@ -6,7 +6,8 @@ import {
   updateFile,
   deleteFile,
   addSectionToLandingPage,
-  createLandingPage
+  createLandingPage,
+  createRaisingSection
 } from "../controllers/fileController";
 import { authMiddleware } from "../middlewares/authMiddleware";
 
@@ -31,6 +32,7 @@ router.post("/:projectId/landing/add-section", authMiddleware, addSectionToLandi
 
 router.post("/:projectId/createLandingPage", authMiddleware, createLandingPage);
 
+router.post('/:projectId/landing/add-secion-raising',authMiddleware,createRaisingSection)
 
 
 export default router;
