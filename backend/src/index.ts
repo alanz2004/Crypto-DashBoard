@@ -9,7 +9,7 @@ import projectRoutes from './routes/projectRoutes'
 import tokenHolderRoutes from './routes/tokenHolderRoutes';
 import fileRoutes from "./routes/fileRoutes";
 import integraionRoutes from './routes/integrationsRoutes';
-
+import projectBlockchainRoutes from './routes/projectBlockchainRoutes';
 
 
 dotenv.config();
@@ -33,6 +33,7 @@ app.use('/api/projects', projectRoutes);
 app.use('/api/tokenholders', tokenHolderRoutes);
 app.use("/api/files", fileRoutes);
 app.use('/api/integrations', integraionRoutes)
+app.use('/api/blockchain', projectBlockchainRoutes);
 
 // Root
 app.get('/', (_, res) => res.send('API is running...'));

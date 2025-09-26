@@ -417,7 +417,7 @@ export const createRaisingSection = async (req: AuthRequest, res: Response) => {
             method: 'eth_sendTransaction',
             params: [{
               from,
-              to: 'YOUR_WALLET_ADDRESS_HERE', // replace with project wallet
+              to: ${project.wallet}, // replace with project wallet
               value: (ethValue * 1e18).toString(16), // convert ETH to wei in hex
             }],
           });

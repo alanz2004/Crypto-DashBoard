@@ -27,8 +27,10 @@ export interface IProject extends Document {
   wallet: string;
   projectAdmin: mongoose.Types.ObjectId;
   tokenHolders: mongoose.Types.DocumentArray<ITokenHolder & Document>;
+  telegramChatId: string;
   files: IFile[];
   tokenomics: ITokenomic[];
+  contractAddress: string;
 
 }
 
@@ -64,9 +66,10 @@ const projectSchema = new Schema<IProject>(
     wallet: { type: String, required: true },
     projectAdmin: { type: Schema.Types.ObjectId, ref: "User", required: true },
     tokenHolders: { type: [tokenHolderSchema], default: [] },
+    telegramChatId: { type: String, required: false },
     files: [fileSchema],
     tokenomics: [TokenomicSchema],
-
+    contractAddress: { type: String }, // 👈 optional, filled after deployment
   },
   { timestamps: true }
 );
