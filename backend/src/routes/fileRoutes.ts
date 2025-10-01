@@ -8,8 +8,8 @@ import {
   addSectionToLandingPage,
   createLandingPage,
   createRaisingSection
-} from "../controllers/fileController";
-import { authMiddleware } from "../middlewares/authMiddleware";
+} from "../controllers/fileController.ts";
+import { authMiddleware } from "../middlewares/authMiddleware.ts";
 
 const router = Router();
 

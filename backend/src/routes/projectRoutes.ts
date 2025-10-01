@@ -5,9 +5,9 @@ import {
   getProjectById,
   addTokenomics, 
   getTokenomics 
-} from "../controllers/projectController";
+} from "../controllers/projectController.ts";
 
-import { authMiddleware } from "../middlewares/authMiddleware";
+import { authMiddleware } from "../middlewares/authMiddleware.ts";
 
 const router = express.Router();
 

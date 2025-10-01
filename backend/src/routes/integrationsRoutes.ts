@@ -1,6 +1,6 @@
 import express from "express";
-import telegramRoutes from "./telegramRoutes";
-import discordRoutes from './discordRoutes';
+import telegramRoutes from "./telegramRoutes.ts";
+import discordRoutes from './discordRoutes.ts';
 
 
 

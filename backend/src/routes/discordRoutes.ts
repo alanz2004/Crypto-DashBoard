@@ -1,6 +1,6 @@
 import express from "express";
-import { discordCallback, registerGuild } from "../controllers/discordController";
-import { authMiddleware } from "../middlewares/authMiddleware";
+import { discordCallback, registerGuild } from "../controllers/discordController.ts";
+import { authMiddleware } from "../middlewares/authMiddleware.ts";
 
 const router = express.Router();
 

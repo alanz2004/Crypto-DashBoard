@@ -1,8 +1,8 @@
 // controllers/fileController.ts
-import { Response } from "express";
+import type { Response } from "express";
 import mongoose from "mongoose";
-import { AuthRequest } from "../middlewares/authMiddleware";
-import { Project } from "../models/Project";
+import type { AuthRequest } from "../middlewares/authMiddleware.ts";
+import { Project } from "../models/Project.ts";
 
 // 📌 Add a new file to a project
 export const addFile = async (req: AuthRequest, res: Response) => {

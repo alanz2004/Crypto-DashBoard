@@ -1,11 +1,11 @@
 import express from "express";
-import { authMiddleware } from "../middlewares/authMiddleware";
+import { authMiddleware } from "../middlewares/authMiddleware.ts";
 import {
   getTokenHolders,
   addTokenHolder,
   updateTokenHolder,
   removeTokenHolder,
-} from "../controllers/tokenHoldersController"; // keep in same controller file
+} from "../controllers/tokenHoldersController.ts"; // keep in same controller file
 
 const router = express.Router();
 

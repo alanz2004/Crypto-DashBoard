@@ -1,6 +1,7 @@
-import { Response } from "express";
-import { Project,ITokenHolder  } from "../models/Project";
-import { AuthRequest } from "../middlewares/authMiddleware";
+import type { Response } from "express";
+import { Project} from "../models/Project.ts";
+import type {ITokenHolder} from "../models/Project.ts"
+import type { AuthRequest } from "../middlewares/authMiddleware.ts";
 
 // 📜 Get all token holders for a project
 export const getTokenHolders = async (req: AuthRequest, res: Response) => {

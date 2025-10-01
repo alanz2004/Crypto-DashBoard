@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { authMiddleware } from "../middlewares/authMiddleware";
-import { getTelegramBotInfo, registerTelegramChat } from "../controllers/telegramController";
+import { authMiddleware } from "../middlewares/authMiddleware.ts";
+import { getTelegramBotInfo, registerTelegramChat } from "../controllers/telegramController.ts";
 
 const router = Router();
 

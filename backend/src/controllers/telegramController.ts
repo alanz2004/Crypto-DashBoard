@@ -1,6 +1,6 @@
-import { Response } from "express";
-import { AuthRequest } from "../middlewares/authMiddleware";
-import { Project} from "../models/Project";
+import type { Response } from "express";
+import type { AuthRequest } from "../middlewares/authMiddleware.ts";
+import { Project} from "../models/Project.ts";
 
 
 import axios from "axios";

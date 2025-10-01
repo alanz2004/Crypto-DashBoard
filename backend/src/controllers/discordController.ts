@@ -1,9 +1,9 @@
 // controllers/discordController.ts
-import { Response } from "express";
-import { AuthRequest } from "../middlewares/authMiddleware";
+import type { Response } from "express";
+import type { AuthRequest } from "../middlewares/authMiddleware.ts";
 
-import { discordClient } from "../services/discordClient"; // see bot service below
-import Integration from "../models/Integration";
+import { discordClient } from "../services/discordClient.ts"; // see bot service below
+import Integration from "../models/Integration.ts";
 
 
 import axios from "axios";

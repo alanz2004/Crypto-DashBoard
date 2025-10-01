@@ -1,10 +1,15 @@
 // src/controllers/userController.ts
-import { Request, Response } from 'express';
+import type { Request, Response, NextFunction } from "express"; // type-only imports for TS
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import User, { IUser } from '../models/User';
 
-import { AuthRequest } from '../middlewares/authMiddleware';
+
+import User from '../models/User.ts';        // runtime import
+
+
+import type { IUser } from '../models/User.ts'; // type-only import
+
+import type { AuthRequest } from '../middlewares/authMiddleware.ts';
 
 
 

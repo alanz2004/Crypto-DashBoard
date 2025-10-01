@@ -1,16 +1,20 @@
-import { Request, Response, NextFunction } from 'express';
-import jwt, { JwtPayload } from 'jsonwebtoken';
-import dotenv from 'dotenv';
+import expressPkg from "express";
+import jwtPkg from "jsonwebtoken";
+import type { JwtPayload } from "jsonwebtoken";
+import dotenv from "dotenv";
 
 dotenv.config();
 
-export interface AuthRequest extends Request {
+const jwt = jwtPkg;
+
+export interface AuthRequest extends expressPkg.Request {
   user?: {
     id: string;
   } & JwtPayload;
 }
 
-export const authMiddleware = (req: AuthRequest, res: Response, next: NextFunction) => {
+// middleware function stays the same
+export const authMiddleware = (req: AuthRequest, res: expressPkg.Response, next: expressPkg.NextFunction) => {
   try {
     const authHeader = req.headers.authorization;
 
@@ -28,7 +32,7 @@ export const authMiddleware = (req: AuthRequest, res: Response, next: NextFuncti
     const decoded = jwt.verify(token, secret) as JwtPayload;
 
     req.user = {
-      id: decoded.id as string, // ensure your token payload has "id"
+      id: decoded.id as string,
       ...decoded
     };
 

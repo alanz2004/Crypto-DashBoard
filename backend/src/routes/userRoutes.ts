@@ -5,9 +5,9 @@ import {
   getUsers,
   getMe,
   deleteUser,
-} from "../controllers/userController";
+} from "../controllers/userController.ts";
 
-import { authMiddleware } from '../middlewares/authMiddleware';
+import { authMiddleware } from '../middlewares/authMiddleware.ts';
 
 
 const router = express.Router();

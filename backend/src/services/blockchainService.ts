@@ -1,73 +1,82 @@
-import ganache from "ganache";
-import { BrowserProvider, ContractFactory, Signer } from "ethers";
-import solc from "solc";
 import fs from "fs";
 import path from "path";
+import { spawn } from "child_process";
+import { ethers } from "ethers";
 
-let provider: BrowserProvider;
-let signer: Signer;
+let provider: ethers.JsonRpcProvider;
+let signer: ethers.JsonRpcSigner;
 
-// Start Ganache and initialize blockchain
-export async function initBlockchain() {
-  // Start Ganache in-memory blockchain
-  const ganacheProvider = ganache.provider();
 
-  // In ethers v6 use BrowserProvider instead of Web3Provider
-  provider = new BrowserProvider(ganacheProvider as any);
+export async function startHardhatNode() {
+  return new Promise<void>((resolve, reject) => {
+    const hardhatNode = spawn("npx hardhat node", { shell: true, stdio: "inherit" });
 
-  const accounts = await provider.listAccounts();
-  signer = await provider.getSigner(accounts[0].address);
+    hardhatNode.on("error", (err) => reject(err));
 
-  console.log("Blockchain started. Admin account:", accounts[0].address);
+    // Wait 3s for node to start
+    setTimeout(() => resolve(), 3000);
+
+    process.on("exit", () => hardhatNode.kill());
+  });
 }
 
-// Compile contract using solc
-export function compileContract() {
+
+
+/**
+ * Initialize blockchain connection
+ */
+export async function initBlockchain() {
+
+  await startHardhatNode();
+
+
+  // Connect to local Hardhat/JSON-RPC node
+  provider = new ethers.JsonRpcProvider("http://127.0.0.1:8545");
+
+  // Get the first account as signer (synchronous)
+  signer = await provider.getSigner(0);
+
+  console.log("✅ Blockchain initialized");
+  console.log("Admin account:", await signer.getAddress());
+}
+
+/**
+ * Get the signer
+ */
+export function getSigner(): ethers.JsonRpcSigner {
+  if (!signer) throw new Error("Blockchain not initialized");
+  return signer;
+}
+
+/**
+ * Deploy Project contract
+ */
+export async function deployProjectContract(name: string, admin: string) {
+  if (!signer) throw new Error("Blockchain not initialized");
+
+  // Load compiled contract
   const contractPath = path.resolve(__dirname, "../contracts/Project.sol");
   const source = fs.readFileSync(contractPath, "utf8");
 
+  // Compile using solc (or you can precompile and import ABI/bytecode)
+  const solc = await import("solc");
   const input = {
     language: "Solidity",
-    sources: {
-      "Project.sol": { content: source },
-    },
-    settings: {
-      outputSelection: {
-        "*": {
-          "*": ["*"],
-        },
-      },
-    },
+    sources: { "Project.sol": { content: source } },
+    settings: { outputSelection: { "*": { "*": ["abi", "evm.bytecode"] } } },
   };
 
   const output = JSON.parse(solc.compile(JSON.stringify(input)));
-
-  if (!output.contracts || !output.contracts["Project.sol"] || !output.contracts["Project"]) {
-    throw new Error("Contract compilation failed. Check your Project.sol file.");
-  }
-
   const contractFile = output.contracts["Project.sol"]["Project"];
-  return {
-    abi: contractFile.abi,
-    bytecode: contractFile.evm.bytecode.object,
-  };
-}
+  const abi = contractFile.abi;
+  const bytecode = contractFile.evm.bytecode.object;
 
-// Deploy new project contract
-export async function deployProjectContract(name: string, admin: string) {
-  const { abi, bytecode } = compileContract();
-
-  const factory = new ContractFactory(abi, bytecode, signer);
+  // Create factory and deploy
+  const factory = new ethers.ContractFactory(abi, bytecode, signer);
   const contract = await factory.deploy(name, admin);
 
-  // In v6 deployment waits automatically, no .deployed()
-  await contract.waitForDeployment();
+  await contract.waitForDeployment(); // ethers v6
+  console.log(`✅ Contract deployed at: ${contract.target}`);
 
-  const address = await contract.getAddress();
-  console.log("Project contract deployed at:", address);
-
-  return { address, abi };
+  return contract;
 }
-
-// Export provider & signer for other files
-export { provider, signer };
