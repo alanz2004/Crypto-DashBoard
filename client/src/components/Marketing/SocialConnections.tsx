@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, {useState} from "react";
 import './SocialConnections.css'
 import { FaTwitter, FaTelegramPlane, FaDiscord } from "react-icons/fa";
 
@@ -15,22 +14,20 @@ interface SocialConnectionsProps {
 
 const SocialConnections: React.FC<SocialConnectionsProps> = ({ projectId }) => {
 
-  const { token} = useAuth();
+    const { token } = useAuth();
   const [chatId, setChatId] = useState("");
   const [telegramStep, setTelegramStep] = useState<"start" | "chatId">("start");
-  
 
   const handleDiscordConnect = async () => {
     try {
-      // Fetch the invite URL from backend
       const res = await fetch(
         `${API_URL}/integrations/discord/invite/${projectId}`,
         {
           method: "GET",
           headers: {
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
           },
-          credentials: "include", // keep cookies if using sessions/JWT
+          credentials: "include",
         }
       );
 
@@ -40,8 +37,7 @@ const SocialConnections: React.FC<SocialConnectionsProps> = ({ projectId }) => {
 
       const data = await res.json();
       if (data.url) {
-        // Redirect user to Discord OAuth2 invite link
-        window.location.href = data.url;
+        window.location.href = data.url; // Redirect to Discord OAuth2
       }
     } catch (error) {
       console.error("Error connecting Discord:", error);
@@ -49,7 +45,7 @@ const SocialConnections: React.FC<SocialConnectionsProps> = ({ projectId }) => {
     }
   };
 
-   const handleTelegramConnect = async () => {
+  const handleTelegramConnect = async () => {
     if (telegramStep === "start") {
       // Step 1: Open Telegram bot link for the user
       window.open(`https://t.me/${import.meta.env.VITE_TELEGRAM_BOT_USERNAME}`, "_blank");
@@ -102,7 +98,7 @@ const SocialConnections: React.FC<SocialConnectionsProps> = ({ projectId }) => {
         {/* Telegram */}
         <div className="social-connection-card">
           <FaTelegramPlane className="social-icon telegram" />
-           <h3>Telegram</h3>
+          <h3>Telegram</h3>
           <p>
             Add our bot to your Telegram group or channel as an admin. The bot
             will track activity, members, and engagement automatically.
@@ -120,6 +116,19 @@ const SocialConnections: React.FC<SocialConnectionsProps> = ({ projectId }) => {
 
           <button className="connect-btn" onClick={handleTelegramConnect}>
             {telegramStep === "start" ? "Open Bot in Telegram" : "Register Chat ID"}
+          </button>
+        </div>
+
+        {/* Discord */}
+        <div className="social-connection-card">
+          <FaDiscord className="social-icon discord" />
+          <h3>Discord</h3>
+          <p>
+            Invite our bot to your Discord server with the required permissions.
+            Once connected, we’ll track member growth, activity, and events.
+          </p>
+          <button className="connect-btn" onClick={handleDiscordConnect}>
+            Connect Discord
           </button>
         </div>
       </div>

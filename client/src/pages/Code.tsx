@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 import "./Code.css";
+import UploadAndGoLive from "../components/Code/UploadAndGoLive";
 
 interface CodePageProps {
   projectId: string;
@@ -63,7 +64,8 @@ const CodePage: React.FC<CodePageProps> = ({ projectId }) => {
 
   return (
     <div className="code-page">
-      {/* Sidebar for file list */}
+      <div className="code-files-container">
+                {/* Sidebar for file list */}
       <div className="file-list">
         {files.map((file) => (
           <div
@@ -88,6 +90,10 @@ const CodePage: React.FC<CodePageProps> = ({ projectId }) => {
           </button>
         </div>
       </div>
+      </div>
+    
+
+      <UploadAndGoLive />
     </div>
   );
 };

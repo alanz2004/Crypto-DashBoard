@@ -1,0 +1,85 @@
+/* Cosmic theme background */
+.upload-container {
+  background-color: #0b0f19;
+  color: #f1f5f9;
+  padding: 30px;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.upload-title {
+  text-align: left;
+  font-size: 28px;
+  color: #6c5ce7;
+  margin-bottom: 10px;
+}
+
+.upload-subtitle {
+  text-align: left;
+  color: #00bcd4;
+  margin-bottom: 30px;
+}
+
+/* Flex layout */
+.platforms {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Platform card */
+.platform-card {
+  background-color: #121826;
+  border: 1px solid #2d3748;
+  padding: 20px;
+  border-radius: 14px;
+  text-align: left;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Glow effect */
+.platform-card:hover {
+  border-color: #6c5ce7;
+  box-shadow: 0 0 20px rgba(108, 92, 231, 0.6);
+  transform: translateY(-3px);
+}
+
+/* Connected state */
+.platform-card.connected {
+  border-color: #00f5a0;
+  box-shadow: 0 0 25px rgba(0, 245, 160, 0.6);
+}
+
+/* Links */
+.platform-link {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 18px;
+  border-radius: 10px;
+  background: #6c5ce7;
+  color: #f1f5f9;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.platform-link:hover {
+  background: #00bcd4;
+  box-shadow: 0 0 12px rgba(0, 188, 212, 0.6);
+}
+
+.platform-stats {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #f1f5f9;
+}
+
+.platform-stats a {
+  color: #00f5a0;
+  text-decoration: none;
+}
+
+.platform-stats a:hover {
+  text-decoration: underline;
+}

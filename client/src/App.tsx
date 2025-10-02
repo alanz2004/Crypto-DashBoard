@@ -61,7 +61,7 @@ export default function App() {
                             <main className="content">
                               <Routes>
                                 <Route path="/" element={<Dashboard />} />
-                                <Route path="/team" element={<Team />} />
+                                <Route path="/team" element={<Team projectId='68a07b2e8ac4689151efe55a'/>} />
                                 <Route path="/wallet" element={<WalletPage />} />
                                 <Route path="/helper" element={<AIHelperPage projectId='68a07b2e8ac4689151efe55a'/>} />
                                 <Route path='/smartcontracts' element={<SmartContractsDashboard projectId='68a07b2e8ac4689151efe55a'/>} />
