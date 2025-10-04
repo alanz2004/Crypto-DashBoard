@@ -4,7 +4,7 @@ import './PricingSection.css';
 const PricingSection: React.FC = () => {
   return (
     <section className="pricing-section">
-      <h2 className="pricing-title">🚀 Choose your plan and start building smarter</h2>
+      <h2 className="pricing-title">Choose your plan and start building smarter</h2>
       <p className="pricing-subtext">
         Whether you’re just starting or scaling a Web3 project, we’ve got you covered with AI-powered tools for tokenomics, smart contracts, and more.
       </p>

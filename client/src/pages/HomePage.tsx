@@ -7,6 +7,7 @@ import FeaturesSection from '../components/Home/FeaturesSection';
 import PricingSection from '../components/Home/PricingSection';
 import SocialMediaBar from '../components/Home/SocialMediaBar';
 import ContactUs from '../components/Home/ContactUs';
+import BlockchainFeature from '../components/Home/BlockchainFeature';
 
 
 import RocketImage from '../assets/rocket.svg'; // Put your rocket image in public or src/assets
@@ -34,7 +35,11 @@ const HomePage: React.FC = () => {
 
       <FeaturesSection />
 
+    
       <CryptoStatsSection />
+
+      <BlockchainFeature />
+
 
       <PricingSection />
 

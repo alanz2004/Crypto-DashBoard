@@ -5,7 +5,7 @@ import { FaCoins, FaCode, FaShieldAlt, FaChartLine, FaMapMarkedAlt, FaRobot } fr
 const FeaturesSection: React.FC = () => {
   return (
     <section className="features-section-home">
-      <h2 className="features-titl-home">🚀 Platform Features</h2>
+      <h2 className="features-titl-home">Platform Features</h2>
       <div className="features-grid-home">
         <div className="feature-card-home slide-in">
           <FaCoins className="icon" />
