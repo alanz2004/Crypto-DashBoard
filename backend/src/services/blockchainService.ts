@@ -1,7 +1,13 @@
 import fs from "fs";
 import path from "path";
 import { spawn } from "child_process";
+import { fileURLToPath } from "url";
 import { ethers } from "ethers";
+import solc from "solc"; // ESM import
+
+// If you were using __dirname, replace it with:
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 let provider: ethers.JsonRpcProvider;
 let signer: ethers.JsonRpcSigner;
@@ -54,29 +60,32 @@ export function getSigner(): ethers.JsonRpcSigner {
 export async function deployProjectContract(name: string, admin: string) {
   if (!signer) throw new Error("Blockchain not initialized");
 
-  // Load compiled contract
   const contractPath = path.resolve(__dirname, "../contracts/Project.sol");
   const source = fs.readFileSync(contractPath, "utf8");
 
-  // Compile using solc (or you can precompile and import ABI/bytecode)
-  const solc = await import("solc");
+  // Prepare standard JSON input for solc
   const input = {
     language: "Solidity",
     sources: { "Project.sol": { content: source } },
     settings: { outputSelection: { "*": { "*": ["abi", "evm.bytecode"] } } },
   };
 
+  // Compile using solc.compile(JSON.stringify(...))
   const output = JSON.parse(solc.compile(JSON.stringify(input)));
+
+  if (!output.contracts || !output.contracts["Project.sol"]["Project"]) {
+    throw new Error("Contract compilation failed");
+  }
+
   const contractFile = output.contracts["Project.sol"]["Project"];
   const abi = contractFile.abi;
   const bytecode = contractFile.evm.bytecode.object;
 
-  // Create factory and deploy
+  // Deploy contract
   const factory = new ethers.ContractFactory(abi, bytecode, signer);
   const contract = await factory.deploy(name, admin);
+  await contract.waitForDeployment();
 
-  await contract.waitForDeployment(); // ethers v6
   console.log(`✅ Contract deployed at: ${contract.target}`);
-
   return contract;
 }

@@ -11,16 +11,19 @@ interface BlockchainData {
   status: "Active" | "Inactive";
 }
 
-const BlockchainInfo: React.FC = () => {
-  const mockData: BlockchainData = {
-    network: "Hardhat (Local)",
-    contractAddress: "0xAbC12345D67890Ef1234567890AbCdEf12345678",
-    deployer: "0xDeAdBeEf1234567890abcdef1234567890abcdef",
-    contractName: "ProjectManager",
-    totalTransactions: 12,
-    deploymentDate: "2025-10-04",
-    status: "Active",
-  };
+interface BlockchainInfoProps {
+  data: BlockchainData | null; // data comes from parent (can be null while loading)
+}
+
+const BlockchainInfo: React.FC<BlockchainInfoProps> = ({ data }) => {
+  if (!data) {
+    return (
+      <div className="blockchain-info-container">
+        <h2 className="section-title">Blockchain Overview</h2>
+        <p className="loading-text">Fetching blockchain data...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="blockchain-info-container">
@@ -29,31 +32,37 @@ const BlockchainInfo: React.FC = () => {
       <div className="info-cards">
         <div className="info-card">
           <span className="label">Network</span>
-          <span className="value">{mockData.network}</span>
+          <span className="value">{data.network}</span>
         </div>
+
         <div className="info-card">
           <span className="label">Contract Name</span>
-          <span className="value">{mockData.contractName}</span>
+          <span className="value">{data.contractName}</span>
         </div>
+
         <div className="info-card">
           <span className="label">Contract Address</span>
-          <span className="value address">{mockData.contractAddress}</span>
+          <span className="value address">{data.contractAddress}</span>
         </div>
+
         <div className="info-card">
           <span className="label">Deployer</span>
-          <span className="value address">{mockData.deployer}</span>
+          <span className="value address">{data.deployer}</span>
         </div>
+
         <div className="info-card">
           <span className="label">Total Transactions</span>
-          <span className="value">{mockData.totalTransactions}</span>
+          <span className="value">{data.totalTransactions}</span>
         </div>
+
         <div className="info-card">
           <span className="label">Deployment Date</span>
-          <span className="value">{mockData.deploymentDate}</span>
+          <span className="value">{data.deploymentDate}</span>
         </div>
-        <div className={`info-card status ${mockData.status.toLowerCase()}`}>
+
+        <div className={`info-card status ${data.status.toLowerCase()}`}>
           <span className="label">Status</span>
-          <span className="value">{mockData.status}</span>
+          <span className="value">{data.status}</span>
         </div>
       </div>
     </div>

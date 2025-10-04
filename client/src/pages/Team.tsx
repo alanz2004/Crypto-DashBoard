@@ -8,9 +8,28 @@ import BlockchainInfo from '../components/Team/BlockchainInfo';
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 
-const Team: React.FC<{ projectId: string }> = ({ projectId }) => {
+interface ContractData {
+  _id: string;
+  projectId: string;
+  name: string;
+  address: string;
+  deployer: string;
+  network: string;
+  abi: any[];
+  bytecode?: string;
+  status: string;
+  transactionCount: number;
+  deploymentDate: string;
+}
+
+interface Props {
+  projectId: string;
+}
+
+const Team: React.FC<Props> = ({ projectId }) => {
   const { token } = useAuth();
-  const [contractAddress, setContractAddress] = useState<string | null>(null);
+  const [contract, setContract] = useState<ContractData | null>(null);
+  const [contractAddress, setContractAddress] = useState<string>('');
   const [deploying, setDeploying] = useState(false);
 
   useEffect(() => {
@@ -30,19 +49,23 @@ const Team: React.FC<{ projectId: string }> = ({ projectId }) => {
     fetchProject();
   }, [projectId, token]);
 
+  // ✅ Deploy and store new contract
   const handleDeployBlockchain = async () => {
     setDeploying(true);
     try {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/blockchain/deploy/${projectId}`, {
         method: "POST",
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${token}` },
       });
+
       if (!res.ok) throw new Error("Failed to deploy blockchain");
+
       const data = await res.json();
-      setContractAddress(data.contractAddress);
+      setContract(data.contract); // store full contract info
+
       alert("✅ Blockchain deployed successfully!");
     } catch (err) {
-      console.error(err);
+      console.error("Error deploying contract:", err);
       alert("❌ Failed to deploy blockchain");
     } finally {
       setDeploying(false);
@@ -67,7 +90,19 @@ const Team: React.FC<{ projectId: string }> = ({ projectId }) => {
         </div>
       )}
 
-      <BlockchainInfo />
+      {contract && (
+        <BlockchainInfo
+          data={{
+            network: contract.network,
+            contractAddress: contract.address,
+            deployer: contract.deployer,
+            contractName: contract.name,
+            totalTransactions: contract.transactionCount,
+            deploymentDate: new Date(contract.deploymentDate).toLocaleDateString(),
+            status: contract.status === "active" ? "Active" : "Inactive",
+          }}
+        />
+        )}
 
       <div className="team-grid">
           <TeamCard />
