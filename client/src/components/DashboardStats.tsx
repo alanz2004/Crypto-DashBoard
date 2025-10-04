@@ -33,7 +33,6 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ totalUsers, totalEth })
 
   return (
    <div className="dashboard-stats-section">
-  <h2 className="dashboard-stats-title">Platform Overview</h2>
 
   <div className="dashboard-stats">
     <div className="stat-card">

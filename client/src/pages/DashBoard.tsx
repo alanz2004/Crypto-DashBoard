@@ -90,6 +90,7 @@ return (
     </div>
   ) : (
     <Fragment>
+      <h1 className='dashboard-title'>{projects[0].projectName}</h1>
       <DashboardStats totalUsers={12500} totalEth={342.57} />
       <TokenomicsChart projectId={projects[0]._id}/>
       <TokenHoldings projectId={projects[0]._id} />

@@ -76,6 +76,26 @@
   width: 100%;
 }
 
+.add-row {
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.add-row .add-btn {
+  font-size: 22px;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+}
+
 .new-holder-row .input-cell {
   width: 33%;              /* slightly smaller than full column */
   height: 40px;            /* bigger height */
@@ -95,19 +115,20 @@
 }
 
 /* container: full width, spaced from borders */
-.add-row {
+.action-row {
   display: flex;
   justify-content: space-between; /* left button left, right button right */
   align-items: center;
   width: 100%;
   box-sizing: border-box;
-  gap: 12px;
+  gap: 25px;
+  margin-top: 25px;
   /* optional background to visually separate the controls */
   /* background: rgba(255,255,255,0.02); */
 }
 
 /* Primary "Add Holder" button (left) */
-.add-row .add-btn {
+.action-row .save-btn {
   background: #6c5ce7;    /* cosmic purple */
   color: #f1f5f9;         /* cool white */
   border: none;
@@ -120,8 +141,8 @@
 }
 
 /* hover / focus for accessibility */
-.add-row .add-btn:hover,
-.add-row .add-btn:focus {
+.action-row .save-btn:hover,
+.action-row .save-btn:focus {
   transform: translateY(-1px);
   background: #5746d6;
   outline: none;
@@ -131,7 +152,7 @@
 /* Secondary "Show Embed Code" button (right).
    Uses a selector for the second button if you didn't add a class.
    If you add a class like .embed-btn, prefer that instead. */
-.add-row button:last-child {
+.action-row button:last-child {
   background: transparent;
   color: #00bcd4;         /* electric blue */
   border: 2px solid rgba(0,188,212,0.12);
@@ -144,8 +165,8 @@
 }
 
 /* hover / focus for embed button */
-.add-row button:last-child:hover,
-.add-row button:last-child:focus {
+.action-row button:last-child:hover,
+.action-row button:last-child:focus {
   background: rgba(0,188,212,0.06);
   transform: translateY(-1px);
   outline: none;
@@ -153,16 +174,16 @@
 
 /* Responsive: on small screens stack buttons vertically */
 @media (max-width: 600px) {
-  .add-row {
+  .action-row {
     flex-direction: column;
     align-items: stretch;
   }
-  .add-row .add-btn,
-  .add-row button:last-child {
+  .action-row .save-btn,
+  .action-row button:last-child {
     width: 100%;
     min-width: 0;
   }
-  .add-row button:last-child {
+  .action-row button:last-child {
     margin-top: 8px;
   }
 }
