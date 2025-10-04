@@ -1,6 +1,10 @@
 import './Team.css';
+
 import { TeamCard } from '../components/Team/TeamCard';
 import TeamTasks from "../components/Team/TeamTasks";
+import BlockchainInfo from '../components/Team/BlockchainInfo';
+
+
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 
@@ -47,6 +51,7 @@ const Team: React.FC<{ projectId: string }> = ({ projectId }) => {
 
   return (
     <div className="team-page">
+    <h1 className='team-page-title'>Team</h1>
       {!contractAddress && (
         <div className="deploy-blockchain-container">
           <p className="deploy-blockchain-text">
@@ -61,6 +66,8 @@ const Team: React.FC<{ projectId: string }> = ({ projectId }) => {
           </button>
         </div>
       )}
+
+      <BlockchainInfo />
 
       <div className="team-grid">
           <TeamCard />
