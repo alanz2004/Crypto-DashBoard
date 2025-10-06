@@ -35,12 +35,12 @@ const Team: React.FC<Props> = ({ projectId }) => {
   useEffect(() => {
     const fetchProject = async () => {
       try {
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/projects/${projectId}`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/blockchain/project/${projectId}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         if (res.ok) {
           const data = await res.json();
-          setContractAddress(data.contractAddress || null);
+          setContract(data[0]);
         }
       } catch (err) {
         console.error("Error fetching project:", err);
@@ -75,7 +75,7 @@ const Team: React.FC<Props> = ({ projectId }) => {
   return (
     <div className="team-page">
     <h1 className='team-page-title'>Team</h1>
-      {!contractAddress && (
+      {!contract && (
         <div className="deploy-blockchain-container">
           <p className="deploy-blockchain-text">
             This project is not deployed to the blockchain yet.
