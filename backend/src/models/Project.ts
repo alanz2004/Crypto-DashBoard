@@ -31,6 +31,7 @@ export interface IProject extends Document {
   files: IFile[];
   tokenomics: ITokenomic[];
   contractAddress: string;
+  teamMembers: Types.ObjectId[];
 
 }
 
@@ -69,7 +70,13 @@ const projectSchema = new Schema<IProject>(
     telegramChatId: { type: String, required: false },
     files: [fileSchema],
     tokenomics: [TokenomicSchema],
-    contractAddress: { type: String }, // 👈 optional, filled after deployment
+    contractAddress: { type: String }, 
+    teamMembers: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "TeamMember", // 👈 reference to TeamMember collection
+      },
+    ],
   },
   { timestamps: true }
 );
