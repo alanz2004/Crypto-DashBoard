@@ -1,0 +1,61 @@
+.add-team-member-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.add-team-member-form {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  width: 100%;
+}
+
+.form-title {
+  color: #9cc9ff;
+  text-align: left;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.add-team-member-form input {
+  background: #111827;
+  border: 1px solid #334155;
+  color: #e2e8f0;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  border-radius: 8px;
+  outline: none;
+  font-size: 1rem;
+  transition: border 0.2s ease-in-out;
+}
+
+.add-team-member-form input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 8px rgba(99, 102, 241, 0.6);
+}
+
+.add-team-member-form button {
+  margin-top: 1rem;
+  background: linear-gradient(90deg, #6d28d9, #3b82f6);
+  color: white;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.add-team-member-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.6);
+}
+
+.form-message {
+  margin-top: 1rem;
+  text-align: center;
+  color: #a5b4fc;
+  font-size: 0.95rem;
+}

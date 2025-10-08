@@ -10,6 +10,7 @@ import tokenHolderRoutes from './routes/tokenHolderRoutes.ts';
 import fileRoutes from "./routes/fileRoutes.ts";
 import integraionRoutes from './routes/integrationsRoutes.ts';
 import projectBlockchainRoutes from './routes/projectBlockchainRoutes.ts';
+import teamRoutes from './routes/teamRoutes.ts';
 
 import { initBlockchain } from './services/blockchainService.ts';
 
@@ -35,6 +36,7 @@ app.use('/api/tokenholders', tokenHolderRoutes);
 app.use("/api/files", fileRoutes);
 app.use('/api/integrations', integraionRoutes)
 app.use('/api/blockchain', projectBlockchainRoutes);
+app.use('/api/team', teamRoutes);
 
 // Root
 app.get('/', (_, res) => res.send('API is running...'));

@@ -3,6 +3,7 @@ import './Team.css';
 import { TeamCard } from '../components/Team/TeamCard';
 import TeamTasks from "../components/Team/TeamTasks";
 import BlockchainInfo from '../components/Team/BlockchainInfo';
+import AddTeamMember from '../components/Team/AddTeamMember';
 
 
 import { useState, useEffect } from 'react';
@@ -107,6 +108,8 @@ const Team: React.FC<Props> = ({ projectId }) => {
       <div className="team-grid">
           <TeamCard />
       </div>
+
+        <AddTeamMember projectId={projectId}/>
 
       <TeamTasks />
     </div>

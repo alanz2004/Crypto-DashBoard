@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import type { Response } from "express";
 import type { AuthRequest } from "../middlewares/authMiddleware.ts";
+import { addMemberToContract } from "../services/blockchainService.ts";
 import { TeamMember } from "../models/TeamMember.ts";
 import { Project } from "../models/Project.ts";
 
@@ -18,6 +19,8 @@ export const addTeamMember = async (req: AuthRequest, res: Response) => {
       return res.status(404).json({ message: "Project not found" });
     }
 
+    console.log(projectId)
+
     // Create new team member
     const newMember = new TeamMember({
       name,
@@ -25,13 +28,27 @@ export const addTeamMember = async (req: AuthRequest, res: Response) => {
       wallet,
       email,
       contribution,
-      project: projectId,
+      projectId: projectId,
     });
     await newMember.save();
 
     // Link member to project
     project.teamMembers.push(newMember._id as mongoose.Types.ObjectId);
     await project.save();
+
+    // 4️⃣ Add member to blockchain (if contract exists)
+    if (project.contractAddress) {
+      try {
+        console.log(`🧩 Adding member on-chain for project: ${project.contractAddress}`);
+        await addMemberToContract(project.contractAddress, wallet, role);
+        console.log("✅ Member successfully added on-chain");
+      } catch (blockchainError: any) {
+        console.error("⚠️ Blockchain update failed:", blockchainError);
+        // You might want to store this info in logs or retry queue
+      }
+    } else {
+      console.warn("⚠️ No contractAddress found for project. Skipping on-chain update.");
+    }
 
     res.status(201).json({
       message: "✅ Team member added successfully",

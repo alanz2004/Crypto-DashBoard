@@ -9,6 +9,19 @@ import solc from "solc"; // ESM import
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// ✅ Load precompiled ABI instead of recompiling each time
+const abiPath = path.resolve(__dirname, "../artifacts/Project_sol_Project.abi");
+const binPath = path.resolve(__dirname, "../artifacts/Project_sol_Project.bin");
+
+if (!fs.existsSync(abiPath) || !fs.existsSync(binPath)) {
+  throw new Error("❌ Missing ABI or BIN file. Run `npx solcjs --bin --abi contracts/Project.sol -o artifacts` first.");
+}
+
+const abi = JSON.parse(fs.readFileSync(abiPath, "utf8"));
+const bytecode = fs.readFileSync(binPath, "utf8");
+
+
+
 let provider: ethers.JsonRpcProvider;
 let signer: ethers.JsonRpcSigner;
 
@@ -60,28 +73,7 @@ export function getSigner(): ethers.JsonRpcSigner {
 export async function deployProjectContract(name: string, admin: string) {
   if (!signer) throw new Error("Blockchain not initialized");
 
-  const contractPath = path.resolve(__dirname, "../contracts/Project.sol");
-  const source = fs.readFileSync(contractPath, "utf8");
-
-  // Prepare standard JSON input for solc
-  const input = {
-    language: "Solidity",
-    sources: { "Project.sol": { content: source } },
-    settings: { outputSelection: { "*": { "*": ["abi", "evm.bytecode"] } } },
-  };
-
-  // Compile using solc.compile(JSON.stringify(...))
-  const output = JSON.parse(solc.compile(JSON.stringify(input)));
-
-  if (!output.contracts || !output.contracts["Project.sol"]["Project"]) {
-    throw new Error("Contract compilation failed");
-  }
-
-  const contractFile = output.contracts["Project.sol"]["Project"];
-  const abi = contractFile.abi;
-  const bytecode = contractFile.evm.bytecode.object;
-
-  // Deploy contract
+  // Deploy contract using precompiled ABI & Bytecode
   const factory = new ethers.ContractFactory(abi, bytecode, signer);
   const contract = await factory.deploy(name, admin);
   await contract.waitForDeployment();
@@ -89,3 +81,27 @@ export async function deployProjectContract(name: string, admin: string) {
   console.log(`✅ Contract deployed at: ${contract.target}`);
   return contract;
 }
+
+/**
+ * Add a new team member to the on-chain project contract.
+ */
+export const addMemberToContract = async (
+  contractAddress: string,
+  wallet: string,
+  role: string
+) => {
+  try {
+    const signer = getSigner();
+    const contract = new ethers.Contract(contractAddress, abi, signer);
+
+    console.log(`🧩 Adding member to contract: ${wallet} (${role})`);
+    const tx = await contract.addMember(wallet, role);
+    await tx.wait();
+
+    console.log("✅ Member added successfully to contract:", tx.hash);
+    return tx;
+  } catch (error: any) {
+    console.error("❌ Error adding member to blockchain:", error);
+    throw new Error(error.message);
+  }
+};
