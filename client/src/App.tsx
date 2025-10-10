@@ -12,7 +12,7 @@ import CodePage from './pages/Code';
 import SmartContractsDashboard from './pages/SmartContractsDashboard';
 import CreateLandingPage from './pages/CreateLandingPage';
 import MarketingNeeds from './pages/MarketingNeeds';
-
+import Collaboration from './pages/Collaboration';
 
 import LoginPage from './pages/LoginPage';
 import SignUp from './pages/SignUp';
@@ -45,6 +45,7 @@ export default function App() {
               <Route path="/login" element={<LoginPage setLoggedIn={setLoggedIn} />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path='/home' element={<HomePage />} />
+              <Route path='/collaboration' element={<Collaboration />} />
               <Route path='/marketingneeds' element={<MarketingNeeds />}/>
               <Route path='/createproject' element={<ProtectedRoute>
                   <CreateProject />
