@@ -8,6 +8,7 @@ import { useAuth } from '../context/AuthContext';
 
 
 import DashboardStats from '../components/DashboardStats';
+import TrackingDashboard from '../components/DashBoard/TrackingDashboard';
 import TokenHoldings from '../components/TokenHoldings';
 import ChartComponent from '../components/FundBarChart';
 import TokenomicsChart from '../components/DashBoard/TokenomicsChart';
@@ -92,6 +93,8 @@ return (
     <Fragment>
       <h1 className='dashboard-title'>{projects[0].projectName}</h1>
       <DashboardStats totalUsers={12500} totalEth={342.57} />
+
+      <TrackingDashboard />
       <TokenomicsChart projectId={projects[0]._id}/>
       <TokenHoldings projectId={projects[0]._id} />
       
