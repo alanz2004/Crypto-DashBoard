@@ -75,44 +75,49 @@ const Team: React.FC<Props> = ({ projectId }) => {
 
   return (
     <div className="team-page">
-    <h1 className='team-page-title'>Team</h1>
-      {!contract && (
-        <div className="deploy-blockchain-container">
-          <p className="deploy-blockchain-text">
-            This project is not deployed to the blockchain yet.
-          </p>
-          <button
-            className="deploy-blockchain-btn"
-            onClick={handleDeployBlockchain}
-            disabled={deploying}
-          >
-            {deploying ? "Deploying..." : "Deploy Blockchain"}
-          </button>
-        </div>
-      )}
+  <div className="team-main">
+    <h1 className="team-page-title">Team</h1>
 
-      {contract && (
-        <BlockchainInfo
-          data={{
-            network: contract.network,
-            contractAddress: contract.address,
-            deployer: contract.deployer,
-            contractName: contract.name,
-            totalTransactions: contract.transactionCount,
-            deploymentDate: new Date(contract.deploymentDate).toLocaleDateString(),
-            status: contract.status === "active" ? "Active" : "Inactive",
-          }}
-        />
-        )}
-
-      <div className="team-grid">
-          <TeamCard />
+    {!contract && (
+      <div className="deploy-blockchain-container">
+        <p className="deploy-blockchain-text">
+          This project is not deployed to the blockchain yet.
+        </p>
+        <button
+          className="deploy-blockchain-btn"
+          onClick={handleDeployBlockchain}
+          disabled={deploying}
+        >
+          {deploying ? "Deploying..." : "Deploy Blockchain"}
+        </button>
       </div>
+    )}
 
-        <AddTeamMember projectId={projectId}/>
-
-      <TeamTasks />
+    <div className="team-grid">
+      <TeamCard />
     </div>
+
+    <AddTeamMember projectId={projectId} />
+    <TeamTasks />
+  </div>
+
+  <div className="blockchain-info-section">
+    {contract && (
+      <BlockchainInfo
+        data={{
+          network: contract.network,
+          contractAddress: contract.address,
+          deployer: contract.deployer,
+          contractName: contract.name,
+          totalTransactions: contract.transactionCount,
+          deploymentDate: new Date(contract.deploymentDate).toLocaleDateString(),
+          status: contract.status === "active" ? "Active" : "Inactive",
+        }}
+      />
+    )}
+  </div>
+</div>
+
   );
 };
 

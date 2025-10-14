@@ -8,13 +8,14 @@
   gap: 24px;
   box-shadow: 0 0 20px rgba(108, 92, 231, 0.4);
   border: 1px solid #2d3748;
-  margin: 40px auto;
+  width: 100%;
+  height: 100%;
 }
 
 .section-title {
   font-size: 2rem;
   color: #6c5ce7;
-  text-align: center;
+  text-align: left;
 }
 
 .info-cards {

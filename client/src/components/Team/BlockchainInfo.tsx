@@ -27,7 +27,7 @@ const BlockchainInfo: React.FC<BlockchainInfoProps> = ({ data }) => {
 
   return (
     <div className="blockchain-info-container">
-      <h2 className="section-title">Blockchain Overview</h2>
+      <h2 className="section-title">BlockChain </h2>
 
       <div className="info-cards">
         <div className="info-card">
