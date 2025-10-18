@@ -10,8 +10,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // ✅ Load precompiled ABI instead of recompiling each time
-const abiPath = path.resolve(__dirname, "../artifacts/Project_sol_Project.abi");
-const binPath = path.resolve(__dirname, "../artifacts/Project_sol_Project.bin");
+const abiPath = path.resolve(__dirname, "../artifacts/contracts_Project_sol_Project.abi");
+const binPath = path.resolve(__dirname, "../artifacts/contracts_Project_sol_Project.bin");
 
 if (!fs.existsSync(abiPath) || !fs.existsSync(binPath)) {
   throw new Error("❌ Missing ABI or BIN file. Run `npx solcjs --bin --abi contracts/Project.sol -o artifacts` first.");

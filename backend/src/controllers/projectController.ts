@@ -212,3 +212,77 @@ export const getTokenomics = async (req: AuthRequest, res: Response) => {
     return res.status(500).json({ message: "Server error" });
   }
 };
+
+// ✅ Controller: Get wallet analytics (static demo data)
+export const trackWalletActivity = async (req: AuthRequest, res: Response) => {
+  try {
+    const { projectId } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(projectId)) {
+      return res.status(400).json({ message: "Invalid project ID" });
+    }
+
+    // 🧩 Find the project and get its wallet address
+    const project = await Project.findById(projectId).select("wallet");
+    if (!project) {
+      return res.status(404).json({ message: "Project not found" });
+    }
+
+    const walletAddress = project.wallet;
+    if (!walletAddress) {
+      return res
+        .status(400)
+        .json({ message: "Project does not have a connected wallet" });
+    }
+
+    // 🚀 Mocked analytics data for now
+    const walletData = {
+      wallet: walletAddress,
+      transactionCount: 842, // demo number
+      totalValueUSD: 157_300.42, // demo total USD value
+      avgTransactionValueUSD: 186.86,
+      activeDays: 42,
+      adoptionScore: 87, // custom metric 0–100
+      growth: {
+        transactionGrowth: 14.8, // percentage
+        valueGrowth: 9.6,
+        trend: "up", // "up", "down", or "neutral"
+      },
+      lastUpdated: new Date().toISOString(),
+    };
+
+    // ✅ Return the static data to frontend
+    return res.status(200).json(walletData);
+  } catch (error) {
+    console.error("Track Wallet Activity Error:", error);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+// ✅ Mock data for now
+export const getTokenMarketData = async (req: AuthRequest, res: Response) => {
+  try {
+    const  tokenName = 'mytoken';
+
+    // Mock example data (you’ll later replace this with real API fetch)
+    const mockData = {
+      tokenName,
+      currentPrice: 0.0023,
+      priceChange24h: 12.5,
+      marketCap: 14500000,
+      liquidity: 320000,
+      volume24h: 450000,
+      sources: [
+        { name: "Raydium", url: "https://raydium.io" },
+        { name: "Birdeye", url: "https://birdeye.so" },
+        { name: "Meteora", url: "https://meteora.ag" },
+      ],
+      lastUpdated: new Date().toISOString(),
+    };
+
+    return res.status(200).json(mockData);
+  } catch (error) {
+    console.error("Get Token Market Data Error:", error);
+    return res.status(500).json({ message: "Server error" });
+  }
+};

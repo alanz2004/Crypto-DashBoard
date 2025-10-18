@@ -4,7 +4,9 @@ import {
   getMyProjects,
   getProjectById,
   addTokenomics, 
-  getTokenomics 
+  getTokenomics ,
+  trackWalletActivity,
+  getTokenMarketData
 } from "../controllers/projectController.ts";
 
 import { authMiddleware } from "../middlewares/authMiddleware.ts";
@@ -21,6 +23,12 @@ router.post("/:projectId/tokenomics", authMiddleware, addTokenomics);
 
 // Get tokenomics
 router.get("/:projectId/tokenomics", authMiddleware, getTokenomics);
+
+router.get("/:projectId/trackWallet", authMiddleware, trackWalletActivity);
+
+router.get("/:projectId/marketokendata", authMiddleware, getTokenMarketData);
+
+
 
 
 export default router;
