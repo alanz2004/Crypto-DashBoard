@@ -1,0 +1,79 @@
+.analytics-overview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+  color: white;
+  padding: 3rem 2rem;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-self: center;
+}
+
+.analytics-text {
+  flex: 1 1 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.analytics-title {
+  font-size: 2.5rem;
+  color: #6c5ce7;
+  text-shadow: 0 0 15px rgba(108, 92, 231, 0.4);
+  text-align: left;
+}
+
+.analytics-desc {
+  font-size: 1.05rem;
+  color: #d2d3f7;
+  line-height: 1.7;
+  text-align: left;
+  max-width: 900px;
+}
+
+.feature-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.feature-card {
+  flex: 1 1 calc(33.33% - 1rem);
+  padding: 1.2rem;
+  transition: 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-3px);
+  text-shadow: 0 0 10px rgba(108, 92, 231, 0.4);
+}
+
+.feature-card h3 {
+  color: #9ca3ff;
+  margin-bottom: 0.6rem;
+  font-size: 1.2rem;
+}
+
+.feature-card p {
+  color: #cfd2f5;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* 📱 Responsive design */
+@media (max-width: 900px) {
+  .feature-card {
+    flex: 1 1 100%;
+  }
+
+  .analytics-title,
+  .analytics-desc {
+    text-align: center;
+  }
+
+  .analytics-text {
+    align-items: center;
+  }
+}

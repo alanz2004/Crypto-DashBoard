@@ -5,6 +5,7 @@ import NavBarHome from '../components/NavBars/NavBarHome';
 import CryptoStatsSection from '../components/CryptoStatsSection';
 import FeaturesSection from '../components/Home/FeaturesSection';
 import PricingSection from '../components/Home/PricingSection';
+import AnalyticsOverviewSection from '../components/Home/AnalyticsOverviewSection';
 import SocialMediaBar from '../components/Home/SocialMediaBar';
 import ContactUs from '../components/Home/ContactUs';
 import BlockchainFeature from '../components/Home/BlockchainFeature';
@@ -39,6 +40,8 @@ const HomePage: React.FC = () => {
       <CryptoStatsSection />
 
       <BlockchainFeature />
+
+      <AnalyticsOverviewSection />
 
 
       <PricingSection />
