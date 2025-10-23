@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { ethers } from "ethers";
+import {
+  BrowserProvider,   // replaces ethers.providers.Web3Provider
+  formatEther        // replaces ethers.utils.formatEther
+} from "ethers";
 import "./Wallet.css";
 
 import WalletLinks from "../components/WalletLinks";
@@ -24,7 +27,7 @@ const WalletPage: React.FC = () => {
   const tokenName = "Ethereum";
   const tokenSymbol = "ETH";
 
-
+  // ✅ Connect wallet
   const connectWallet = async () => {
     if (!(window as any).ethereum) {
       setError("MetaMask not detected. Please install MetaMask.");
@@ -32,57 +35,56 @@ const WalletPage: React.FC = () => {
     }
 
     try {
-      const provider = new ethers.providers.Web3Provider(
-        (window as any).ethereum
-      );
+      const provider = new BrowserProvider((window as any).ethereum);
       await provider.send("eth_requestAccounts", []);
-      const signer = provider.getSigner();
+      const signer = await provider.getSigner();
       const account = await signer.getAddress();
+
       setWalletAddress(account);
       localStorage.setItem("walletAddress", account);
 
       const balanceWei = await provider.getBalance(account);
-      const balanceEth = parseFloat(ethers.utils.formatEther(balanceWei));
+      const balanceEth = parseFloat(formatEther(balanceWei));
       setBalance(balanceEth);
 
-      // Fetch transactions
-      fetchTransactions(account);
+      await fetchTransactions(account);
     } catch (err) {
       console.error(err);
       setError("Failed to connect wallet.");
     }
   };
 
-const fetchTransactions = async (address: string) => {
-  try {
-    const apiKey = "PVREZKYJ84WK3TKTDT6SHVZCUUCMEYY9BB"; // Replace with your key
+  // ✅ Fetch transactions from Etherscan API
+  const fetchTransactions = async (address: string) => {
+    try {
+      const apiKey = "PVREZKYJ84WK3TKTDT6SHVZCUUCMEYY9BB"; // replace with your real key
+      const response = await fetch(
+        `https://api.etherscan.io/v2/api?chainid=1&module=account&action=txlist&address=${address}&sort=desc&apikey=${apiKey}`
+      );
 
-    // ✅ Correct v2 endpoint:
-    const response = await fetch(
-      `https://api.etherscan.io/v2/api?chainid=1&module=account&action=txlist&address=${address}&sort=desc&apikey=${apiKey}`
-    );
+      const data = await response.json();
 
-    const data = await response.json();
+      if (data.status === "1" && Array.isArray(data.result)) {
+        const txs = data.result.slice(0, 5).map((tx: any) => ({
+          id: tx.hash,
+          type:
+            tx.from.toLowerCase() === address.toLowerCase()
+              ? "Send"
+              : "Receive",
+          amount: parseFloat(formatEther(tx.value)),
+          tokenSymbol: "ETH",
+          date: new Date(parseInt(tx.timeStamp) * 1000).toLocaleDateString(),
+          hash: tx.hash,
+        }));
 
-    if (data.status === "1" && Array.isArray(data.result)) {
-      const txs = data.result.slice(0, 5).map((tx: any) => ({
-        id: tx.hash,
-        type:
-          tx.from.toLowerCase() === address.toLowerCase() ? "Send" : "Receive",
-        amount: parseFloat(ethers.utils.formatEther(tx.value)),
-        tokenSymbol: "ETH",
-        date: new Date(parseInt(tx.timeStamp) * 1000).toLocaleDateString(),
-        hash: tx.hash,
-      }));
-
-      setTransactions(txs);
-    } else {
-      console.warn("No transactions found or API limit reached");
+        setTransactions(txs);
+      } else {
+        console.warn("No transactions found or API limit reached");
+      }
+    } catch (err) {
+      console.error("Error fetching transactions:", err);
     }
-  } catch (err) {
-    console.error("Error fetching transactions:", err);
-  }
-};
+  };
 
   useEffect(() => {
     if (walletAddress && balance === null) {
@@ -123,29 +125,27 @@ const fetchTransactions = async (address: string) => {
         </div>
       )}
 
-    <div className="wallet-transactions">
-  <h2>📄 Last Transactions</h2>
-  <div className="transaction-list">
-    {transactions.length > 0 ? (
-      transactions.slice(0, 5).map((tx) => (
-        <div className="transaction-card" key={tx.id}>
-          <div className="transaction-header">
-            <span className={`tx-type ${tx.type.toLowerCase()}`}>
-              {tx.type === "Send" ? "🔼 Send" : "🔽 Receive"}
-            </span>
-            <span>{tx.date}</span>
-          </div>
-          <p className="tx-amount">{tx.amount} ETH</p>
-          <p className="tx-hash">Hash: {tx.hash}</p>
+      <div className="wallet-transactions">
+        <h2>📄 Last Transactions</h2>
+        <div className="transaction-list">
+          {transactions.length > 0 ? (
+            transactions.map((tx) => (
+              <div className="transaction-card" key={tx.id}>
+                <div className="transaction-header">
+                  <span className={`tx-type ${tx.type.toLowerCase()}`}>
+                    {tx.type === "Send" ? "🔼 Send" : "🔽 Receive"}
+                  </span>
+                  <span>{tx.date}</span>
+                </div>
+                <p className="tx-amount">{tx.amount} ETH</p>
+                <p className="tx-hash">Hash: {tx.hash}</p>
+              </div>
+            ))
+          ) : (
+            <p className="no-transactions">No recent transactions found.</p>
+          )}
         </div>
-      ))
-    ) : (
-      <p className="no-transactions">No recent transactions found.</p>
-    )}
-  </div>
-</div>
-
-      
+      </div>
 
       <WalletLinks />
     </div>
@@ -153,4 +153,3 @@ const fetchTransactions = async (address: string) => {
 };
 
 export default WalletPage;
-
