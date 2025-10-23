@@ -1,66 +1,55 @@
-import './DashBoard.css'
-
-import { useEffect, useState,Fragment } from "react";
+import { useEffect, useState, Fragment } from "react";
 import { useNavigate } from "react-router-dom";
+import "./DashBoard.css";
 
+import { useAuth } from "../context/AuthContext";
 
-import { useAuth } from '../context/AuthContext';
+// Components
+import DashboardStats from "../components/DashboardStats";
+import TrackingDashboard from "../components/DashBoard/TrackingDashboard";
+import TokenHoldings from "../components/TokenHoldings";
+import WalletActivity from "../components/DashBoard/WalletActivity";
+import TokenMarketData from "../components/DashBoard/TokenMarketData";
+import TokenomicsChart from "../components/DashBoard/TokenomicsChart";
 
-
-import DashboardStats from '../components/DashboardStats';
-import TrackingDashboard from '../components/DashBoard/TrackingDashboard';
-import TokenHoldings from '../components/TokenHoldings';
-import WalletActivity from '../components/DashBoard/WalletActivity';
-import TokenMarketData from '../components/DashBoard/TokenMarketData';
-import TokenomicsChart from '../components/DashBoard/TokenomicsChart';
-
-const sampleData = [
-  { category: 'Category A', value: 75, description: 'Description A...' },
-  { category: 'Category B', value: 55, description: 'Description B...' },
-  { category: 'Category C', value: 90, description: 'Description C...' },
-];
-
-type Project = {
+// --- Types ---
+interface Project {
   _id: string;
   projectName: string;
   projectDescription: string;
   wallet: string;
-  // extend based on backend response
-};
-
+  // Extend with more fields if backend response includes them
+}
 
 export default function Dashboard() {
-
-  const { token } = useAuth();  // ✅ grab token (or user) from context
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const { token } = useAuth();
   const navigate = useNavigate();
 
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
+  // --- Fetch projects from API ---
   useEffect(() => {
-    const fetchProjects = async () => {
-      if (!token) {
-        setError("User not authenticated");
-        setLoading(false);
-        return;
-      }
+    if (!token) {
+      setError("User not authenticated");
+      setLoading(false);
+      return;
+    }
 
+    const fetchProjects = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/projects`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/projects`, {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, // ✅ using context token
+            Authorization: `Bearer ${token}`,
           },
         });
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch projects");
-        }
+        if (!res.ok) throw new Error(`Failed to fetch projects (${res.status})`);
 
-        const data: Project[] = await response.json();
+        const data: Project[] = await res.json();
         setProjects(data);
-        console.log(projects)
       } catch (err) {
         setError((err as Error).message);
       } finally {
@@ -69,48 +58,63 @@ export default function Dashboard() {
     };
 
     fetchProjects();
-  }, [token]); // ✅ re-fetch if token changes
+  }, [token]);
 
-return (
-  <div className="dashboard-content">
-  {loading ? (
-    <div className="loading-spinner">
-      <div className="spinner"></div>
-    </div>
-  ) : error ? (
-    <div className="error-message">{error}</div>
-  ) : projects.length === 0 ? (
-    <div className="no-projects">
-      <h3>You don’t have any projects yet 🚀</h3>
-      <p>Start building your startup journey by creating your first project.</p>
-      <button
-        className="create-project-btn"
-        onClick={() => navigate("/createProject")}
-      >
-        + Create Project
-      </button>
-    </div>
-  ) : (
-    <Fragment>
-      <h1 className='dashboard-title'>{projects[0].projectName}</h1>
-      <DashboardStats totalUsers={12500} totalEth={342.57} />
-      <WalletActivity projectId={projects[0]._id} />
-      <TokenMarketData projectId={projects[0]._id} />
-      <TrackingDashboard />
-      <TokenomicsChart projectId={projects[0]._id}/>
-      <TokenHoldings projectId={projects[0]._id} />
-      
-      {/* 🚀 New Section for Create Landing Page */}
-      <div className="landing-page-actions">
+  // --- Render Conditions ---
+  if (loading) {
+    return (
+      <div className="dashboard-loader">
+        <div className="spinner" />
+        <p>Loading your dashboard...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return <div className="error-message">⚠️ {error}</div>;
+  }
+
+  if (projects.length === 0) {
+    return (
+      <div className="no-projects">
+        <h3>No projects yet 🚀</h3>
+        <p>Start building your startup journey by creating your first project.</p>
         <button
-          className="create-landing-btn"
-          onClick={() => navigate("/createLandingPage")}
+          className="create-project-btn"
+          onClick={() => navigate("/createProject")}
         >
-        Create Landing Page
+          + Create Project
         </button>
       </div>
-    </Fragment>
-  )}
-</div>
-);
+    );
+  }
+
+  // --- Active Project (for simplicity, show first one) ---
+  const activeProject = projects[0];
+
+  return (
+    <div className="dashboard-content">
+      <Fragment>
+        <h1 className="dashboard-title">{activeProject.projectName}</h1>
+
+        <DashboardStats totalUsers={12500} totalEth={342.57} />
+
+        <WalletActivity projectId={activeProject._id} />
+        <TokenMarketData projectId={activeProject._id} />
+        <TrackingDashboard />
+        <TokenomicsChart projectId={activeProject._id} />
+        <TokenHoldings projectId={activeProject._id} />
+
+        {/* 🚀 Create Landing Page Action */}
+        <div className="landing-page-actions">
+          <button
+            className="create-landing-btn"
+            onClick={() => navigate("/createLandingPage")}
+          >
+            Create Landing Page
+          </button>
+        </div>
+      </Fragment>
+    </div>
+  );
 }

@@ -38,21 +38,21 @@ export default function App() {
 
   return (
     <Router>
-      <AuthProvider>
+      {/* <AuthProvider> */}
 
-                <Routes>
+                {/* <Routes> */}
               {/* Login route — always available — no Navbar or layout */}
-              <Route path="/login" element={<LoginPage setLoggedIn={setLoggedIn} />} />
+              {/* <Route path="/login" element={<LoginPage setLoggedIn={setLoggedIn} />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path='/home' element={<HomePage />} />
               <Route path='/collaboration' element={<Collaboration />} />
               <Route path='/marketingneeds' element={<MarketingNeeds />}/>
               <Route path='/createproject' element={<ProtectedRoute>
                   <CreateProject />
-                </ProtectedRoute>} />
+                </ProtectedRoute>} /> */}
 
               {/* Main app routes with layout */}
-              <Route
+              {/* <Route
                 path="*"
                 element={
                   loggedIn ? (
@@ -82,9 +82,13 @@ export default function App() {
                   )
                 }
               />
-            </Routes>
+            </Routes> */}
 
-      </AuthProvider>
+      {/* </AuthProvider> */}
+
+       <Routes>
+        <Route path="/" element={<HomePage />} />
+      </Routes>
     
     </Router>
   );

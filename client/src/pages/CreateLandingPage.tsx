@@ -6,68 +6,74 @@ interface TeamMember {
   role: string;
 }
 
-interface Props {
+interface CreateLandingPageProps {
   projectId?: string;
 }
 
-const CreateLandingPage: React.FC<Props> = ({ projectId }) => {
+const CreateLandingPage: React.FC<CreateLandingPageProps> = ({ projectId }) => {
   const [projectName, setProjectName] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
   const [teamMembers, setTeamMembers] = useState<TeamMember[]>([{ name: "", role: "" }]);
   const [loading, setLoading] = useState(false);
 
-  const handleTeamChange = (index: number, field: "name" | "role", value: string) => {
-    const updated = [...teamMembers];
-    updated[index][field] = value;
-    setTeamMembers(updated);
+  // --- Handlers ---
+  const handleTeamChange = (index: number, field: keyof TeamMember, value: string) => {
+    setTeamMembers((prev) =>
+      prev.map((member, i) =>
+        i === index ? { ...member, [field]: value } : member
+      )
+    );
   };
 
   const addTeamMember = () => {
-    setTeamMembers([...teamMembers, { name: "", role: "" }]);
+    setTeamMembers((prev) => [...prev, { name: "", role: "" }]);
   };
 
   const removeTeamMember = (index: number) => {
-    setTeamMembers(teamMembers.filter((_, i) => i !== index));
+    setTeamMembers((prev) => prev.filter((_, i) => i !== index));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!projectId) return alert("Missing project ID");
+
     setLoading(true);
 
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/files/${projectId}/createLandingPage`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          projectName,
-          projectDescription,
-          teamMembers,
-        }),
-      });
 
-      if (!response.ok) {
-        throw new Error(`Failed with status ${response.status}`);
-      }
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/files/${projectId}/createLandingPage`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ projectName, projectDescription, teamMembers }),
+        }
+      );
 
-      const data = await response.json();
+      if (!res.ok) throw new Error(`Failed with status ${res.status}`);
+
+      const data = await res.json();
+      console.log("✅ Landing page created:", data);
       alert("✅ Landing page created successfully!");
-      console.log(data);
     } catch (err) {
-      console.error(err);
+      console.error("❌ Failed to create landing page:", err);
       alert("❌ Failed to create landing page.");
     } finally {
       setLoading(false);
     }
   };
 
+  // --- Render ---
   return (
     <div className="landing-page-form-container">
       <h1>Create Landing Page</h1>
+
       <form className="landing-page-form" onSubmit={handleSubmit}>
+        {/* --- Project Info --- */}
         <div className="form-group">
           <label>Project Name</label>
           <input
@@ -87,37 +93,49 @@ const CreateLandingPage: React.FC<Props> = ({ projectId }) => {
           />
         </div>
 
-        <div className="team-members-section">
+        {/* --- Team Members --- */}
+        <section className="team-members-section">
           <h2>Team Members</h2>
+
           {teamMembers.map((member, index) => (
             <div className="team-member" key={index}>
               <input
                 type="text"
                 placeholder="Name"
                 value={member.name}
-                onChange={(e) => handleTeamChange(index, "name", e.target.value)}
+                onChange={(e) =>
+                  handleTeamChange(index, "name", e.target.value)
+                }
                 required
               />
               <input
                 type="text"
                 placeholder="Role"
                 value={member.role}
-                onChange={(e) => handleTeamChange(index, "role", e.target.value)}
+                onChange={(e) =>
+                  handleTeamChange(index, "role", e.target.value)
+                }
                 required
               />
               {teamMembers.length > 1 && (
-                <button type="button" onClick={() => removeTeamMember(index)}>
+                <button
+                  type="button"
+                  onClick={() => removeTeamMember(index)}
+                  className="remove-btn"
+                >
                   Remove
                 </button>
               )}
             </div>
           ))}
-          <button type="button" onClick={addTeamMember}>
-            Add Team Member
-          </button>
-        </div>
 
-        <button type="submit" disabled={loading}>
+          <button type="button" onClick={addTeamMember} className="add-btn">
+            + Add Team Member
+          </button>
+        </section>
+
+        {/* --- Submit --- */}
+        <button type="submit" disabled={loading} className="submit-btn">
           {loading ? "Creating..." : "Create Landing Page"}
         </button>
       </form>
